@@ -8,10 +8,11 @@ constexpr double eps1m24 = 1.0 - 0x1P-24;
 constexpr double eps1p24 = 1.0 + 0x1P-24;
 
 // Listing 3.1. Computing multiplicative inverses of numbers
-int main(int argc, char *argv[argc + 1]) {
+int main(int argc, char* argv[argc + 1]) {
   for (int i = 1; i < argc; ++i) {
     // process args
     double const a = strtod(argv[i], nullptr); // arg -> double
+
     double x = 1.0;
     for (;;) { // by powers of 2
       double prod = a * x;
