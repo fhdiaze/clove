@@ -3,11 +3,11 @@
 #include <stdlib.h>
 
 enum corvid {
-  magpie,
-  raven,
-  jay,
-  chough,
-  corvid_num,
+    magpie,
+    raven,
+    jay,
+    chough,
+    corvid_num,
 };
 
 #define FLOCK_MAGPIE (1U << magpie)
@@ -18,7 +18,7 @@ enum corvid {
 #define FLOCK_FULL ((1U << corvid_num) - 1)
 
 int main(void) {
-  int x = INT_MIN + INT_MAX;
-  printf("%d\n", __builtin_popcount(x));
-  return EXIT_SUCCESS;
+    int x = INT_MIN + INT_MAX;
+    printf("%d\n", __builtin_popcount(x));
+    return EXIT_SUCCESS;
 }
