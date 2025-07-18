@@ -1,6 +1,8 @@
 #include <limits.h>
+#include <stddef.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 enum corvid {
     magpie,
@@ -18,7 +20,12 @@ enum corvid {
 #define FLOCK_FULL ((1U << corvid_num) - 1)
 
 int main(void) {
-    int x = INT_MIN + INT_MAX;
-    printf("%d\n", __builtin_popcount(x));
+    char name[] = "hello world!";
+    size_t const len = strlen(name);
+    char copy[len + 1];
+    strcpy_s(copy, sizeof(copy), name);
+    //printf("%d\n", __builtin_popcount(x));
+    printf("%s\n", copy);
+    printf("%llu\n", strlen(copy));
     return EXIT_SUCCESS;
 }
