@@ -1,5 +1,5 @@
 CompileFlags:
-    Add: [-std=c23, -Wall, -xc]
+    Add: [-std=c23, -Wall, -Werr, -xc]
 InlayHints:
   BlockEnd: false
   Designators: true
