@@ -17,4 +17,6 @@ if (!(Test-Path $outdir)) {
 
 $output = Join-Path $outdir "$base.exe"
 
-clang -std=c23 -Wall -Werror -xc -fuse-ld=lld -fsanitize=address $SourceFile -o $output
+# clang -std=c23 -Wall -Werror -xc -fuse-ld=lld -fsanitize=address $SourceFile -o $output
+# clang -std=c23 -Wall -Werror -xc -fsanitize=address $SourceFile -o $output
+clang -std=c23 -Wall -Werror -xc -fuse-ld=lld $SourceFile -o $output

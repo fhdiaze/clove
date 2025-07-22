@@ -24,8 +24,18 @@ int main(void) {
     size_t const len = strlen(name);
     char copy[len + 1];
     strcpy_s(copy, sizeof(copy), name);
-    //printf("%d\n", __builtin_popcount(x));
+    // printf("%d\n", __builtin_popcount(x));
     printf("%s\n", copy);
     printf("%llu\n", strlen(copy));
+    char const *const p2string = "some text";
+    char const *const p = nullptr;
+    char const *const pinvalid;
+    int const a;
+    printf("a=%d\n", a);
+    printf("%s\n", p);
+    printf("%s\n", pinvalid);
+    printf("%s\n", p2string);
+    typedef int calArray[9];
+
     return EXIT_SUCCESS;
 }

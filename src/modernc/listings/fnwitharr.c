@@ -1,4 +1,5 @@
 #include <stdio.h>
+
 void swap_double(double a[static 2]) {
     double tmp = a[0];
     a[0] = a[1];
