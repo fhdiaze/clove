@@ -1,14 +1,18 @@
+#include "../../lib/log.h"
 #include <stddef.h>
 #include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
+#undef LOG_LEVEL
+#define LOG_LEVEL LOG_LEVEL_DEBUG
+
 int main(void) {
     FILE *file = NULL;
     errno_t err = fopen_s(&file, "./src/aoc/twenty_two/ten.txt", "r");
     if (err != 0 || file == NULL) {
-        printf("Unable to find the file\n");
+        loge("Unable to find the file\n");
 
         return EXIT_FAILURE;
     }
@@ -22,12 +26,12 @@ int main(void) {
     while (true) {
         cycle++;
 
-        printf("During cycle=%llu, x=%lld, v=%lld, inst=%s\n", cycle, x, v, inst);
+        logd("During cycle=%llu, x=%lld, v=%lld, inst=%s\n", cycle, x, v, inst);
 
         // Update strengths
         if (cycle % 40 == 20) {
             strengths += x * cycle;
-            printf("Strength: %lld\n", strengths);
+            logi("Strength: %lld\n", strengths);
         }
 
         // Check if there is a pending instruction
@@ -36,7 +40,7 @@ int main(void) {
             x += v;
             v = 0;
 
-            printf("End cycle=%llu, x=%lld, v=%lld, inst=%s\n", cycle, x, v, inst);
+            logd("End cycle=%llu, x=%lld, v=%lld, inst=%s\n", cycle, x, v, inst);
 
             continue;
         }
@@ -45,7 +49,7 @@ int main(void) {
         if (fgets(inst, instmaxlen, file) != NULL) {
             size_t instlen = strlen(inst);
             if (instlen == 0 || inst[instlen - 1] != '\n') {
-                printf("The instruction read is not valid: %s", inst);
+                loge("The instruction read is not valid: %s", inst);
 
                 return EXIT_FAILURE;
             }
@@ -56,7 +60,7 @@ int main(void) {
                 v = strtoll(inst + 5, NULL, 10); // Process addx: inst is a pointer :)
             }
 
-            printf("End cycle=%llu, x=%lld, v=%lld, inst=%s\n", cycle, x, v, inst);
+            logd("End cycle=%llu, x=%lld, v=%lld, inst=%s\n", cycle, x, v, inst);
 
             continue;
         }
@@ -64,7 +68,7 @@ int main(void) {
         break;
     }
 
-    printf("cycle=%llu, x=%lld, v=%lld, s=%lld\n", cycle, x, v, strengths);
+    logi("cycle=%llu, x=%lld, v=%lld, s=%lld\n", cycle, x, v, strengths);
 
     fclose(file);
 
