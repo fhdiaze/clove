@@ -17,6 +17,10 @@
       printf("[TRACE] " __VA_ARGS__);                                          \
   } while (0)
 
+/**
+ * logd - Logs a debug message if LOG_LEVEL <= LOG_LEVEL_DEBUG.
+ * Usage: logd("Debug info: x=%d\n", x);
+ */
 #define logd(...)                                                              \
   do {                                                                         \
     if (LOG_LEVEL <= LOG_LEVEL_DEBUG)                                          \

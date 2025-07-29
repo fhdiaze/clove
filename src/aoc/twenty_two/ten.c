@@ -6,7 +6,9 @@
 #include <string.h>
 
 #undef LOG_LEVEL
-#define LOG_LEVEL LOG_LEVEL_DEBUG
+#define LOG_LEVEL LOG_LEVEL_INFO
+#define SCREEN_INDEX(cycle) ((cycle) - 1 + ((cycle) - 1) / 40)
+#define PIXEL_COLUMN(cycle) (1 + ((cycle) - 1) % 40)
 
 int main(void) {
     FILE *file = NULL;
@@ -19,34 +21,44 @@ int main(void) {
 
     constexpr int instmaxlen = 256;
     char inst[instmaxlen];
-    uint64_t cycle = 0;
+    uint64_t cycle = 1;
     int64_t x = 1, v = 0;
     int64_t strengths = 0;
+    // 240 pixels + One new line character per row + end of string
+    char screen[247] = {[SCREEN_INDEX(40) + 1] = '\n',
+                        [SCREEN_INDEX(80) + 1] = '\n',
+                        [SCREEN_INDEX(120) + 1] = '\n',
+                        [SCREEN_INDEX(160) + 1] = '\n',
+                        [SCREEN_INDEX(200) + 1] = '\n',
+                        [SCREEN_INDEX(240) + 1] = '\n',
+                        [246] = '\0'};
 
     while (true) {
-        cycle++;
-
-        logd("During cycle=%llu, x=%lld, v=%lld, inst=%s\n", cycle, x, v, inst);
+        logd("Starts Cycle=%llu, x=%lld, v=%lld, inst=%s\n", cycle, x, v, inst);
 
         // Update strengths
         if (cycle % 40 == 20) {
             strengths += x * cycle;
-            logi("Strength: %lld\n", strengths);
+            logd("Strength: %lld\n", strengths);
         }
+
+        if (PIXEL_COLUMN(cycle) >= x - 1 && PIXEL_COLUMN(cycle) <= x + 1) {
+            // The pixel should be drawn
+            screen[SCREEN_INDEX(cycle)] = '#'; // wo should count for the new line
+        } else if (cycle <= 240) {
+            screen[SCREEN_INDEX(cycle)] = '.';
+        }
+
+        logd("During Cycle=%llu, x=%lld\n", cycle, x);
 
         // Check if there is a pending instruction
         if (v != 0) {
             // Process instruction
             x += v;
             v = 0;
-
-            logd("End cycle=%llu, x=%lld, v=%lld, inst=%s\n", cycle, x, v, inst);
-
-            continue;
-        }
-
-        // Read the instruction
-        if (fgets(inst, instmaxlen, file) != NULL) {
+            inst[0] = '\0';
+        } else if (fgets(inst, instmaxlen, file) != NULL) {
+            // Read the instruction
             size_t instlen = strlen(inst);
             if (instlen == 0 || inst[instlen - 1] != '\n') {
                 loge("The instruction read is not valid: %s", inst);
@@ -55,22 +67,28 @@ int main(void) {
             }
             inst[instlen - 1] = '\0'; // Remove trailing new line
 
+            logd("inst=%s\n", inst);
+
             // Process the instruction
             if (inst[3] == 'x') {
                 v = strtoll(inst + 5, NULL, 10); // Process addx: inst is a pointer :)
+            } else {
+                inst[0] = '\0';
             }
-
-            logd("End cycle=%llu, x=%lld, v=%lld, inst=%s\n", cycle, x, v, inst);
-
-            continue;
+        } else {
+            break;
         }
 
-        break;
+        logd("Ends Cycle=%llu, x=%lld, v=%lld, inst=%s\n", cycle, x, v, inst);
+
+        cycle++;
     }
 
-    logi("cycle=%llu, x=%lld, v=%lld, s=%lld\n", cycle, x, v, strengths);
+    logd("cycle=%llu, x=%lld, v=%lld, s=%lld\n", cycle, x, v, strengths);
 
     fclose(file);
+
+    printf("%s", screen);
 
     return EXIT_SUCCESS;
 }
