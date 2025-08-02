@@ -1,0 +1,728 @@
+[DEBUG] Starts Cycle=1, x=1, v=0, inst=
+[DEBUG] During Cycle=1, x=1, PixelCol=0, ScreenInd=0, PixelPaintedWith=#
+[DEBUG] Ends Cycle=1, x=1, v=1, inst=addx 1
+[DEBUG] Starts Cycle=2, x=1, v=1, inst=addx 1
+[DEBUG] During Cycle=2, x=1, PixelCol=1, ScreenInd=1, PixelPaintedWith=#
+[DEBUG] Ends Cycle=2, x=2, v=0, inst=
+[DEBUG] Starts Cycle=3, x=2, v=0, inst=
+[DEBUG] During Cycle=3, x=2, PixelCol=2, ScreenInd=2, PixelPaintedWith=#
+[DEBUG] Ends Cycle=3, x=2, v=5, inst=addx 5
+[DEBUG] Starts Cycle=4, x=2, v=5, inst=addx 5
+[DEBUG] During Cycle=4, x=2, PixelCol=3, ScreenInd=3, PixelPaintedWith=#
+[DEBUG] Ends Cycle=4, x=7, v=0, inst=
+[DEBUG] Starts Cycle=5, x=7, v=0, inst=
+[DEBUG] During Cycle=5, x=7, PixelCol=4, ScreenInd=4, PixelPaintedWith=.
+[DEBUG] Ends Cycle=5, x=7, v=0, inst=
+[DEBUG] Starts Cycle=6, x=7, v=0, inst=
+[DEBUG] During Cycle=6, x=7, PixelCol=5, ScreenInd=5, PixelPaintedWith=.
+[DEBUG] Ends Cycle=6, x=7, v=-1, inst=addx -1
+[DEBUG] Starts Cycle=7, x=7, v=-1, inst=addx -1
+[DEBUG] During Cycle=7, x=7, PixelCol=6, ScreenInd=6, PixelPaintedWith=#
+[DEBUG] Ends Cycle=7, x=6, v=0, inst=
+[DEBUG] Starts Cycle=8, x=6, v=0, inst=
+[DEBUG] During Cycle=8, x=6, PixelCol=7, ScreenInd=7, PixelPaintedWith=#
+[DEBUG] Ends Cycle=8, x=6, v=0, inst=
+[DEBUG] Starts Cycle=9, x=6, v=0, inst=
+[DEBUG] During Cycle=9, x=6, PixelCol=8, ScreenInd=8, PixelPaintedWith=.
+[DEBUG] Ends Cycle=9, x=6, v=0, inst=
+[DEBUG] Starts Cycle=10, x=6, v=0, inst=
+[DEBUG] During Cycle=10, x=6, PixelCol=9, ScreenInd=9, PixelPaintedWith=.
+[DEBUG] Ends Cycle=10, x=6, v=6, inst=addx 6
+[DEBUG] Starts Cycle=11, x=6, v=6, inst=addx 6
+[DEBUG] During Cycle=11, x=6, PixelCol=10, ScreenInd=10, PixelPaintedWith=.
+[DEBUG] Ends Cycle=11, x=12, v=0, inst=
+[DEBUG] Starts Cycle=12, x=12, v=0, inst=
+[DEBUG] During Cycle=12, x=12, PixelCol=11, ScreenInd=11, PixelPaintedWith=#
+[DEBUG] Ends Cycle=12, x=12, v=15, inst=addx 15
+[DEBUG] Starts Cycle=13, x=12, v=15, inst=addx 15
+[DEBUG] During Cycle=13, x=12, PixelCol=12, ScreenInd=12, PixelPaintedWith=#
+[DEBUG] Ends Cycle=13, x=27, v=0, inst=
+[DEBUG] Starts Cycle=14, x=27, v=0, inst=
+[DEBUG] During Cycle=14, x=27, PixelCol=13, ScreenInd=13, PixelPaintedWith=.
+[DEBUG] Ends Cycle=14, x=27, v=-9, inst=addx -9
+[DEBUG] Starts Cycle=15, x=27, v=-9, inst=addx -9
+[DEBUG] During Cycle=15, x=27, PixelCol=14, ScreenInd=14, PixelPaintedWith=.
+[DEBUG] Ends Cycle=15, x=18, v=0, inst=
+[DEBUG] Starts Cycle=16, x=18, v=0, inst=
+[DEBUG] During Cycle=16, x=18, PixelCol=15, ScreenInd=15, PixelPaintedWith=.
+[DEBUG] Ends Cycle=16, x=18, v=0, inst=
+[DEBUG] Starts Cycle=17, x=18, v=0, inst=
+[DEBUG] During Cycle=17, x=18, PixelCol=16, ScreenInd=16, PixelPaintedWith=.
+[DEBUG] Ends Cycle=17, x=18, v=-1, inst=addx -1
+[DEBUG] Starts Cycle=18, x=18, v=-1, inst=addx -1
+[DEBUG] During Cycle=18, x=18, PixelCol=17, ScreenInd=17, PixelPaintedWith=#
+[DEBUG] Ends Cycle=18, x=17, v=0, inst=
+[DEBUG] Starts Cycle=19, x=17, v=0, inst=
+[DEBUG] During Cycle=19, x=17, PixelCol=18, ScreenInd=18, PixelPaintedWith=#
+[DEBUG] Ends Cycle=19, x=17, v=4, inst=addx 4
+[DEBUG] Starts Cycle=20, x=17, v=4, inst=addx 4
+[DEBUG] During Cycle=20, x=17, PixelCol=19, ScreenInd=19, PixelPaintedWith=.
+[DEBUG] Ends Cycle=20, x=21, v=0, inst=
+[DEBUG] Starts Cycle=21, x=21, v=0, inst=
+[DEBUG] During Cycle=21, x=21, PixelCol=20, ScreenInd=20, PixelPaintedWith=#
+[DEBUG] Ends Cycle=21, x=21, v=2, inst=addx 2
+[DEBUG] Starts Cycle=22, x=21, v=2, inst=addx 2
+[DEBUG] During Cycle=22, x=21, PixelCol=21, ScreenInd=21, PixelPaintedWith=#
+[DEBUG] Ends Cycle=22, x=23, v=0, inst=
+[DEBUG] Starts Cycle=23, x=23, v=0, inst=
+[DEBUG] During Cycle=23, x=23, PixelCol=22, ScreenInd=22, PixelPaintedWith=#
+[DEBUG] Ends Cycle=23, x=23, v=-22, inst=addx -22
+[DEBUG] Starts Cycle=24, x=23, v=-22, inst=addx -22
+[DEBUG] During Cycle=24, x=23, PixelCol=23, ScreenInd=23, PixelPaintedWith=#
+[DEBUG] Ends Cycle=24, x=1, v=0, inst=
+[DEBUG] Starts Cycle=25, x=1, v=0, inst=
+[DEBUG] During Cycle=25, x=1, PixelCol=24, ScreenInd=24, PixelPaintedWith=.
+[DEBUG] Ends Cycle=25, x=1, v=27, inst=addx 27
+[DEBUG] Starts Cycle=26, x=1, v=27, inst=addx 27
+[DEBUG] During Cycle=26, x=1, PixelCol=25, ScreenInd=25, PixelPaintedWith=.
+[DEBUG] Ends Cycle=26, x=28, v=0, inst=
+[DEBUG] Starts Cycle=27, x=28, v=0, inst=
+[DEBUG] During Cycle=27, x=28, PixelCol=26, ScreenInd=26, PixelPaintedWith=.
+[DEBUG] Ends Cycle=27, x=28, v=-1, inst=addx -1
+[DEBUG] Starts Cycle=28, x=28, v=-1, inst=addx -1
+[DEBUG] During Cycle=28, x=28, PixelCol=27, ScreenInd=27, PixelPaintedWith=#
+[DEBUG] Ends Cycle=28, x=27, v=0, inst=
+[DEBUG] Starts Cycle=29, x=27, v=0, inst=
+[DEBUG] During Cycle=29, x=27, PixelCol=28, ScreenInd=28, PixelPaintedWith=#
+[DEBUG] Ends Cycle=29, x=27, v=4, inst=addx 4
+[DEBUG] Starts Cycle=30, x=27, v=4, inst=addx 4
+[DEBUG] During Cycle=30, x=27, PixelCol=29, ScreenInd=29, PixelPaintedWith=.
+[DEBUG] Ends Cycle=30, x=31, v=0, inst=
+[DEBUG] Starts Cycle=31, x=31, v=0, inst=
+[DEBUG] During Cycle=31, x=31, PixelCol=30, ScreenInd=30, PixelPaintedWith=#
+[DEBUG] Ends Cycle=31, x=31, v=0, inst=
+[DEBUG] Starts Cycle=32, x=31, v=0, inst=
+[DEBUG] During Cycle=32, x=31, PixelCol=31, ScreenInd=31, PixelPaintedWith=#
+[DEBUG] Ends Cycle=32, x=31, v=1, inst=addx 1
+[DEBUG] Starts Cycle=33, x=31, v=1, inst=addx 1
+[DEBUG] During Cycle=33, x=31, PixelCol=32, ScreenInd=32, PixelPaintedWith=#
+[DEBUG] Ends Cycle=33, x=32, v=0, inst=
+[DEBUG] Starts Cycle=34, x=32, v=0, inst=
+[DEBUG] During Cycle=34, x=32, PixelCol=33, ScreenInd=33, PixelPaintedWith=#
+[DEBUG] Ends Cycle=34, x=32, v=2, inst=addx 2
+[DEBUG] Starts Cycle=35, x=32, v=2, inst=addx 2
+[DEBUG] During Cycle=35, x=32, PixelCol=34, ScreenInd=34, PixelPaintedWith=.
+[DEBUG] Ends Cycle=35, x=34, v=0, inst=
+[DEBUG] Starts Cycle=36, x=34, v=0, inst=
+[DEBUG] During Cycle=36, x=34, PixelCol=35, ScreenInd=35, PixelPaintedWith=#
+[DEBUG] Ends Cycle=36, x=34, v=0, inst=
+[DEBUG] Starts Cycle=37, x=34, v=0, inst=
+[DEBUG] During Cycle=37, x=34, PixelCol=36, ScreenInd=36, PixelPaintedWith=.
+[DEBUG] Ends Cycle=37, x=34, v=0, inst=
+[DEBUG] Starts Cycle=38, x=34, v=0, inst=
+[DEBUG] During Cycle=38, x=34, PixelCol=37, ScreenInd=37, PixelPaintedWith=.
+[DEBUG] Ends Cycle=38, x=34, v=0, inst=
+[DEBUG] Starts Cycle=39, x=34, v=0, inst=
+[DEBUG] During Cycle=39, x=34, PixelCol=38, ScreenInd=38, PixelPaintedWith=.
+[DEBUG] Ends Cycle=39, x=34, v=0, inst=
+[DEBUG] Starts Cycle=40, x=34, v=0, inst=
+[DEBUG] During Cycle=40, x=34, PixelCol=39, ScreenInd=39, PixelPaintedWith=.
+[DEBUG] Ends Cycle=40, x=34, v=1, inst=addx 1
+[DEBUG] Starts Cycle=41, x=34, v=1, inst=addx 1
+[DEBUG] During Cycle=41, x=34, PixelCol=0, ScreenInd=41, PixelPaintedWith=.
+[DEBUG] Ends Cycle=41, x=35, v=0, inst=
+[DEBUG] Starts Cycle=42, x=35, v=0, inst=
+[DEBUG] During Cycle=42, x=35, PixelCol=1, ScreenInd=42, PixelPaintedWith=.
+[DEBUG] Ends Cycle=42, x=35, v=-33, inst=addx -33
+[DEBUG] Starts Cycle=43, x=35, v=-33, inst=addx -33
+[DEBUG] During Cycle=43, x=35, PixelCol=2, ScreenInd=43, PixelPaintedWith=.
+[DEBUG] Ends Cycle=43, x=2, v=0, inst=
+[DEBUG] Starts Cycle=44, x=2, v=0, inst=
+[DEBUG] During Cycle=44, x=2, PixelCol=3, ScreenInd=44, PixelPaintedWith=#
+[DEBUG] Ends Cycle=44, x=2, v=2, inst=addx 2
+[DEBUG] Starts Cycle=45, x=2, v=2, inst=addx 2
+[DEBUG] During Cycle=45, x=2, PixelCol=4, ScreenInd=45, PixelPaintedWith=.
+[DEBUG] Ends Cycle=45, x=4, v=0, inst=
+[DEBUG] Starts Cycle=46, x=4, v=0, inst=
+[DEBUG] During Cycle=46, x=4, PixelCol=5, ScreenInd=46, PixelPaintedWith=#
+[DEBUG] Ends Cycle=46, x=4, v=5, inst=addx 5
+[DEBUG] Starts Cycle=47, x=4, v=5, inst=addx 5
+[DEBUG] During Cycle=47, x=4, PixelCol=6, ScreenInd=47, PixelPaintedWith=.
+[DEBUG] Ends Cycle=47, x=9, v=0, inst=
+[DEBUG] Starts Cycle=48, x=9, v=0, inst=
+[DEBUG] During Cycle=48, x=9, PixelCol=7, ScreenInd=48, PixelPaintedWith=.
+[DEBUG] Ends Cycle=48, x=9, v=2, inst=addx 2
+[DEBUG] Starts Cycle=49, x=9, v=2, inst=addx 2
+[DEBUG] During Cycle=49, x=9, PixelCol=8, ScreenInd=49, PixelPaintedWith=#
+[DEBUG] Ends Cycle=49, x=11, v=0, inst=
+[DEBUG] Starts Cycle=50, x=11, v=0, inst=
+[DEBUG] During Cycle=50, x=11, PixelCol=9, ScreenInd=50, PixelPaintedWith=.
+[DEBUG] Ends Cycle=50, x=11, v=3, inst=addx 3
+[DEBUG] Starts Cycle=51, x=11, v=3, inst=addx 3
+[DEBUG] During Cycle=51, x=11, PixelCol=10, ScreenInd=51, PixelPaintedWith=#
+[DEBUG] Ends Cycle=51, x=14, v=0, inst=
+[DEBUG] Starts Cycle=52, x=14, v=0, inst=
+[DEBUG] During Cycle=52, x=14, PixelCol=11, ScreenInd=52, PixelPaintedWith=.
+[DEBUG] Ends Cycle=52, x=14, v=-2, inst=addx -2
+[DEBUG] Starts Cycle=53, x=14, v=-2, inst=addx -2
+[DEBUG] During Cycle=53, x=14, PixelCol=12, ScreenInd=53, PixelPaintedWith=.
+[DEBUG] Ends Cycle=53, x=12, v=0, inst=
+[DEBUG] Starts Cycle=54, x=12, v=0, inst=
+[DEBUG] During Cycle=54, x=12, PixelCol=13, ScreenInd=54, PixelPaintedWith=#
+[DEBUG] Ends Cycle=54, x=12, v=7, inst=addx 7
+[DEBUG] Starts Cycle=55, x=12, v=7, inst=addx 7
+[DEBUG] During Cycle=55, x=12, PixelCol=14, ScreenInd=55, PixelPaintedWith=.
+[DEBUG] Ends Cycle=55, x=19, v=0, inst=
+[DEBUG] Starts Cycle=56, x=19, v=0, inst=
+[DEBUG] During Cycle=56, x=19, PixelCol=15, ScreenInd=56, PixelPaintedWith=.
+[DEBUG] Ends Cycle=56, x=19, v=0, inst=
+[DEBUG] Starts Cycle=57, x=19, v=0, inst=
+[DEBUG] During Cycle=57, x=19, PixelCol=16, ScreenInd=57, PixelPaintedWith=.
+[DEBUG] Ends Cycle=57, x=19, v=-2, inst=addx -2
+[DEBUG] Starts Cycle=58, x=19, v=-2, inst=addx -2
+[DEBUG] During Cycle=58, x=19, PixelCol=17, ScreenInd=58, PixelPaintedWith=.
+[DEBUG] Ends Cycle=58, x=17, v=0, inst=
+[DEBUG] Starts Cycle=59, x=17, v=0, inst=
+[DEBUG] During Cycle=59, x=17, PixelCol=18, ScreenInd=59, PixelPaintedWith=#
+[DEBUG] Ends Cycle=59, x=17, v=-8, inst=addx -8
+[DEBUG] Starts Cycle=60, x=17, v=-8, inst=addx -8
+[DEBUG] During Cycle=60, x=17, PixelCol=19, ScreenInd=60, PixelPaintedWith=.
+[DEBUG] Ends Cycle=60, x=9, v=0, inst=
+[DEBUG] Starts Cycle=61, x=9, v=0, inst=
+[DEBUG] During Cycle=61, x=9, PixelCol=20, ScreenInd=61, PixelPaintedWith=.
+[DEBUG] Ends Cycle=61, x=9, v=15, inst=addx 15
+[DEBUG] Starts Cycle=62, x=9, v=15, inst=addx 15
+[DEBUG] During Cycle=62, x=9, PixelCol=21, ScreenInd=62, PixelPaintedWith=.
+[DEBUG] Ends Cycle=62, x=24, v=0, inst=
+[DEBUG] Starts Cycle=63, x=24, v=0, inst=
+[DEBUG] During Cycle=63, x=24, PixelCol=22, ScreenInd=63, PixelPaintedWith=.
+[DEBUG] Ends Cycle=63, x=24, v=5, inst=addx 5
+[DEBUG] Starts Cycle=64, x=24, v=5, inst=addx 5
+[DEBUG] During Cycle=64, x=24, PixelCol=23, ScreenInd=64, PixelPaintedWith=#
+[DEBUG] Ends Cycle=64, x=29, v=0, inst=
+[DEBUG] Starts Cycle=65, x=29, v=0, inst=
+[DEBUG] During Cycle=65, x=29, PixelCol=24, ScreenInd=65, PixelPaintedWith=.
+[DEBUG] Ends Cycle=65, x=29, v=0, inst=
+[DEBUG] Starts Cycle=66, x=29, v=0, inst=
+[DEBUG] During Cycle=66, x=29, PixelCol=25, ScreenInd=66, PixelPaintedWith=.
+[DEBUG] Ends Cycle=66, x=29, v=0, inst=
+[DEBUG] Starts Cycle=67, x=29, v=0, inst=
+[DEBUG] During Cycle=67, x=29, PixelCol=26, ScreenInd=67, PixelPaintedWith=.
+[DEBUG] Ends Cycle=67, x=29, v=-2, inst=addx -2
+[DEBUG] Starts Cycle=68, x=29, v=-2, inst=addx -2
+[DEBUG] During Cycle=68, x=29, PixelCol=27, ScreenInd=68, PixelPaintedWith=.
+[DEBUG] Ends Cycle=68, x=27, v=0, inst=
+[DEBUG] Starts Cycle=69, x=27, v=0, inst=
+[DEBUG] During Cycle=69, x=27, PixelCol=28, ScreenInd=69, PixelPaintedWith=#
+[DEBUG] Ends Cycle=69, x=27, v=2, inst=addx 2
+[DEBUG] Starts Cycle=70, x=27, v=2, inst=addx 2
+[DEBUG] During Cycle=70, x=27, PixelCol=29, ScreenInd=70, PixelPaintedWith=.
+[DEBUG] Ends Cycle=70, x=29, v=0, inst=
+[DEBUG] Starts Cycle=71, x=29, v=0, inst=
+[DEBUG] During Cycle=71, x=29, PixelCol=30, ScreenInd=71, PixelPaintedWith=#
+[DEBUG] Ends Cycle=71, x=29, v=0, inst=
+[DEBUG] Starts Cycle=72, x=29, v=0, inst=
+[DEBUG] During Cycle=72, x=29, PixelCol=31, ScreenInd=72, PixelPaintedWith=.
+[DEBUG] Ends Cycle=72, x=29, v=0, inst=
+[DEBUG] Starts Cycle=73, x=29, v=0, inst=
+[DEBUG] During Cycle=73, x=29, PixelCol=32, ScreenInd=73, PixelPaintedWith=.
+[DEBUG] Ends Cycle=73, x=29, v=7, inst=addx 7
+[DEBUG] Starts Cycle=74, x=29, v=7, inst=addx 7
+[DEBUG] During Cycle=74, x=29, PixelCol=33, ScreenInd=74, PixelPaintedWith=.
+[DEBUG] Ends Cycle=74, x=36, v=0, inst=
+[DEBUG] Starts Cycle=75, x=36, v=0, inst=
+[DEBUG] During Cycle=75, x=36, PixelCol=34, ScreenInd=75, PixelPaintedWith=.
+[DEBUG] Ends Cycle=75, x=36, v=-14, inst=addx -14
+[DEBUG] Starts Cycle=76, x=36, v=-14, inst=addx -14
+[DEBUG] During Cycle=76, x=36, PixelCol=35, ScreenInd=76, PixelPaintedWith=#
+[DEBUG] Ends Cycle=76, x=22, v=0, inst=
+[DEBUG] Starts Cycle=77, x=22, v=0, inst=
+[DEBUG] During Cycle=77, x=22, PixelCol=36, ScreenInd=77, PixelPaintedWith=.
+[DEBUG] Ends Cycle=77, x=22, v=0, inst=
+[DEBUG] Starts Cycle=78, x=22, v=0, inst=
+[DEBUG] During Cycle=78, x=22, PixelCol=37, ScreenInd=78, PixelPaintedWith=.
+[DEBUG] Ends Cycle=78, x=22, v=-2, inst=addx -2
+[DEBUG] Starts Cycle=79, x=22, v=-2, inst=addx -2
+[DEBUG] During Cycle=79, x=22, PixelCol=38, ScreenInd=79, PixelPaintedWith=.
+[DEBUG] Ends Cycle=79, x=20, v=0, inst=
+[DEBUG] Starts Cycle=80, x=20, v=0, inst=
+[DEBUG] During Cycle=80, x=20, PixelCol=39, ScreenInd=80, PixelPaintedWith=.
+[DEBUG] Ends Cycle=80, x=20, v=-17, inst=addx -17
+[DEBUG] Starts Cycle=81, x=20, v=-17, inst=addx -17
+[DEBUG] During Cycle=81, x=20, PixelCol=0, ScreenInd=82, PixelPaintedWith=.
+[DEBUG] Ends Cycle=81, x=3, v=0, inst=
+[DEBUG] Starts Cycle=82, x=3, v=0, inst=
+[DEBUG] During Cycle=82, x=3, PixelCol=1, ScreenInd=83, PixelPaintedWith=.
+[DEBUG] Ends Cycle=82, x=3, v=5, inst=addx 5
+[DEBUG] Starts Cycle=83, x=3, v=5, inst=addx 5
+[DEBUG] During Cycle=83, x=3, PixelCol=2, ScreenInd=84, PixelPaintedWith=#
+[DEBUG] Ends Cycle=83, x=8, v=0, inst=
+[DEBUG] Starts Cycle=84, x=8, v=0, inst=
+[DEBUG] During Cycle=84, x=8, PixelCol=3, ScreenInd=85, PixelPaintedWith=.
+[DEBUG] Ends Cycle=84, x=8, v=-4, inst=addx -4
+[DEBUG] Starts Cycle=85, x=8, v=-4, inst=addx -4
+[DEBUG] During Cycle=85, x=8, PixelCol=4, ScreenInd=86, PixelPaintedWith=.
+[DEBUG] Ends Cycle=85, x=4, v=0, inst=
+[DEBUG] Starts Cycle=86, x=4, v=0, inst=
+[DEBUG] During Cycle=86, x=4, PixelCol=5, ScreenInd=87, PixelPaintedWith=#
+[DEBUG] Ends Cycle=86, x=4, v=0, inst=
+[DEBUG] Starts Cycle=87, x=4, v=0, inst=
+[DEBUG] During Cycle=87, x=4, PixelCol=6, ScreenInd=88, PixelPaintedWith=.
+[DEBUG] Ends Cycle=87, x=4, v=23, inst=addx 23
+[DEBUG] Starts Cycle=88, x=4, v=23, inst=addx 23
+[DEBUG] During Cycle=88, x=4, PixelCol=7, ScreenInd=89, PixelPaintedWith=.
+[DEBUG] Ends Cycle=88, x=27, v=0, inst=
+[DEBUG] Starts Cycle=89, x=27, v=0, inst=
+[DEBUG] During Cycle=89, x=27, PixelCol=8, ScreenInd=90, PixelPaintedWith=.
+[DEBUG] Ends Cycle=89, x=27, v=-18, inst=addx -18
+[DEBUG] Starts Cycle=90, x=27, v=-18, inst=addx -18
+[DEBUG] During Cycle=90, x=27, PixelCol=9, ScreenInd=91, PixelPaintedWith=.
+[DEBUG] Ends Cycle=90, x=9, v=0, inst=
+[DEBUG] Starts Cycle=91, x=9, v=0, inst=
+[DEBUG] During Cycle=91, x=9, PixelCol=10, ScreenInd=92, PixelPaintedWith=#
+[DEBUG] Ends Cycle=91, x=9, v=0, inst=
+[DEBUG] Starts Cycle=92, x=9, v=0, inst=
+[DEBUG] During Cycle=92, x=9, PixelCol=11, ScreenInd=93, PixelPaintedWith=.
+[DEBUG] Ends Cycle=92, x=9, v=0, inst=
+[DEBUG] Starts Cycle=93, x=9, v=0, inst=
+[DEBUG] During Cycle=93, x=9, PixelCol=12, ScreenInd=94, PixelPaintedWith=.
+[DEBUG] Ends Cycle=93, x=9, v=0, inst=
+[DEBUG] Starts Cycle=94, x=9, v=0, inst=
+[DEBUG] During Cycle=94, x=9, PixelCol=13, ScreenInd=95, PixelPaintedWith=.
+[DEBUG] Ends Cycle=94, x=9, v=28, inst=addx 28
+[DEBUG] Starts Cycle=95, x=9, v=28, inst=addx 28
+[DEBUG] During Cycle=95, x=9, PixelCol=14, ScreenInd=96, PixelPaintedWith=.
+[DEBUG] Ends Cycle=95, x=37, v=0, inst=
+[DEBUG] Starts Cycle=96, x=37, v=0, inst=
+[DEBUG] During Cycle=96, x=37, PixelCol=15, ScreenInd=97, PixelPaintedWith=.
+[DEBUG] Ends Cycle=96, x=37, v=-18, inst=addx -18
+[DEBUG] Starts Cycle=97, x=37, v=-18, inst=addx -18
+[DEBUG] During Cycle=97, x=37, PixelCol=16, ScreenInd=98, PixelPaintedWith=.
+[DEBUG] Ends Cycle=97, x=19, v=0, inst=
+[DEBUG] Starts Cycle=98, x=19, v=0, inst=
+[DEBUG] During Cycle=98, x=19, PixelCol=17, ScreenInd=99, PixelPaintedWith=.
+[DEBUG] Ends Cycle=98, x=19, v=4, inst=addx 4
+[DEBUG] Starts Cycle=99, x=19, v=4, inst=addx 4
+[DEBUG] During Cycle=99, x=19, PixelCol=18, ScreenInd=100, PixelPaintedWith=#
+[DEBUG] Ends Cycle=99, x=23, v=0, inst=
+[DEBUG] Starts Cycle=100, x=23, v=0, inst=
+[DEBUG] During Cycle=100, x=23, PixelCol=19, ScreenInd=101, PixelPaintedWith=.
+[DEBUG] Ends Cycle=100, x=23, v=0, inst=
+[DEBUG] Starts Cycle=101, x=23, v=0, inst=
+[DEBUG] During Cycle=101, x=23, PixelCol=20, ScreenInd=102, PixelPaintedWith=.
+[DEBUG] Ends Cycle=101, x=23, v=0, inst=
+[DEBUG] Starts Cycle=102, x=23, v=0, inst=
+[DEBUG] During Cycle=102, x=23, PixelCol=21, ScreenInd=103, PixelPaintedWith=.
+[DEBUG] Ends Cycle=102, x=23, v=-5, inst=addx -5
+[DEBUG] Starts Cycle=103, x=23, v=-5, inst=addx -5
+[DEBUG] During Cycle=103, x=23, PixelCol=22, ScreenInd=104, PixelPaintedWith=#
+[DEBUG] Ends Cycle=103, x=18, v=0, inst=
+[DEBUG] Starts Cycle=104, x=18, v=0, inst=
+[DEBUG] During Cycle=104, x=18, PixelCol=23, ScreenInd=105, PixelPaintedWith=.
+[DEBUG] Ends Cycle=104, x=18, v=1, inst=addx 1
+[DEBUG] Starts Cycle=105, x=18, v=1, inst=addx 1
+[DEBUG] During Cycle=105, x=18, PixelCol=24, ScreenInd=106, PixelPaintedWith=.
+[DEBUG] Ends Cycle=105, x=19, v=0, inst=
+[DEBUG] Starts Cycle=106, x=19, v=0, inst=
+[DEBUG] During Cycle=106, x=19, PixelCol=25, ScreenInd=107, PixelPaintedWith=.
+[DEBUG] Ends Cycle=106, x=19, v=10, inst=addx 10
+[DEBUG] Starts Cycle=107, x=19, v=10, inst=addx 10
+[DEBUG] During Cycle=107, x=19, PixelCol=26, ScreenInd=108, PixelPaintedWith=.
+[DEBUG] Ends Cycle=107, x=29, v=0, inst=
+[DEBUG] Starts Cycle=108, x=29, v=0, inst=
+[DEBUG] During Cycle=108, x=29, PixelCol=27, ScreenInd=109, PixelPaintedWith=.
+[DEBUG] Ends Cycle=108, x=29, v=2, inst=addx 2
+[DEBUG] Starts Cycle=109, x=29, v=2, inst=addx 2
+[DEBUG] During Cycle=109, x=29, PixelCol=28, ScreenInd=110, PixelPaintedWith=#
+[DEBUG] Ends Cycle=109, x=31, v=0, inst=
+[DEBUG] Starts Cycle=110, x=31, v=0, inst=
+[DEBUG] During Cycle=110, x=31, PixelCol=29, ScreenInd=111, PixelPaintedWith=.
+[DEBUG] Ends Cycle=110, x=31, v=0, inst=
+[DEBUG] Starts Cycle=111, x=31, v=0, inst=
+[DEBUG] During Cycle=111, x=31, PixelCol=30, ScreenInd=112, PixelPaintedWith=#
+[DEBUG] Ends Cycle=111, x=31, v=0, inst=
+[DEBUG] Starts Cycle=112, x=31, v=0, inst=
+[DEBUG] During Cycle=112, x=31, PixelCol=31, ScreenInd=113, PixelPaintedWith=#
+[DEBUG] Ends Cycle=112, x=31, v=-30, inst=addx -30
+[DEBUG] Starts Cycle=113, x=31, v=-30, inst=addx -30
+[DEBUG] During Cycle=113, x=31, PixelCol=32, ScreenInd=114, PixelPaintedWith=#
+[DEBUG] Ends Cycle=113, x=1, v=0, inst=
+[DEBUG] Starts Cycle=114, x=1, v=0, inst=
+[DEBUG] During Cycle=114, x=1, PixelCol=33, ScreenInd=115, PixelPaintedWith=.
+[DEBUG] Ends Cycle=114, x=1, v=33, inst=addx 33
+[DEBUG] Starts Cycle=115, x=1, v=33, inst=addx 33
+[DEBUG] During Cycle=115, x=1, PixelCol=34, ScreenInd=116, PixelPaintedWith=.
+[DEBUG] Ends Cycle=115, x=34, v=0, inst=
+[DEBUG] Starts Cycle=116, x=34, v=0, inst=
+[DEBUG] During Cycle=116, x=34, PixelCol=35, ScreenInd=117, PixelPaintedWith=#
+[DEBUG] Ends Cycle=116, x=34, v=-32, inst=addx -32
+[DEBUG] Starts Cycle=117, x=34, v=-32, inst=addx -32
+[DEBUG] During Cycle=117, x=34, PixelCol=36, ScreenInd=118, PixelPaintedWith=.
+[DEBUG] Ends Cycle=117, x=2, v=0, inst=
+[DEBUG] Starts Cycle=118, x=2, v=0, inst=
+[DEBUG] During Cycle=118, x=2, PixelCol=37, ScreenInd=119, PixelPaintedWith=.
+[DEBUG] Ends Cycle=118, x=2, v=0, inst=
+[DEBUG] Starts Cycle=119, x=2, v=0, inst=
+[DEBUG] During Cycle=119, x=2, PixelCol=38, ScreenInd=120, PixelPaintedWith=.
+[DEBUG] Ends Cycle=119, x=2, v=0, inst=
+[DEBUG] Starts Cycle=120, x=2, v=0, inst=
+[DEBUG] During Cycle=120, x=2, PixelCol=39, ScreenInd=121, PixelPaintedWith=.
+[DEBUG] Ends Cycle=120, x=2, v=-2, inst=addx -2
+[DEBUG] Starts Cycle=121, x=2, v=-2, inst=addx -2
+[DEBUG] During Cycle=121, x=2, PixelCol=0, ScreenInd=123, PixelPaintedWith=.
+[DEBUG] Ends Cycle=121, x=0, v=0, inst=
+[DEBUG] Starts Cycle=122, x=0, v=0, inst=
+[DEBUG] During Cycle=122, x=0, PixelCol=1, ScreenInd=124, PixelPaintedWith=#
+[DEBUG] Ends Cycle=122, x=0, v=6, inst=addx 6
+[DEBUG] Starts Cycle=123, x=0, v=6, inst=addx 6
+[DEBUG] During Cycle=123, x=0, PixelCol=2, ScreenInd=125, PixelPaintedWith=.
+[DEBUG] Ends Cycle=123, x=6, v=0, inst=
+[DEBUG] Starts Cycle=124, x=6, v=0, inst=
+[DEBUG] During Cycle=124, x=6, PixelCol=3, ScreenInd=126, PixelPaintedWith=.
+[DEBUG] Ends Cycle=124, x=6, v=-2, inst=addx -2
+[DEBUG] Starts Cycle=125, x=6, v=-2, inst=addx -2
+[DEBUG] During Cycle=125, x=6, PixelCol=4, ScreenInd=127, PixelPaintedWith=.
+[DEBUG] Ends Cycle=125, x=4, v=0, inst=
+[DEBUG] Starts Cycle=126, x=4, v=0, inst=
+[DEBUG] During Cycle=126, x=4, PixelCol=5, ScreenInd=128, PixelPaintedWith=#
+[DEBUG] Ends Cycle=126, x=4, v=4, inst=addx 4
+[DEBUG] Starts Cycle=127, x=4, v=4, inst=addx 4
+[DEBUG] During Cycle=127, x=4, PixelCol=6, ScreenInd=129, PixelPaintedWith=.
+[DEBUG] Ends Cycle=127, x=8, v=0, inst=
+[DEBUG] Starts Cycle=128, x=8, v=0, inst=
+[DEBUG] During Cycle=128, x=8, PixelCol=7, ScreenInd=130, PixelPaintedWith=#
+[DEBUG] Ends Cycle=128, x=8, v=3, inst=addx 3
+[DEBUG] Starts Cycle=129, x=8, v=3, inst=addx 3
+[DEBUG] During Cycle=129, x=8, PixelCol=8, ScreenInd=131, PixelPaintedWith=#
+[DEBUG] Ends Cycle=129, x=11, v=0, inst=
+[DEBUG] Starts Cycle=130, x=11, v=0, inst=
+[DEBUG] During Cycle=130, x=11, PixelCol=9, ScreenInd=132, PixelPaintedWith=.
+[DEBUG] Ends Cycle=130, x=11, v=19, inst=addx 19
+[DEBUG] Starts Cycle=131, x=11, v=19, inst=addx 19
+[DEBUG] During Cycle=131, x=11, PixelCol=10, ScreenInd=133, PixelPaintedWith=#
+[DEBUG] Ends Cycle=131, x=30, v=0, inst=
+[DEBUG] Starts Cycle=132, x=30, v=0, inst=
+[DEBUG] During Cycle=132, x=30, PixelCol=11, ScreenInd=134, PixelPaintedWith=.
+[DEBUG] Ends Cycle=132, x=30, v=10, inst=addx 10
+[DEBUG] Starts Cycle=133, x=30, v=10, inst=addx 10
+[DEBUG] During Cycle=133, x=30, PixelCol=12, ScreenInd=135, PixelPaintedWith=.
+[DEBUG] Ends Cycle=133, x=40, v=0, inst=
+[DEBUG] Starts Cycle=134, x=40, v=0, inst=
+[DEBUG] During Cycle=134, x=40, PixelCol=13, ScreenInd=136, PixelPaintedWith=.
+[DEBUG] Ends Cycle=134, x=40, v=-5, inst=addx -5
+[DEBUG] Starts Cycle=135, x=40, v=-5, inst=addx -5
+[DEBUG] During Cycle=135, x=40, PixelCol=14, ScreenInd=137, PixelPaintedWith=.
+[DEBUG] Ends Cycle=135, x=35, v=0, inst=
+[DEBUG] Starts Cycle=136, x=35, v=0, inst=
+[DEBUG] During Cycle=136, x=35, PixelCol=15, ScreenInd=138, PixelPaintedWith=.
+[DEBUG] Ends Cycle=136, x=35, v=-16, inst=addx -16
+[DEBUG] Starts Cycle=137, x=35, v=-16, inst=addx -16
+[DEBUG] During Cycle=137, x=35, PixelCol=16, ScreenInd=139, PixelPaintedWith=.
+[DEBUG] Ends Cycle=137, x=19, v=0, inst=
+[DEBUG] Starts Cycle=138, x=19, v=0, inst=
+[DEBUG] During Cycle=138, x=19, PixelCol=17, ScreenInd=140, PixelPaintedWith=.
+[DEBUG] Ends Cycle=138, x=19, v=3, inst=addx 3
+[DEBUG] Starts Cycle=139, x=19, v=3, inst=addx 3
+[DEBUG] During Cycle=139, x=19, PixelCol=18, ScreenInd=141, PixelPaintedWith=#
+[DEBUG] Ends Cycle=139, x=22, v=0, inst=
+[DEBUG] Starts Cycle=140, x=22, v=0, inst=
+[DEBUG] During Cycle=140, x=22, PixelCol=19, ScreenInd=142, PixelPaintedWith=.
+[DEBUG] Ends Cycle=140, x=22, v=-2, inst=addx -2
+[DEBUG] Starts Cycle=141, x=22, v=-2, inst=addx -2
+[DEBUG] During Cycle=141, x=22, PixelCol=20, ScreenInd=143, PixelPaintedWith=.
+[DEBUG] Ends Cycle=141, x=20, v=0, inst=
+[DEBUG] Starts Cycle=142, x=20, v=0, inst=
+[DEBUG] During Cycle=142, x=20, PixelCol=21, ScreenInd=144, PixelPaintedWith=#
+[DEBUG] Ends Cycle=142, x=20, v=17, inst=addx 17
+[DEBUG] Starts Cycle=143, x=20, v=17, inst=addx 17
+[DEBUG] During Cycle=143, x=20, PixelCol=22, ScreenInd=145, PixelPaintedWith=.
+[DEBUG] Ends Cycle=143, x=37, v=0, inst=
+[DEBUG] Starts Cycle=144, x=37, v=0, inst=
+[DEBUG] During Cycle=144, x=37, PixelCol=23, ScreenInd=146, PixelPaintedWith=.
+[DEBUG] Ends Cycle=144, x=37, v=-19, inst=addx -19
+[DEBUG] Starts Cycle=145, x=37, v=-19, inst=addx -19
+[DEBUG] During Cycle=145, x=37, PixelCol=24, ScreenInd=147, PixelPaintedWith=.
+[DEBUG] Ends Cycle=145, x=18, v=0, inst=
+[DEBUG] Starts Cycle=146, x=18, v=0, inst=
+[DEBUG] During Cycle=146, x=18, PixelCol=25, ScreenInd=148, PixelPaintedWith=.
+[DEBUG] Ends Cycle=146, x=18, v=11, inst=addx 11
+[DEBUG] Starts Cycle=147, x=18, v=11, inst=addx 11
+[DEBUG] During Cycle=147, x=18, PixelCol=26, ScreenInd=149, PixelPaintedWith=.
+[DEBUG] Ends Cycle=147, x=29, v=0, inst=
+[DEBUG] Starts Cycle=148, x=29, v=0, inst=
+[DEBUG] During Cycle=148, x=29, PixelCol=27, ScreenInd=150, PixelPaintedWith=.
+[DEBUG] Ends Cycle=148, x=29, v=2, inst=addx 2
+[DEBUG] Starts Cycle=149, x=29, v=2, inst=addx 2
+[DEBUG] During Cycle=149, x=29, PixelCol=28, ScreenInd=151, PixelPaintedWith=#
+[DEBUG] Ends Cycle=149, x=31, v=0, inst=
+[DEBUG] Starts Cycle=150, x=31, v=0, inst=
+[DEBUG] During Cycle=150, x=31, PixelCol=29, ScreenInd=152, PixelPaintedWith=.
+[DEBUG] Ends Cycle=150, x=31, v=9, inst=addx 9
+[DEBUG] Starts Cycle=151, x=31, v=9, inst=addx 9
+[DEBUG] During Cycle=151, x=31, PixelCol=30, ScreenInd=153, PixelPaintedWith=#
+[DEBUG] Ends Cycle=151, x=40, v=0, inst=
+[DEBUG] Starts Cycle=152, x=40, v=0, inst=
+[DEBUG] During Cycle=152, x=40, PixelCol=31, ScreenInd=154, PixelPaintedWith=.
+[DEBUG] Ends Cycle=152, x=40, v=0, inst=
+[DEBUG] Starts Cycle=153, x=40, v=0, inst=
+[DEBUG] During Cycle=153, x=40, PixelCol=32, ScreenInd=155, PixelPaintedWith=.
+[DEBUG] Ends Cycle=153, x=40, v=-4, inst=addx -4
+[DEBUG] Starts Cycle=154, x=40, v=-4, inst=addx -4
+[DEBUG] During Cycle=154, x=40, PixelCol=33, ScreenInd=156, PixelPaintedWith=.
+[DEBUG] Ends Cycle=154, x=36, v=0, inst=
+[DEBUG] Starts Cycle=155, x=36, v=0, inst=
+[DEBUG] During Cycle=155, x=36, PixelCol=34, ScreenInd=157, PixelPaintedWith=.
+[DEBUG] Ends Cycle=155, x=36, v=-6, inst=addx -6
+[DEBUG] Starts Cycle=156, x=36, v=-6, inst=addx -6
+[DEBUG] During Cycle=156, x=36, PixelCol=35, ScreenInd=158, PixelPaintedWith=#
+[DEBUG] Ends Cycle=156, x=30, v=0, inst=
+[DEBUG] Starts Cycle=157, x=30, v=0, inst=
+[DEBUG] During Cycle=157, x=30, PixelCol=36, ScreenInd=159, PixelPaintedWith=.
+[DEBUG] Ends Cycle=157, x=30, v=-7, inst=addx -7
+[DEBUG] Starts Cycle=158, x=30, v=-7, inst=addx -7
+[DEBUG] During Cycle=158, x=30, PixelCol=37, ScreenInd=160, PixelPaintedWith=.
+[DEBUG] Ends Cycle=158, x=23, v=0, inst=
+[DEBUG] Starts Cycle=159, x=23, v=0, inst=
+[DEBUG] During Cycle=159, x=23, PixelCol=38, ScreenInd=161, PixelPaintedWith=.
+[DEBUG] Ends Cycle=159, x=23, v=-24, inst=addx -24
+[DEBUG] Starts Cycle=160, x=23, v=-24, inst=addx -24
+[DEBUG] During Cycle=160, x=23, PixelCol=39, ScreenInd=162, PixelPaintedWith=.
+[DEBUG] Ends Cycle=160, x=-1, v=0, inst=
+[DEBUG] Starts Cycle=161, x=-1, v=0, inst=
+[DEBUG] During Cycle=161, x=-1, PixelCol=0, ScreenInd=164, PixelPaintedWith=#
+[DEBUG] Ends Cycle=161, x=-1, v=0, inst=
+[DEBUG] Starts Cycle=162, x=-1, v=0, inst=
+[DEBUG] During Cycle=162, x=-1, PixelCol=1, ScreenInd=165, PixelPaintedWith=.
+[DEBUG] Ends Cycle=162, x=-1, v=7, inst=addx 7
+[DEBUG] Starts Cycle=163, x=-1, v=7, inst=addx 7
+[DEBUG] During Cycle=163, x=-1, PixelCol=2, ScreenInd=166, PixelPaintedWith=.
+[DEBUG] Ends Cycle=163, x=6, v=0, inst=
+[DEBUG] Starts Cycle=164, x=6, v=0, inst=
+[DEBUG] During Cycle=164, x=6, PixelCol=3, ScreenInd=167, PixelPaintedWith=.
+[DEBUG] Ends Cycle=164, x=6, v=-2, inst=addx -2
+[DEBUG] Starts Cycle=165, x=6, v=-2, inst=addx -2
+[DEBUG] During Cycle=165, x=6, PixelCol=4, ScreenInd=168, PixelPaintedWith=.
+[DEBUG] Ends Cycle=165, x=4, v=0, inst=
+[DEBUG] Starts Cycle=166, x=4, v=0, inst=
+[DEBUG] During Cycle=166, x=4, PixelCol=5, ScreenInd=169, PixelPaintedWith=#
+[DEBUG] Ends Cycle=166, x=4, v=5, inst=addx 5
+[DEBUG] Starts Cycle=167, x=4, v=5, inst=addx 5
+[DEBUG] During Cycle=167, x=4, PixelCol=6, ScreenInd=170, PixelPaintedWith=.
+[DEBUG] Ends Cycle=167, x=9, v=0, inst=
+[DEBUG] Starts Cycle=168, x=9, v=0, inst=
+[DEBUG] During Cycle=168, x=9, PixelCol=7, ScreenInd=171, PixelPaintedWith=.
+[DEBUG] Ends Cycle=168, x=9, v=2, inst=addx 2
+[DEBUG] Starts Cycle=169, x=9, v=2, inst=addx 2
+[DEBUG] During Cycle=169, x=9, PixelCol=8, ScreenInd=172, PixelPaintedWith=#
+[DEBUG] Ends Cycle=169, x=11, v=0, inst=
+[DEBUG] Starts Cycle=170, x=11, v=0, inst=
+[DEBUG] During Cycle=170, x=11, PixelCol=9, ScreenInd=173, PixelPaintedWith=.
+[DEBUG] Ends Cycle=170, x=11, v=3, inst=addx 3
+[DEBUG] Starts Cycle=171, x=11, v=3, inst=addx 3
+[DEBUG] During Cycle=171, x=11, PixelCol=10, ScreenInd=174, PixelPaintedWith=#
+[DEBUG] Ends Cycle=171, x=14, v=0, inst=
+[DEBUG] Starts Cycle=172, x=14, v=0, inst=
+[DEBUG] During Cycle=172, x=14, PixelCol=11, ScreenInd=175, PixelPaintedWith=.
+[DEBUG] Ends Cycle=172, x=14, v=-2, inst=addx -2
+[DEBUG] Starts Cycle=173, x=14, v=-2, inst=addx -2
+[DEBUG] During Cycle=173, x=14, PixelCol=12, ScreenInd=176, PixelPaintedWith=.
+[DEBUG] Ends Cycle=173, x=12, v=0, inst=
+[DEBUG] Starts Cycle=174, x=12, v=0, inst=
+[DEBUG] During Cycle=174, x=12, PixelCol=13, ScreenInd=177, PixelPaintedWith=#
+[DEBUG] Ends Cycle=174, x=12, v=2, inst=addx 2
+[DEBUG] Starts Cycle=175, x=12, v=2, inst=addx 2
+[DEBUG] During Cycle=175, x=12, PixelCol=14, ScreenInd=178, PixelPaintedWith=.
+[DEBUG] Ends Cycle=175, x=14, v=0, inst=
+[DEBUG] Starts Cycle=176, x=14, v=0, inst=
+[DEBUG] During Cycle=176, x=14, PixelCol=15, ScreenInd=179, PixelPaintedWith=#
+[DEBUG] Ends Cycle=176, x=14, v=5, inst=addx 5
+[DEBUG] Starts Cycle=177, x=14, v=5, inst=addx 5
+[DEBUG] During Cycle=177, x=14, PixelCol=16, ScreenInd=180, PixelPaintedWith=.
+[DEBUG] Ends Cycle=177, x=19, v=0, inst=
+[DEBUG] Starts Cycle=178, x=19, v=0, inst=
+[DEBUG] During Cycle=178, x=19, PixelCol=17, ScreenInd=181, PixelPaintedWith=.
+[DEBUG] Ends Cycle=178, x=19, v=2, inst=addx 2
+[DEBUG] Starts Cycle=179, x=19, v=2, inst=addx 2
+[DEBUG] During Cycle=179, x=19, PixelCol=18, ScreenInd=182, PixelPaintedWith=#
+[DEBUG] Ends Cycle=179, x=21, v=0, inst=
+[DEBUG] Starts Cycle=180, x=21, v=0, inst=
+[DEBUG] During Cycle=180, x=21, PixelCol=19, ScreenInd=183, PixelPaintedWith=.
+[DEBUG] Ends Cycle=180, x=21, v=7, inst=addx 7
+[DEBUG] Starts Cycle=181, x=21, v=7, inst=addx 7
+[DEBUG] During Cycle=181, x=21, PixelCol=20, ScreenInd=184, PixelPaintedWith=#
+[DEBUG] Ends Cycle=181, x=28, v=0, inst=
+[DEBUG] Starts Cycle=182, x=28, v=0, inst=
+[DEBUG] During Cycle=182, x=28, PixelCol=21, ScreenInd=185, PixelPaintedWith=.
+[DEBUG] Ends Cycle=182, x=28, v=-2, inst=addx -2
+[DEBUG] Starts Cycle=183, x=28, v=-2, inst=addx -2
+[DEBUG] During Cycle=183, x=28, PixelCol=22, ScreenInd=186, PixelPaintedWith=.
+[DEBUG] Ends Cycle=183, x=26, v=0, inst=
+[DEBUG] Starts Cycle=184, x=26, v=0, inst=
+[DEBUG] During Cycle=184, x=26, PixelCol=23, ScreenInd=187, PixelPaintedWith=.
+[DEBUG] Ends Cycle=184, x=26, v=0, inst=
+[DEBUG] Starts Cycle=185, x=26, v=0, inst=
+[DEBUG] During Cycle=185, x=26, PixelCol=24, ScreenInd=188, PixelPaintedWith=.
+[DEBUG] Ends Cycle=185, x=26, v=3, inst=addx 3
+[DEBUG] Starts Cycle=186, x=26, v=3, inst=addx 3
+[DEBUG] During Cycle=186, x=26, PixelCol=25, ScreenInd=189, PixelPaintedWith=#
+[DEBUG] Ends Cycle=186, x=29, v=0, inst=
+[DEBUG] Starts Cycle=187, x=29, v=0, inst=
+[DEBUG] During Cycle=187, x=29, PixelCol=26, ScreenInd=190, PixelPaintedWith=.
+[DEBUG] Ends Cycle=187, x=29, v=-2, inst=addx -2
+[DEBUG] Starts Cycle=188, x=29, v=-2, inst=addx -2
+[DEBUG] During Cycle=188, x=29, PixelCol=27, ScreenInd=191, PixelPaintedWith=.
+[DEBUG] Ends Cycle=188, x=27, v=0, inst=
+[DEBUG] Starts Cycle=189, x=27, v=0, inst=
+[DEBUG] During Cycle=189, x=27, PixelCol=28, ScreenInd=192, PixelPaintedWith=#
+[DEBUG] Ends Cycle=189, x=27, v=2, inst=addx 2
+[DEBUG] Starts Cycle=190, x=27, v=2, inst=addx 2
+[DEBUG] During Cycle=190, x=27, PixelCol=29, ScreenInd=193, PixelPaintedWith=.
+[DEBUG] Ends Cycle=190, x=29, v=0, inst=
+[DEBUG] Starts Cycle=191, x=29, v=0, inst=
+[DEBUG] During Cycle=191, x=29, PixelCol=30, ScreenInd=194, PixelPaintedWith=#
+[DEBUG] Ends Cycle=191, x=29, v=7, inst=addx 7
+[DEBUG] Starts Cycle=192, x=29, v=7, inst=addx 7
+[DEBUG] During Cycle=192, x=29, PixelCol=31, ScreenInd=195, PixelPaintedWith=.
+[DEBUG] Ends Cycle=192, x=36, v=0, inst=
+[DEBUG] Starts Cycle=193, x=36, v=0, inst=
+[DEBUG] During Cycle=193, x=36, PixelCol=32, ScreenInd=196, PixelPaintedWith=.
+[DEBUG] Ends Cycle=193, x=36, v=0, inst=
+[DEBUG] Starts Cycle=194, x=36, v=0, inst=
+[DEBUG] During Cycle=194, x=36, PixelCol=33, ScreenInd=197, PixelPaintedWith=.
+[DEBUG] Ends Cycle=194, x=36, v=-2, inst=addx -2
+[DEBUG] Starts Cycle=195, x=36, v=-2, inst=addx -2
+[DEBUG] During Cycle=195, x=36, PixelCol=34, ScreenInd=198, PixelPaintedWith=.
+[DEBUG] Ends Cycle=195, x=34, v=0, inst=
+[DEBUG] Starts Cycle=196, x=34, v=0, inst=
+[DEBUG] During Cycle=196, x=34, PixelCol=35, ScreenInd=199, PixelPaintedWith=#
+[DEBUG] Ends Cycle=196, x=34, v=-34, inst=addx -34
+[DEBUG] Starts Cycle=197, x=34, v=-34, inst=addx -34
+[DEBUG] During Cycle=197, x=34, PixelCol=36, ScreenInd=200, PixelPaintedWith=.
+[DEBUG] Ends Cycle=197, x=0, v=0, inst=
+[DEBUG] Starts Cycle=198, x=0, v=0, inst=
+[DEBUG] During Cycle=198, x=0, PixelCol=37, ScreenInd=201, PixelPaintedWith=.
+[DEBUG] Ends Cycle=198, x=0, v=1, inst=addx 1
+[DEBUG] Starts Cycle=199, x=0, v=1, inst=addx 1
+[DEBUG] During Cycle=199, x=0, PixelCol=38, ScreenInd=202, PixelPaintedWith=.
+[DEBUG] Ends Cycle=199, x=1, v=0, inst=
+[DEBUG] Starts Cycle=200, x=1, v=0, inst=
+[DEBUG] During Cycle=200, x=1, PixelCol=39, ScreenInd=203, PixelPaintedWith=.
+[DEBUG] Ends Cycle=200, x=1, v=1, inst=addx 1
+[DEBUG] Starts Cycle=201, x=1, v=1, inst=addx 1
+[DEBUG] During Cycle=201, x=1, PixelCol=0, ScreenInd=205, PixelPaintedWith=#
+[DEBUG] Ends Cycle=201, x=2, v=0, inst=
+[DEBUG] Starts Cycle=202, x=2, v=0, inst=
+[DEBUG] During Cycle=202, x=2, PixelCol=1, ScreenInd=206, PixelPaintedWith=#
+[DEBUG] Ends Cycle=202, x=2, v=0, inst=
+[DEBUG] Starts Cycle=203, x=2, v=0, inst=
+[DEBUG] During Cycle=203, x=2, PixelCol=2, ScreenInd=207, PixelPaintedWith=#
+[DEBUG] Ends Cycle=203, x=2, v=0, inst=
+[DEBUG] Starts Cycle=204, x=2, v=0, inst=
+[DEBUG] During Cycle=204, x=2, PixelCol=3, ScreenInd=208, PixelPaintedWith=#
+[DEBUG] Ends Cycle=204, x=2, v=0, inst=
+[DEBUG] Starts Cycle=205, x=2, v=0, inst=
+[DEBUG] During Cycle=205, x=2, PixelCol=4, ScreenInd=209, PixelPaintedWith=.
+[DEBUG] Ends Cycle=205, x=2, v=5, inst=addx 5
+[DEBUG] Starts Cycle=206, x=2, v=5, inst=addx 5
+[DEBUG] During Cycle=206, x=2, PixelCol=5, ScreenInd=210, PixelPaintedWith=.
+[DEBUG] Ends Cycle=206, x=7, v=0, inst=
+[DEBUG] Starts Cycle=207, x=7, v=0, inst=
+[DEBUG] During Cycle=207, x=7, PixelCol=6, ScreenInd=211, PixelPaintedWith=#
+[DEBUG] Ends Cycle=207, x=7, v=0, inst=
+[DEBUG] Starts Cycle=208, x=7, v=0, inst=
+[DEBUG] During Cycle=208, x=7, PixelCol=7, ScreenInd=212, PixelPaintedWith=#
+[DEBUG] Ends Cycle=208, x=7, v=0, inst=
+[DEBUG] Starts Cycle=209, x=7, v=0, inst=
+[DEBUG] During Cycle=209, x=7, PixelCol=8, ScreenInd=213, PixelPaintedWith=#
+[DEBUG] Ends Cycle=209, x=7, v=5, inst=addx 5
+[DEBUG] Starts Cycle=210, x=7, v=5, inst=addx 5
+[DEBUG] During Cycle=210, x=7, PixelCol=9, ScreenInd=214, PixelPaintedWith=.
+[DEBUG] Ends Cycle=210, x=12, v=0, inst=
+[DEBUG] Starts Cycle=211, x=12, v=0, inst=
+[DEBUG] During Cycle=211, x=12, PixelCol=10, ScreenInd=215, PixelPaintedWith=.
+[DEBUG] Ends Cycle=211, x=12, v=-1, inst=addx -1
+[DEBUG] Starts Cycle=212, x=12, v=-1, inst=addx -1
+[DEBUG] During Cycle=212, x=12, PixelCol=11, ScreenInd=216, PixelPaintedWith=#
+[DEBUG] Ends Cycle=212, x=11, v=0, inst=
+[DEBUG] Starts Cycle=213, x=11, v=0, inst=
+[DEBUG] During Cycle=213, x=11, PixelCol=12, ScreenInd=217, PixelPaintedWith=#
+[DEBUG] Ends Cycle=213, x=11, v=0, inst=
+[DEBUG] Starts Cycle=214, x=11, v=0, inst=
+[DEBUG] During Cycle=214, x=11, PixelCol=13, ScreenInd=218, PixelPaintedWith=.
+[DEBUG] Ends Cycle=214, x=11, v=6, inst=addx 6
+[DEBUG] Starts Cycle=215, x=11, v=6, inst=addx 6
+[DEBUG] During Cycle=215, x=11, PixelCol=14, ScreenInd=219, PixelPaintedWith=.
+[DEBUG] Ends Cycle=215, x=17, v=0, inst=
+[DEBUG] Starts Cycle=216, x=17, v=0, inst=
+[DEBUG] During Cycle=216, x=17, PixelCol=15, ScreenInd=220, PixelPaintedWith=.
+[DEBUG] Ends Cycle=216, x=17, v=-1, inst=addx -1
+[DEBUG] Starts Cycle=217, x=17, v=-1, inst=addx -1
+[DEBUG] During Cycle=217, x=17, PixelCol=16, ScreenInd=221, PixelPaintedWith=#
+[DEBUG] Ends Cycle=217, x=16, v=0, inst=
+[DEBUG] Starts Cycle=218, x=16, v=0, inst=
+[DEBUG] During Cycle=218, x=16, PixelCol=17, ScreenInd=222, PixelPaintedWith=#
+[DEBUG] Ends Cycle=218, x=16, v=0, inst=
+[DEBUG] Starts Cycle=219, x=16, v=0, inst=
+[DEBUG] During Cycle=219, x=16, PixelCol=18, ScreenInd=223, PixelPaintedWith=.
+[DEBUG] Ends Cycle=219, x=16, v=4, inst=addx 4
+[DEBUG] Starts Cycle=220, x=16, v=4, inst=addx 4
+[DEBUG] During Cycle=220, x=16, PixelCol=19, ScreenInd=224, PixelPaintedWith=.
+[DEBUG] Ends Cycle=220, x=20, v=0, inst=
+[DEBUG] Starts Cycle=221, x=20, v=0, inst=
+[DEBUG] During Cycle=221, x=20, PixelCol=20, ScreenInd=225, PixelPaintedWith=#
+[DEBUG] Ends Cycle=221, x=20, v=3, inst=addx 3
+[DEBUG] Starts Cycle=222, x=20, v=3, inst=addx 3
+[DEBUG] During Cycle=222, x=20, PixelCol=21, ScreenInd=226, PixelPaintedWith=#
+[DEBUG] Ends Cycle=222, x=23, v=0, inst=
+[DEBUG] Starts Cycle=223, x=23, v=0, inst=
+[DEBUG] During Cycle=223, x=23, PixelCol=22, ScreenInd=227, PixelPaintedWith=#
+[DEBUG] Ends Cycle=223, x=23, v=4, inst=addx 4
+[DEBUG] Starts Cycle=224, x=23, v=4, inst=addx 4
+[DEBUG] During Cycle=224, x=23, PixelCol=23, ScreenInd=228, PixelPaintedWith=#
+[DEBUG] Ends Cycle=224, x=27, v=0, inst=
+[DEBUG] Starts Cycle=225, x=27, v=0, inst=
+[DEBUG] During Cycle=225, x=27, PixelCol=24, ScreenInd=229, PixelPaintedWith=.
+[DEBUG] Ends Cycle=225, x=27, v=-1, inst=addx -1
+[DEBUG] Starts Cycle=226, x=27, v=-1, inst=addx -1
+[DEBUG] During Cycle=226, x=27, PixelCol=25, ScreenInd=230, PixelPaintedWith=.
+[DEBUG] Ends Cycle=226, x=26, v=0, inst=
+[DEBUG] Starts Cycle=227, x=26, v=0, inst=
+[DEBUG] During Cycle=227, x=26, PixelCol=26, ScreenInd=231, PixelPaintedWith=#
+[DEBUG] Ends Cycle=227, x=26, v=5, inst=addx 5
+[DEBUG] Starts Cycle=228, x=26, v=5, inst=addx 5
+[DEBUG] During Cycle=228, x=26, PixelCol=27, ScreenInd=232, PixelPaintedWith=#
+[DEBUG] Ends Cycle=228, x=31, v=0, inst=
+[DEBUG] Starts Cycle=229, x=31, v=0, inst=
+[DEBUG] During Cycle=229, x=31, PixelCol=28, ScreenInd=233, PixelPaintedWith=.
+[DEBUG] Ends Cycle=229, x=31, v=0, inst=
+[DEBUG] Starts Cycle=230, x=31, v=0, inst=
+[DEBUG] During Cycle=230, x=31, PixelCol=29, ScreenInd=234, PixelPaintedWith=.
+[DEBUG] Ends Cycle=230, x=31, v=5, inst=addx 5
+[DEBUG] Starts Cycle=231, x=31, v=5, inst=addx 5
+[DEBUG] During Cycle=231, x=31, PixelCol=30, ScreenInd=235, PixelPaintedWith=#
+[DEBUG] Ends Cycle=231, x=36, v=0, inst=
+[DEBUG] Starts Cycle=232, x=36, v=0, inst=
+[DEBUG] During Cycle=232, x=36, PixelCol=31, ScreenInd=236, PixelPaintedWith=.
+[DEBUG] Ends Cycle=232, x=36, v=0, inst=
+[DEBUG] Starts Cycle=233, x=36, v=0, inst=
+[DEBUG] During Cycle=233, x=36, PixelCol=32, ScreenInd=237, PixelPaintedWith=.
+[DEBUG] Ends Cycle=233, x=36, v=0, inst=
+[DEBUG] Starts Cycle=234, x=36, v=0, inst=
+[DEBUG] During Cycle=234, x=36, PixelCol=33, ScreenInd=238, PixelPaintedWith=.
+[DEBUG] Ends Cycle=234, x=36, v=0, inst=
+[DEBUG] Starts Cycle=235, x=36, v=0, inst=
+[DEBUG] During Cycle=235, x=36, PixelCol=34, ScreenInd=239, PixelPaintedWith=.
+[DEBUG] Ends Cycle=235, x=36, v=0, inst=
+[DEBUG] Starts Cycle=236, x=36, v=0, inst=
+[DEBUG] During Cycle=236, x=36, PixelCol=35, ScreenInd=240, PixelPaintedWith=#
+[DEBUG] Ends Cycle=236, x=36, v=0, inst=
+[DEBUG] Starts Cycle=237, x=36, v=0, inst=
+[DEBUG] During Cycle=237, x=36, PixelCol=36, ScreenInd=241, PixelPaintedWith=#
+[DEBUG] Ends Cycle=237, x=36, v=1, inst=addx 1
+[DEBUG] Starts Cycle=238, x=36, v=1, inst=addx 1
+[DEBUG] During Cycle=238, x=36, PixelCol=37, ScreenInd=242, PixelPaintedWith=#
+[DEBUG] Ends Cycle=238, x=37, v=0, inst=
+[DEBUG] Starts Cycle=239, x=37, v=0, inst=
+[DEBUG] During Cycle=239, x=37, PixelCol=38, ScreenInd=243, PixelPaintedWith=#
+[DEBUG] Ends Cycle=239, x=37, v=0, inst=
+[DEBUG] Starts Cycle=240, x=37, v=0, inst=
+[DEBUG] During Cycle=240, x=37, PixelCol=39, ScreenInd=244, PixelPaintedWith=.
+[DEBUG] Ends Cycle=240, x=37, v=0, inst=
+[DEBUG] Starts Cycle=241, x=37, v=0, inst=
+[INFO] 
+####..##...##....##.####...##.####.#....
+...#.#..#.#..#....#....#....#.#....#....
+..#..#....#.......#...#.....#.###..#....
+.#...#.##.#.......#..#......#.#....#....
+#....#..#.#..#.#..#.#....#..#.#....#....
+####..###..##...##..####..##..#....####.

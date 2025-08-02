@@ -6,9 +6,10 @@
 #include <string.h>
 
 #undef LOG_LEVEL
-#define LOG_LEVEL LOG_LEVEL_INFO
-#define SCREEN_INDEX(cycle) ((cycle) - 1 + ((cycle) - 1) / 40)
-#define PIXEL_COLUMN(cycle) (1 + ((cycle) - 1) % 40)
+#define LOG_LEVEL LOG_LEVEL_DEBUG
+#define SCREEN_ROW(cycle) ((cycle - 1) / 40)
+#define SCREEN_INDEX(cycle) ((cycle) - 1 + (SCREEN_ROW(cycle)))
+#define PIXEL_COLUMN(cycle) (((cycle) - 1) % 40)
 
 int main(void) {
     FILE *file = NULL;
@@ -39,17 +40,21 @@ int main(void) {
         // Update strengths
         if (cycle % 40 == 20) {
             strengths += x * cycle;
-            logd("Strength: %lld\n", strengths);
+            logt("Strength: %lld\n", strengths);
         }
 
-        if (PIXEL_COLUMN(cycle) >= x - 1 && PIXEL_COLUMN(cycle) <= x + 1) {
-            // The pixel should be drawn
-            screen[SCREEN_INDEX(cycle)] = '#'; // wo should count for the new line
-        } else if (cycle <= 240) {
-            screen[SCREEN_INDEX(cycle)] = '.';
-        }
+        if (cycle <= 240) {
+            // Do not compare signed ints with unsigned ones. x was not negative but it got to 0 so x-1 was converted to a large unsigned.
+            if ((x - 1) <= (int64_t)PIXEL_COLUMN(cycle) && (int64_t)PIXEL_COLUMN(cycle) <= (x + 1)) {
+                // The pixel should be drawn
+                screen[SCREEN_INDEX(cycle)] = '#';
+            } else {
+                screen[SCREEN_INDEX(cycle)] = '.';
+            }
 
-        logd("During Cycle=%llu, x=%lld\n", cycle, x);
+            logd("During Cycle=%llu, x=%lld, PixelCol=%lld, ScreenInd=%lld, PixelPaintedWith=%c\n", cycle, x, PIXEL_COLUMN(cycle), SCREEN_INDEX(cycle),
+                 screen[SCREEN_INDEX(cycle)]);
+        }
 
         // Check if there is a pending instruction
         if (v != 0) {
@@ -61,13 +66,13 @@ int main(void) {
             // Read the instruction
             size_t instlen = strlen(inst);
             if (instlen == 0 || inst[instlen - 1] != '\n') {
-                loge("The instruction read is not valid: %s", inst);
+                logf("The instruction read is not valid: %s", inst);
 
                 return EXIT_FAILURE;
             }
             inst[instlen - 1] = '\0'; // Remove trailing new line
 
-            logd("inst=%s\n", inst);
+            logt("inst=%s\n", inst);
 
             // Process the instruction
             if (inst[3] == 'x') {
@@ -84,11 +89,11 @@ int main(void) {
         cycle++;
     }
 
-    logd("cycle=%llu, x=%lld, v=%lld, s=%lld\n", cycle, x, v, strengths);
+    logt("End of prog: cycle=%llu, x=%lld, v=%lld, s=%lld\n", cycle, x, v, strengths);
 
     fclose(file);
 
-    printf("%s", screen);
+    logi("\n%s", screen);
 
     return EXIT_SUCCESS;
 }
