@@ -4,3 +4,4 @@ BasedOnStyle: LLVM
 IndentWidth: 4
 Language: C
 ColumnLimit: 180
+InsertNewlineAtEOF: true

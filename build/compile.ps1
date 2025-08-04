@@ -17,5 +17,12 @@ if (!(Test-Path $outdir)) {
 
 $output = Join-Path $outdir "$base.exe"
 
-# -fsanitize=address
-clang -std=c23 -Wall -Werror -Wextra -Wsign-compare -xc -fuse-ld=lld $SourceFile -o $output
+# Read flags from file
+$flags = Get-Content "compile_flags.txt" |
+    Where-Object { $_.Trim() -ne "" -and -not $_.StartsWith("//") } |
+    ForEach-Object { $_.Trim().TrimEnd(',') } |
+    Where-Object { $_ -ne "" }
+#$flags += "-fsanitize=address"
+#$flags += "-o0"
+
+clang @flags $SourceFile -o $output

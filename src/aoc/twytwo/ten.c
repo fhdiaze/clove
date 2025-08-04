@@ -1,4 +1,4 @@
-#include "../../lib/log.h"
+#include "log.h"
 #include <stddef.h>
 #include <stdint.h>
 #include <stdio.h>
@@ -13,18 +13,18 @@
 
 int main(void) {
     FILE *file = NULL;
-    errno_t err = fopen_s(&file, "./src/aoc/twenty_two/ten.txt", "r");
+    errno_t err = fopen_s(&file, "./src/aoc/twytwo/ten.txt", "r");
     if (err != 0 || file == NULL) {
         loge("Unable to find the file\n");
 
-        return EXIT_FAILURE;
+        exit(EXIT_FAILURE);
     }
 
     constexpr int instmaxlen = 256;
     char inst[instmaxlen];
-    uint64_t cycle = 1;
-    int64_t x = 1, v = 0;
-    int64_t strengths = 0;
+    size_t cycle = 1;
+    int x = 1, v = 0;
+    unsigned strengths = 0;
     // 240 pixels + One new line character per row + end of string
     char screen[247] = {[SCREEN_INDEX(40) + 1] = '\n',
                         [SCREEN_INDEX(80) + 1] = '\n',
@@ -35,25 +35,24 @@ int main(void) {
                         [246] = '\0'};
 
     while (true) {
-        logd("Starts Cycle=%llu, x=%lld, v=%lld, inst=%s\n", cycle, x, v, inst);
+        logd("Starts Cycle=%llu, x=%d, v=%d, inst=%s\n", cycle, x, v, inst);
 
         // Update strengths
         if (cycle % 40 == 20) {
             strengths += x * cycle;
-            logt("Strength: %lld\n", strengths);
+            logt("Strength: %u\n", strengths);
         }
 
         if (cycle <= 240) {
             // Do not compare signed ints with unsigned ones. x was not negative but it got to 0 so x-1 was converted to a large unsigned.
-            if ((x - 1) <= (int64_t)PIXEL_COLUMN(cycle) && (int64_t)PIXEL_COLUMN(cycle) <= (x + 1)) {
+            if ((x - 1) <= (int)PIXEL_COLUMN(cycle) && (int)PIXEL_COLUMN(cycle) <= (x + 1)) {
                 // The pixel should be drawn
                 screen[SCREEN_INDEX(cycle)] = '#';
             } else {
                 screen[SCREEN_INDEX(cycle)] = '.';
             }
 
-            logd("During Cycle=%llu, x=%lld, PixelCol=%lld, ScreenInd=%lld, PixelPaintedWith=%c\n", cycle, x, PIXEL_COLUMN(cycle), SCREEN_INDEX(cycle),
-                 screen[SCREEN_INDEX(cycle)]);
+            logd("During Cycle=%llu, x=%d, PixelCol=%lld, ScreenInd=%lld, PixelPaintedWith=%c\n", cycle, x, PIXEL_COLUMN(cycle), SCREEN_INDEX(cycle), screen[SCREEN_INDEX(cycle)]);
         }
 
         // Check if there is a pending instruction
@@ -68,7 +67,7 @@ int main(void) {
             if (instlen == 0 || inst[instlen - 1] != '\n') {
                 logf("The instruction read is not valid: %s", inst);
 
-                return EXIT_FAILURE;
+                exit(EXIT_FAILURE);
             }
             inst[instlen - 1] = '\0'; // Remove trailing new line
 
@@ -76,7 +75,7 @@ int main(void) {
 
             // Process the instruction
             if (inst[3] == 'x') {
-                v = strtoll(inst + 5, NULL, 10); // Process addx: inst is a pointer :)
+                v = atoi(inst + 5); // Process addx: inst is a pointer :)
             } else {
                 inst[0] = '\0';
             }
@@ -84,12 +83,12 @@ int main(void) {
             break;
         }
 
-        logd("Ends Cycle=%llu, x=%lld, v=%lld, inst=%s\n", cycle, x, v, inst);
+        logd("Ends Cycle=%llu, x=%d, v=%d, inst=%s\n", cycle, x, v, inst);
 
         cycle++;
     }
 
-    logt("End of prog: cycle=%llu, x=%lld, v=%lld, s=%lld\n", cycle, x, v, strengths);
+    logt("End of prog: cycle=%llu, x=%d, v=%d, s=%u\n", cycle, x, v, strengths);
 
     fclose(file);
 

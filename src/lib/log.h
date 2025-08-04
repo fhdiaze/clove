@@ -1,3 +1,4 @@
+#include <stdio.h>
 #define LOG_LEVEL_ALL INT_MIN
 #define LOG_LEVEL_TRACE 0
 #define LOG_LEVEL_DEBUG 1
