@@ -10,7 +10,7 @@ if (!(Test-Path $SourceFile)) {
 
 # Get the base filename without extension
 $base = [System.IO.Path]::GetFileNameWithoutExtension($SourceFile)
-$outdir = ".\target"
+$outdir = ".\bin"
 if (!(Test-Path $outdir)) {
     New-Item -ItemType Directory -Path $outdir | Out-Null
 }
