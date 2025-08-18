@@ -1,4 +1,5 @@
-#include "../../lib/log.h"
+#include "log.h"
+#include <stdio.h>
 #include <stdlib.h>
 
 #undef LOG_LEVEL
