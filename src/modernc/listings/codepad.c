@@ -21,18 +21,22 @@ enum corvid {
 #define FLOCK_EMPTY 0U
 #define FLOCK_FULL ((1U << corvid_num) - 1)
 
+int random_int() { return rand(); }
+
 int main(void) {
+    // constexpr int runtime_constant = random_int(); // this is not a value known at compile time
+    // int array[runtime_constant];  // VLA
     char name[] = "hello world!";
-    size_t const len = strlen(name);
+    const size_t len = strlen(name);
     char copy[len + 1];
     strcpy_s(copy, sizeof(copy), name);
     // printf("%d\n", __builtin_popcount(x));
     printf("%s\n", copy);
     printf("%llu\n", strlen(copy));
-    char const *const p2string = "some text";
-    char const *const p = nullptr;
-    char const *const pinvalid;
-    int const a = {};
+    const char *const p2string = "some text";
+    const char *const p = nullptr;
+    const char *const pinvalid;
+    const int a = {};
     printf("a=%d\n", a);
     printf("%s\n", p);
     printf("%s\n", pinvalid);
@@ -44,7 +48,7 @@ int main(void) {
     printf("unsigned=%u\n", uint);
     printf("signed=%d\n", sint);
 
-    time_t const now = time(NULL);
+    const time_t now = time(NULL);
     printf("time=%lld\n", now);
     char now_as_string[100];
     struct tm now_buffer;

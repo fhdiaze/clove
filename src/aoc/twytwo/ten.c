@@ -11,11 +11,11 @@
 #define SCREEN_INDEX(cycle) ((cycle) - 1 + (SCREEN_ROW(cycle)))
 #define PIXEL_COLUMN(cycle) (((cycle) - 1) % 40)
 
+// Solve day ten problem
 int main(void) {
-    FILE *file = NULL;
-    errno_t err = fopen_s(&file, "./src/aoc/twytwo/ten.txt", "r");
-    if (err != 0 || file == NULL) {
-        loge("Unable to find the file\n");
+    FILE *file = fopen("./data/aoc/twytwo/ten.txt", "r");
+    if (file == nullptr) {
+        LOG_ERROR("Unable to find the file\n");
 
         exit(EXIT_FAILURE);
     }
@@ -35,12 +35,12 @@ int main(void) {
                         [246] = '\0'};
 
     while (true) {
-        logd("Starts Cycle=%llu, x=%d, v=%d, inst=%s\n", cycle, x, v, inst);
+        LOG_DEBUG("Starts Cycle=%llu, x=%d, v=%d, inst=%s\n", cycle, x, v, inst);
 
         // Update strengths
         if (cycle % 40 == 20) {
             strengths += x * cycle;
-            logt("Strength: %u\n", strengths);
+            LOG_TRACE("Strength: %u\n", strengths);
         }
 
         if (cycle <= 240) {
@@ -52,7 +52,7 @@ int main(void) {
                 screen[SCREEN_INDEX(cycle)] = '.';
             }
 
-            logd("During Cycle=%llu, x=%d, PixelCol=%lld, ScreenInd=%lld, PixelPaintedWith=%c\n", cycle, x, PIXEL_COLUMN(cycle), SCREEN_INDEX(cycle), screen[SCREEN_INDEX(cycle)]);
+            LOG_DEBUG("During Cycle=%llu, x=%d, PixelCol=%lld, ScreenInd=%lld, PixelPaintedWith=%c\n", cycle, x, PIXEL_COLUMN(cycle), SCREEN_INDEX(cycle), screen[SCREEN_INDEX(cycle)]);
         }
 
         // Check if there is a pending instruction
@@ -65,13 +65,13 @@ int main(void) {
             // Read the instruction
             size_t instlen = strlen(inst);
             if (instlen == 0 || inst[instlen - 1] != '\n') {
-                logf("The instruction read is not valid: %s", inst);
+                LOG_FATAL("The instruction read is not valid: %s", inst);
 
                 exit(EXIT_FAILURE);
             }
             inst[instlen - 1] = '\0'; // Remove trailing new line
 
-            logt("inst=%s\n", inst);
+            LOG_TRACE("inst=%s\n", inst);
 
             // Process the instruction
             if (inst[3] == 'x') {
@@ -83,16 +83,16 @@ int main(void) {
             break;
         }
 
-        logd("Ends Cycle=%llu, x=%d, v=%d, inst=%s\n", cycle, x, v, inst);
+        LOG_DEBUG("Ends Cycle=%llu, x=%d, v=%d, inst=%s\n", cycle, x, v, inst);
 
         cycle++;
     }
 
-    logt("End of prog: cycle=%llu, x=%d, v=%d, s=%u\n", cycle, x, v, strengths);
+    LOG_TRACE("End of prog: cycle=%llu, x=%d, v=%d, s=%u\n", cycle, x, v, strengths);
 
     fclose(file);
 
-    logi("\n%s", screen);
+    LOG_INFO("\n%s", screen);
 
     return EXIT_SUCCESS;
 }
