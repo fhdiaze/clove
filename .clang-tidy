@@ -1,6 +1,5 @@
 Checks: "abseil*,
         clang-analyzer*,
-        google*,
         modernize*,
         bugprone*,
         misc*,
