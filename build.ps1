@@ -32,6 +32,7 @@ if ($BuildMode -eq "Debug") {
     $flags += "-O0"             # No optimization
     $flags += "-DDEBUG"         # Define DEBUG macro
     #$flags += "-fsanitize=address"
+    #$flags += "-fno-omit-frame-pointer"
     Write-Host "Building in DEBUG mode..."
 } else {
     $flags += "-O3"             # Maximum optimization
