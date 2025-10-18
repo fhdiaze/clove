@@ -1,4 +1,4 @@
-typedef int logger_function(char const *, ...);
+typedef int logger_function(const char *, ...);
 
 extern logger_function *logger;
 

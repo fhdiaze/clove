@@ -1,6 +1,6 @@
+#include "temp.h"
 #include <stdio.h>
 #include <stdlib.h>
-#include "temp.h"
 
 extern int logger_verbose(const char *, ...);
 static int logger_ignore(const char *, ...) { return 0; }
@@ -11,12 +11,13 @@ static logger_function *loggers = {
     [log_ver] = logger_verbose,
 };
 
-int main(void) {
-    unsigned uint = -4;
-    signed sint = -4;
+int main(void)
+{
+        unsigned uint = -4;
+        signed sint = -4;
 
-    printf("unsigned=%u\n", uint);
-    printf("signed=%d\n", sint);
+        printf("unsigned=%u\n", uint);
+        printf("signed=%d\n", sint);
 
-    return EXIT_SUCCESS;
+        return EXIT_SUCCESS;
 }

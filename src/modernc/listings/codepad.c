@@ -7,6 +7,9 @@
 #include <string.h>
 #include <time.h>
 
+#undef LOG_LEVEL
+#define LOG_LEVEL LOG_LEVEL_ALL
+
 typedef struct {
         int array[10];
 } Test;
@@ -28,17 +31,23 @@ enum corvid {
 
 int random_int() { return rand(); }
 
+/**
+ * @brief hethsa
+ *
+ * @param n the nimeber
+ */
 void fgoto(unsigned n)
 {
         unsigned j = 0;
         unsigned *p = nullptr;
         unsigned *q = nullptr;
+        logi("j=%d", j);
+        logi("p=%p", (void *)p);
+        logi("q=%p", (void *)q);
 
 AGAIN:
-        logi("p=%p\n", (void *)p);
-        logi("q=%p\n", (void *)q);
         if (p)
-                logi("%u: p and q are %s, *p is %u \n", j,
+                logi("%u: p and q are %s, *p is %u", j,
                      (q == p) ? "equal" : "unequal", *p);
         q = p;
         p = &((unsigned){j});
@@ -49,13 +58,14 @@ AGAIN:
 Test my_function()
 {
         Test t = {};
-        logi("function array address=%p\n", (void *)&(t.array));
+        logi("function array address=%p", (void *)&(t.array));
 
         return t;
 }
 
 int main(void)
 {
+        logi("starting");
         // constexpr int runtime_constant = random_int(); // this is not a value
         // known at compile time int array[runtime_constant];  // VLA
         char name[] = "hello world!";
@@ -67,9 +77,9 @@ int main(void)
         printf("%llu\n", strlen(copy));
         const char *const p2string = "some text";
         const char *const p = nullptr;
-        const char *const pinvalid;
+        const char *const pinvalid = nullptr;
         const int a = {};
-        printf("a=%d\n", a);
+        logi("a=%d", a);
         printf("%s\n", p);
         printf("%s\n", pinvalid);
         printf("%s\n", p2string);
@@ -80,7 +90,7 @@ int main(void)
         printf("unsigned=%u\n", uint);
         printf("signed=%d\n", sint);
 
-        const time_t now = time(NULL);
+        const time_t now = time(nullptr);
         printf("time=%lld\n", now);
         char now_as_string[100];
         struct tm now_buffer;
@@ -92,9 +102,14 @@ int main(void)
 
         Test test_structure = my_function();
 
-        logi("array address=%p\n", (void *)&(test_structure.array));
+        logi("array address=%p", (void *)&(test_structure.array));
 
         fgoto(2);
+
+        char tix[] = "12345";
+
+        logi("tix length: %zu", strlen(tix));
+        logi("validate tix: %p", memchr(tix, 0, strlen(tix) + 1));
 
         return EXIT_SUCCESS;
 }
