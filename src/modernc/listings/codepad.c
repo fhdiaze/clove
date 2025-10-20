@@ -1,3 +1,7 @@
+#ifndef LOG_LEVEL
+#define LOG_LEVEL LOG_LEVEL_ALL
+#endif // LOG_LEVEL
+
 #include "log.h"
 #include <corecrt.h>
 #include <limits.h>
@@ -6,9 +10,6 @@
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
-
-#undef LOG_LEVEL
-#define LOG_LEVEL LOG_LEVEL_ALL
 
 typedef struct {
         int array[10];
@@ -41,7 +42,7 @@ void fgoto(unsigned n)
         unsigned j = 0;
         unsigned *p = nullptr;
         unsigned *q = nullptr;
-        logi("j=%d", j);
+        logd("the value of j=%d", j);
         logi("p=%p", (void *)p);
         logi("q=%p", (void *)q);
 
@@ -62,6 +63,12 @@ Test my_function()
 
         return t;
 }
+
+#define CONCAT(a, b) a##b
+#define strtod(NPTR, ...) \
+        STRTOD_I##__VA_OPT__(I)(NPTR __VA_OPT__(, ) __VA_ARGS__)
+#define STRTOD_I(NPTR) strtod(NPTR, nullptr)
+#define STRTOD_II(NPTR, ENDPTR) strtod(NPTR, ENDPTR)
 
 int main(void)
 {
@@ -110,6 +117,11 @@ int main(void)
 
         logi("tix length: %zu", strlen(tix));
         logi("validate tix: %p", memchr(tix, 0, strlen(tix) + 1));
+
+        int var12 = 100;
+        // This expands to printf("%d\n", var12);
+        logi("%d", CONCAT(var, 12));
+        logi("%f", strtod("12"));
 
         return EXIT_SUCCESS;
 }
