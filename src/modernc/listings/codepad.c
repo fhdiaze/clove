@@ -1,5 +1,5 @@
 #ifndef LOG_LEVEL
-#define LOG_LEVEL LOG_LEVEL_ALL
+#define LOG_LEVEL LOG_LEVEL_ERROR
 #endif // LOG_LEVEL
 
 #include "log.h"
@@ -41,7 +41,7 @@ void fgoto(unsigned n)
 {
         unsigned j = 0;
         unsigned *p = nullptr;
-        unsigned *q = nullptr;
+        [[__maybe_unused__]] unsigned *q = nullptr;
         logd("the value of j=%d", j);
         logi("p=%p", (void *)p);
         logi("q=%p", (void *)q);
@@ -85,7 +85,7 @@ int main(void)
         const char *const p2string = "some text";
         const char *const p = nullptr;
         const char *const pinvalid = nullptr;
-        const int a = {};
+        [[__maybe_unused__]] const int a = {};
         logi("a=%d", a);
         printf("%s\n", p);
         printf("%s\n", pinvalid);
@@ -107,18 +107,18 @@ int main(void)
                  "%A %Y-%m-%d %H:%M:%S %Z", &now_buffer);
         printf("formatted time=%s\n", now_as_string);
 
-        Test test_structure = my_function();
+        [[__maybe_unused__]] Test test_structure = my_function();
 
         logi("array address=%p", (void *)&(test_structure.array));
 
         fgoto(2);
 
-        char tix[] = "12345";
+        [[__maybe_unused__]] char tix[] = "12345";
 
         logi("tix length: %zu", strlen(tix));
         logi("validate tix: %p", memchr(tix, 0, strlen(tix) + 1));
 
-        int var12 = 100;
+        [[__maybe_unused__]] int var12 = 100;
         // This expands to printf("%d\n", var12);
         logi("%d", CONCAT(var, 12));
         logi("%f", strtod("12"));

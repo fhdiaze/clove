@@ -27,7 +27,7 @@
         printf("[" log_level "] %s:%s:%s: " fmt "\n", file_name, func_name, \
                STRGY(line_number) __VA_OPT__(, ) __VA_ARGS__)
 
-#define LOG_MSG_NOOP(log_level, fmt, file_name, func_name, line_number, ...) \
+#define LOG_MSG_NOOP(...) \
         ((void)0)
 
 // Logs a trace message if LOG_LEVEL <= LOG_LEVEL_TRACE
@@ -37,7 +37,7 @@
         LOG_MSG("TRACE", fmt, __FILE__, __func__, __LINE__, __VA_ARGS__)
 #else
 #define logt(fmt, ...) \
-        LOG_MSG_NOOP("TRACE", fmt, __FILE__, __func__, __LINE__, __VA_ARGS__)
+        LOG_MSG_NOOP()
 #endif // logt
 
 // Logs a debug message if LOG_LEVEL <= LOG_LEVEL_DEBUG.
@@ -47,7 +47,7 @@
         LOG_MSG("DEBUG", fmt, __FILE__, __func__, __LINE__, __VA_ARGS__)
 #else
 #define logd(fmt, ...) \
-        LOG_MSG_NOOP("DEBUG", fmt, __FILE__, __func__, __LINE__, __VA_ARGS__)
+        LOG_MSG_NOOP()
 #endif // logd
 
 // Logs an information message if LOG_LEVEL <= LOG_LEVEL_INFO
@@ -57,7 +57,7 @@
         LOG_MSG("INFO", fmt, __FILE__, __func__, __LINE__, __VA_ARGS__)
 #else
 #define logi(fmt, ...) \
-        LOG_MSG_NOOP("INFO", fmt, __FILE__, __func__, __LINE__, __VA_ARGS__)
+        LOG_MSG_NOOP()
 #endif // logi
 
 // Logs a warning message if LOG_LEVEL <= LOG_LEVEL_WARN
@@ -67,7 +67,7 @@
         LOG_MSG("WARN", fmt, __FILE__, __func__, __LINE__, __VA_ARGS__)
 #else
 #define logw(fmt, ...) \
-        LOG_MSG_NOOP("WARN", fmt, __FILE__, __func__, __LINE__, __VA_ARGS__)
+        LOG_MSG_NOOP()
 #endif // logw
 
 // Logs an error message if LOG_LEVEL <= LOG_LEVEL_ERROR
@@ -77,7 +77,7 @@
         LOG_MSG("ERROR", fmt, __FILE__, __func__, __LINE__, __VA_ARGS__)
 #else
 #define loge(fmt, ...) \
-        LOG_MSG_NOOP("ERROR", fmt, __FILE__, __func__, __LINE__, __VA_ARGS__)
+        LOG_MSG_NOOP()
 #endif // loge
 
 // Logs a fatal message if LOG_LEVEL <= LOG_LEVEL_FATAL
@@ -87,7 +87,7 @@
         LOG_MSG("FATAL", fmt, __FILE__, __func__, __LINE__, __VA_ARGS__)
 #else
 #define logf(fmt, ...) \
-        LOG_MSG_NOOP("FATAL", fmt, __FILE__, __func__, __LINE__, __VA_ARGS__)
+        LOG_MSG_NOOP()
 #endif // logf
 
 #endif // LOG_H
