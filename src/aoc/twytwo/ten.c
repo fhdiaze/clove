@@ -1,12 +1,15 @@
+#ifndef LOG_LEVEL
+#define LOG_LEVEL LOG_LEVEL_DEBUG
+#endif // LOG_LEVEL
+
 #include "log.h"
+#include <time.h>
 #include <stddef.h>
 #include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
-#undef LOG_LEVEL
-#define LOG_LEVEL LOG_LEVEL_DEBUG
 #define SCREEN_ROW(cycle) ((cycle - 1) / 40)
 #define SCREEN_INDEX(cycle) ((cycle) - 1 + (SCREEN_ROW(cycle)))
 #define PIXEL_COLUMN(cycle) (((cycle) - 1) % 40)
@@ -25,7 +28,7 @@ int main(void)
         char inst[instmaxlen];
         size_t cycle = 1;
         int x = 1, v = 0;
-        unsigned strengths = 0;
+        [[__maybe_unused__]] unsigned strengths = 0;
         // 240 pixels + One new line character per row + end of string
         char screen[247] = {[SCREEN_INDEX(40) + 1] = '\n',
                             [SCREEN_INDEX(80) + 1] = '\n',
@@ -42,7 +45,7 @@ int main(void)
                 // Update strengths
                 if (cycle % 40 == 20) {
                         strengths += x * cycle;
-                        logt("Strength: %u\n", strengths);
+                        logt("Strength: %u", strengths);
                 }
 
                 if (cycle <= 240) {
@@ -58,7 +61,7 @@ int main(void)
                         }
 
                         logd("During Cycle=%llu, x=%d, PixelCol=%lld, "
-                             "ScreenInd=%lld, PixelPaintedWith=%c\n",
+                             "ScreenInd=%lld, PixelPaintedWith=%c",
                              cycle, x, PIXEL_COLUMN(cycle), SCREEN_INDEX(cycle),
                              screen[SCREEN_INDEX(cycle)]);
                 }
@@ -73,15 +76,14 @@ int main(void)
                         // Read the instruction
                         size_t instlen = strlen(inst);
                         if (instlen == 0 || inst[instlen - 1] != '\n') {
-                                LOG_FATAL(
-                                    "The instruction read is not valid: %s",
-                                    inst);
+                                logf("The instruction read is not valid: %s",
+                                     inst);
 
                                 exit(EXIT_FAILURE);
                         }
                         inst[instlen - 1] = '\0'; // Remove trailing new line
 
-                        LOG_TRACE("inst=%s\n", inst);
+                        logt("inst=%s", inst);
 
                         // Process the instruction
                         if (inst[3] == 'x') {
@@ -95,18 +97,17 @@ int main(void)
                         break;
                 }
 
-                LOG_DEBUG("Ends Cycle=%llu, x=%d, v=%d, inst=%s\n", cycle, x, v,
-                          inst);
+                logd("Ends Cycle=%llu, x=%d, v=%d, inst=%s", cycle, x, v, inst);
 
                 cycle++;
         }
 
-        LOG_TRACE("End of prog: cycle=%llu, x=%d, v=%d, s=%u\n", cycle, x, v,
-                  strengths);
+        logt("End of prog: cycle=%llu, x=%d, v=%d, s=%u", cycle, x, v,
+             strengths);
 
         fclose(file);
 
-        LOG_INFO("\n%s", screen);
+        logi("\n%s", screen);
 
         return EXIT_SUCCESS;
 }
