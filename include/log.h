@@ -25,8 +25,8 @@
 #define STRGY(n) STRINGIFY(n)
 
 #define LOG_MSG(log_level, fmt, file_name, func_name, line_number, ...) \
-        printf("%s[%lld] %s:%s:%s: " fmt "\n", log_level,               \
-               (time_t){time(nullptr)}, file_name, func_name,           \
+        printf("%c[%lld] %s:%s:%s: " fmt "\n", log_level,               \
+               (long long)time(nullptr), file_name, func_name,           \
                STRGY(line_number) __VA_OPT__(, ) __VA_ARGS__)
 
 #define LOG_MSG_NOOP(...) ((void)0)
@@ -35,7 +35,7 @@
 // Usage: logd("Log trace: x=%d", x);
 #if LOG_LEVEL <= LOG_LEVEL_TRACE
 #define logt(fmt, ...) \
-        LOG_MSG("T", fmt, __FILE__, __func__, __LINE__, __VA_ARGS__)
+        LOG_MSG('T', fmt, __FILE__, __func__, __LINE__, __VA_ARGS__)
 #else
 #define logt(fmt, ...) LOG_MSG_NOOP()
 #endif // logt
@@ -44,7 +44,7 @@
 // Usage: logd("log debug: x=%d", x);
 #if LOG_LEVEL <= LOG_LEVEL_DEBUG
 #define logd(fmt, ...) \
-        LOG_MSG("D", fmt, __FILE__, __func__, __LINE__, __VA_ARGS__)
+        LOG_MSG('D', fmt, __FILE__, __func__, __LINE__, __VA_ARGS__)
 #else
 #define logd(fmt, ...) LOG_MSG_NOOP()
 #endif // logd
@@ -53,7 +53,7 @@
 // Usage: logi("Log info: x=%d", x);
 #if LOG_LEVEL <= LOG_LEVEL_INFO
 #define logi(fmt, ...) \
-        LOG_MSG("I", fmt, __FILE__, __func__, __LINE__, __VA_ARGS__)
+        LOG_MSG('I', fmt, __FILE__, __func__, __LINE__, __VA_ARGS__)
 #else
 #define logi(fmt, ...) LOG_MSG_NOOP()
 #endif // logi
@@ -62,7 +62,7 @@
 // Usage: logw("Log warn: x=%d", x);
 #if LOG_LEVEL <= LOG_LEVEL_WARN
 #define logw(fmt, ...) \
-        LOG_MSG("W", fmt, __FILE__, __func__, __LINE__, __VA_ARGS__)
+        LOG_MSG('W', fmt, __FILE__, __func__, __LINE__, __VA_ARGS__)
 #else
 #define logw(fmt, ...) LOG_MSG_NOOP()
 #endif // logw
@@ -71,7 +71,7 @@
 // Usage: loge("Log error: x=%d", x);
 #if LOG_LEVEL <= LOG_LEVEL_ERROR
 #define loge(fmt, ...) \
-        LOG_MSG("E", fmt, __FILE__, __func__, __LINE__, __VA_ARGS__)
+        LOG_MSG('E', fmt, __FILE__, __func__, __LINE__, __VA_ARGS__)
 #else
 #define loge(fmt, ...) LOG_MSG_NOOP()
 #endif // loge
@@ -80,7 +80,7 @@
 // Usage: logf("Log fatal: x=%d", x);
 #if LOG_LEVEL <= LOG_LEVEL_FATAL
 #define logf(fmt, ...) \
-        LOG_MSG("F", fmt, __FILE__, __func__, __LINE__, __VA_ARGS__)
+        LOG_MSG('F', fmt, __FILE__, __func__, __LINE__, __VA_ARGS__)
 #else
 #define logf(fmt, ...) LOG_MSG_NOOP()
 #endif // logf
