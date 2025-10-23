@@ -4,6 +4,7 @@
 #define LOG_H
 
 #include <stdint.h>
+#include <stdio.h>
 #include <time.h>
 
 #define LOG_LEVEL_ALL 0UL
@@ -25,8 +26,8 @@
 #define STRGY(n) STRINGIFY(n)
 
 #define LOG_MSG(log_level, fmt, file_name, func_name, line_number, ...) \
-        printf("%c[%lld] %s:%s:%s: " fmt "\n", log_level,               \
-               (long long)time(nullptr), file_name, func_name,           \
+        log_msg("%c[%lld] %s:%s:%s: " fmt "\n", log_level,               \
+               (long long)time(nullptr), file_name, func_name,          \
                STRGY(line_number) __VA_OPT__(, ) __VA_ARGS__)
 
 #define LOG_MSG_NOOP(...) ((void)0)
@@ -84,5 +85,15 @@
 #else
 #define logf(fmt, ...) LOG_MSG_NOOP()
 #endif // logf
+
+inline static void log_msg(const char *restrict fmt, char log_level,
+                           const char *restrict file_name,
+                           const char *restrict func_name,
+                           const char *restrict line_number)
+{
+        printf("%c[%lld] %s:%s:%s: " fmt "\n", log_level,
+               (long long)time(nullptr), file_name, func_name,
+               STRGY(line_number) __VA_OPT__(, ) __VA_ARGS__);
+}
 
 #endif // LOG_H
