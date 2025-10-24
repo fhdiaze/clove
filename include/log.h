@@ -4,7 +4,6 @@
 #define LOG_H
 
 #include <stdint.h>
-#include <stdio.h>
 #include <time.h>
 
 #define LOG_LEVEL_ALL 0UL
@@ -25,10 +24,20 @@
 #define STRINGIFY(n) #n
 #define STRGY(n) STRINGIFY(n)
 
-#define LOG_MSG(log_level, fmt, file_name, func_name, line_number, ...) \
-        log_msg("%c[%lld] %s:%s:%s: " fmt "\n", log_level,               \
-               (long long)time(nullptr), file_name, func_name,          \
-               STRGY(line_number) __VA_OPT__(, ) __VA_ARGS__)
+#define LOG_MSG(log_level, fmt, file_name, func_name, line_number, ...)        \
+        do {                                                                   \
+                char timestamp[32];                                            \
+                char time_zone[10];                                            \
+                struct timespec ts;                                            \
+                struct tm local;                                               \
+                timespec_get(&ts, TIME_UTC);                                   \
+                localtime_s(&local, &ts.tv_sec);                               \
+                strftime(timestamp, 32, "%FT%T", &local);                      \
+                strftime(time_zone, 10, "%z", &local);                         \
+                printf("%c[%s.%09ld%s] %s:%s:%s: " fmt "\n", log_level,        \
+                       timestamp, ts.tv_nsec, time_zone, file_name, func_name, \
+                       STRGY(line_number) __VA_OPT__(, ) __VA_ARGS__);         \
+        } while (false)
 
 #define LOG_MSG_NOOP(...) ((void)0)
 
@@ -85,15 +94,5 @@
 #else
 #define logf(fmt, ...) LOG_MSG_NOOP()
 #endif // logf
-
-inline static void log_msg(const char *restrict fmt, char log_level,
-                           const char *restrict file_name,
-                           const char *restrict func_name,
-                           const char *restrict line_number)
-{
-        printf("%c[%lld] %s:%s:%s: " fmt "\n", log_level,
-               (long long)time(nullptr), file_name, func_name,
-               STRGY(line_number) __VA_OPT__(, ) __VA_ARGS__);
-}
 
 #endif // LOG_H
