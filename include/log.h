@@ -24,19 +24,20 @@
 #define STRINGIFY(n) #n
 #define STRGY(n) STRINGIFY(n)
 
-#define LOG_MSG(log_level, fmt, file_name, func_name, line_number, ...)        \
-        do {                                                                   \
-                char timestamp[32];                                            \
-                char time_zone[10];                                            \
-                struct timespec ts;                                            \
-                struct tm local;                                               \
-                timespec_get(&ts, TIME_UTC);                                   \
-                localtime_s(&local, &ts.tv_sec);                               \
-                strftime(timestamp, 32, "%FT%T", &local);                      \
-                strftime(time_zone, 10, "%z", &local);                         \
-                printf("%c[%s.%09ld%s] %s:%s:%s: " fmt "\n", log_level,        \
-                       timestamp, ts.tv_nsec, time_zone, file_name, func_name, \
-                       STRGY(line_number) __VA_OPT__(, ) __VA_ARGS__);         \
+#define LOG_MSG(log_level, fmt, file_name, func_name, line_number, ...)   \
+        do {                                                              \
+                char _pr_tstamp_str[32];                                  \
+                char _pr_tz_str[10];                                      \
+                struct timespec _pr_ts;                                   \
+                struct tm _pr_tm;                                         \
+                timespec_get(&_pr_ts, TIME_UTC);                          \
+                localtime_s(&_pr_tm, &_pr_ts.tv_sec);                     \
+                strftime(_pr_tstamp_str, 32, "%FT%T", &_pr_tm);           \
+                strftime(_pr_tz_str, 10, "%z", &_pr_tm);                  \
+                printf("%c[%s.%09ld%s] %s:%s:%s: " fmt "\n", log_level,   \
+                       _pr_tstamp_str, _pr_ts.tv_nsec, _pr_tz_str, file_name, \
+                       func_name,                                         \
+                       STRGY(line_number) __VA_OPT__(, ) __VA_ARGS__);    \
         } while (false)
 
 #define LOG_MSG_NOOP(...) ((void)0)
