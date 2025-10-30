@@ -23,6 +23,8 @@ enum corvid {
         corvid_num,
 };
 
+typedef int myint;
+
 #define FLOCK_MAGPIE (1U << magpie)
 #define FLOCK_RAVEN (1U << raven)
 #define FLOCK_JAY (1U << jay)
@@ -91,7 +93,7 @@ int main(void)
         printf("%s\n", pinvalid);
         printf("%s\n", p2string);
 
-        unsigned uint = -4;
+        unsigned uint = 4;
         signed sint = -4;
 
         printf("unsigned=%u\n", uint);

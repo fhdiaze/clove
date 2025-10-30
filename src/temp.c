@@ -5,7 +5,7 @@
 extern int logger_verbose(const char *, ...);
 static int logger_ignore(const char *, ...) { return 0; }
 logger_function *logger = logger_ignore;
-static logger_function *loggers = {
+[[__maybe_unused__]] static logger_function *loggers[] = {
     [log_pri] = printf,
     [log_ign] = logger_ignore,
     [log_ver] = logger_verbose,
@@ -13,7 +13,7 @@ static logger_function *loggers = {
 
 int main(void)
 {
-        unsigned uint = -4;
+        unsigned uint = 4;
         signed sint = -4;
 
         printf("unsigned=%u\n", uint);

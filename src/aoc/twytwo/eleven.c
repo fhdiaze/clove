@@ -1,9 +1,9 @@
+#undef LOG_LEVEL
+#define LOG_LEVEL LOG_LEVEL_ALL
+
 #include "log.h"
 #include <stdio.h>
 #include <stdlib.h>
-
-#undef LOG_LEVEL
-#define LOG_LEVEL LOG_LEVEL_ALL
 
 static constexpr unsigned LINE_BUFFER_SIZE = 100;
 
@@ -22,14 +22,14 @@ int main(void)
 {
         FILE *file = fopen("./data/aoc/twytwo/eleven.txt", "r");
         if (file == nullptr) {
-                loge("the input puzzle 'eleven.txt' was not found\n");
+                loge("the input puzzle 'eleven.txt' was not found");
                 return EXIT_FAILURE;
         }
 
         char line_buffer[LINE_BUFFER_SIZE];
 
         while (fgets(line_buffer, sizeof(line_buffer), file) != nullptr) {
-                logi("Read: %s\n", line_buffer);
+                logi("Read: %s", line_buffer);
         }
 
         fclose(file);

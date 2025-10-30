@@ -1,4 +1,5 @@
 #include "sighandler.h"
+#include <csetjmp>
 #include <ctype.h>
 #include <stdio.h>
 
@@ -95,7 +96,9 @@ constexpr unsigned maxline = 256;
 
 void basic_blocks(void)
 {
+        auto x1 = maxline;
         char buffer[maxline];
+        unsigned x = 0;
         unsigned depth = 0;
         const char *format =
             "All matching %0.0d'%c' '%c' pairs have been closed correctly\n";
@@ -111,6 +114,12 @@ void basic_blocks(void)
         case plusR:
                 format = "Error: closing too many (%d) '%c' parenthesis with "
                          "additional '%c'\n";
+                // retry
+                if (!x) {
+                    // jump for fun
+                    x = 1;
+                    longjmp(jmpTarget, plusR);
+                }
                 break;
         case tooDeep:
                 format =

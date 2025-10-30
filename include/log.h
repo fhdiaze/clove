@@ -6,6 +6,8 @@
 #include <stdint.h>
 #include <time.h>
 
+// Constants
+#define LOG_TSTAMP_BUF_SIZE 32
 #define LOG_LEVEL_ALL 0UL
 #define LOG_LEVEL_TRACE 1UL
 #define LOG_LEVEL_DEBUG 2UL
@@ -26,12 +28,13 @@
 
 #define LOG_MSG(log_level, fmt, file_name, func_name, line_number, ...)      \
         do {                                                                 \
-                char _pr_tstamp_str[32];                                     \
+                char _pr_tstamp_str[LOG_TSTAMP_BUF_SIZE];                    \
                 struct timespec _pr_ts;                                      \
                 struct tm _pr_tm;                                            \
                 timespec_get(&_pr_ts, TIME_UTC);                             \
                 gmtime_s(&_pr_tm, &_pr_ts.tv_sec);                           \
-                strftime(_pr_tstamp_str, 32, "%FT%T", &_pr_tm);              \
+                strftime(_pr_tstamp_str, LOG_TSTAMP_BUF_SIZE, "%FT%T",       \
+                         &_pr_tm);                                           \
                 printf("%c[%s.%09ldZ] %s:%s:%s: " fmt "\n", log_level,       \
                        _pr_tstamp_str, _pr_ts.tv_nsec, file_name, func_name, \
                        STRGY(line_number) __VA_OPT__(, ) __VA_ARGS__);       \
