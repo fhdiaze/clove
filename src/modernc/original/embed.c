@@ -37,21 +37,21 @@ static char there[sizeof here];
 
 int main(int argc, char *argv[static argc + 1])
 {
-        size_t ibytes = 0;
-        int cmp = 1000;
-        // Open the file in binary mode.
-        FILE *inp = fopen(__FILE__, "rb");
-        if (inp) {
-                // read the file as binary
-                ibytes = fread(there, 1, sizeof there, inp);
-                cmp = memcmp(here, there, sizeof here);
-                fclose(inp);
-        } else {
-                printf("could not open %s\n", __FILE__);
-                printf("+++++++++++++++++++++++++++++++++++++++++++++++\n");
-        }
-        size_t obytes = fwrite(here, 1, sizeof here, stdout);
-        printf("+++++++++++++++++++++++++++++++++++++++++++++++\n");
-        printf("in %zu, out %zu, bytes are %s\n", ibytes, obytes,
-               cmp < 0 ? "smaller" : (cmp > 0 ? "greater" : "equal"));
+		size_t ibytes = 0;
+		int cmp = 1000;
+		// Open the file in binary mode.
+		FILE *inp = fopen(__FILE__, "rb");
+		if (inp) {
+				// read the file as binary
+				ibytes = fread(there, 1, sizeof there, inp);
+				cmp = memcmp(here, there, sizeof here);
+				fclose(inp);
+		} else {
+				printf("could not open %s\n", __FILE__);
+				printf("+++++++++++++++++++++++++++++++++++++++++++++++\n");
+		}
+		size_t obytes = fwrite(here, 1, sizeof here, stdout);
+		printf("+++++++++++++++++++++++++++++++++++++++++++++++\n");
+		printf("in %zu, out %zu, bytes are %s\n", ibytes, obytes,
+		       cmp < 0 ? "smaller" : (cmp > 0 ? "greater" : "equal"));
 }

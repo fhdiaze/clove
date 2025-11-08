@@ -9,14 +9,14 @@
  **/
 unsigned accu(unsigned *restrict count)
 {
-        unsigned ret = 0;
-        unsigned tmp = 0;
-        (*count) = 0;
-        while (tmp < 9) {
-                tmp = (*count)++;
-                ret += 2 * tmp + 1;
-        }
-        return ret;
+		unsigned ret = 0;
+		unsigned tmp = 0;
+		(*count) = 0;
+		while (tmp < 9) {
+				tmp = (*count)++;
+				ret += 2 * tmp + 1;
+		}
+		return ret;
 }
 
 /**
@@ -27,14 +27,14 @@ unsigned accu(unsigned *restrict count)
  **/
 unsigned accuv(volatile unsigned *restrict count)
 {
-        unsigned ret = 0;
-        unsigned tmp = 0;
-        (*count) = 0;
-        while (tmp < 9) {
-                tmp = (*count)++;
-                ret += 2 * tmp + 1;
-        }
-        return ret;
+		unsigned ret = 0;
+		unsigned tmp = 0;
+		(*count) = 0;
+		while (tmp < 9) {
+				tmp = (*count)++;
+				ret += 2 * tmp + 1;
+		}
+		return ret;
 }
 
 /**
@@ -55,122 +55,122 @@ unsigned accuv(volatile unsigned *restrict count)
  **/
 unsigned accua(_Atomic(unsigned) *restrict count)
 {
-        unsigned ret = 0;
-        unsigned tmp = 0;
-        (*count) = 0;
-        while (tmp < 9) {
-                tmp = (*count)++;
-                ret += 2 * tmp + 1;
-        }
-        return ret;
+		unsigned ret = 0;
+		unsigned tmp = 0;
+		(*count) = 0;
+		while (tmp < 9) {
+				tmp = (*count)++;
+				ret += 2 * tmp + 1;
+		}
+		return ret;
 }
 
 unsigned accuav(_Atomic(unsigned) volatile *restrict count)
 {
-        unsigned ret = 0;
-        unsigned tmp = 0;
-        (*count) = 0;
-        while (tmp < 9) {
-                tmp = (*count)++;
-                ret += 2 * tmp + 1;
-        }
-        return ret;
+		unsigned ret = 0;
+		unsigned tmp = 0;
+		(*count) = 0;
+		while (tmp < 9) {
+				tmp = (*count)++;
+				ret += 2 * tmp + 1;
+		}
+		return ret;
 }
 
 unsigned accuar(_Atomic(unsigned) *restrict count)
 {
-        unsigned ret = 0;
-        unsigned tmp = 0;
-        atomic_store_explicit(count, 0, memory_order_relaxed);
-        while (tmp < 9) {
-                tmp =
-                    atomic_fetch_add_explicit(count, 1u, memory_order_relaxed);
-                ret += 2 * tmp + 1;
-        }
-        return ret;
+		unsigned ret = 0;
+		unsigned tmp = 0;
+		atomic_store_explicit(count, 0, memory_order_relaxed);
+		while (tmp < 9) {
+				tmp =
+					atomic_fetch_add_explicit(count, 1u, memory_order_relaxed);
+				ret += 2 * tmp + 1;
+		}
+		return ret;
 }
 
 unsigned accuavr(_Atomic(unsigned) volatile *restrict count)
 {
-        unsigned ret = 0;
-        unsigned tmp = 0;
-        atomic_store_explicit(count, 0, memory_order_relaxed);
-        while (tmp < 9) {
-                tmp =
-                    atomic_fetch_add_explicit(count, 1u, memory_order_relaxed);
-                ret += 2 * tmp + 1;
-        }
-        return ret;
+		unsigned ret = 0;
+		unsigned tmp = 0;
+		atomic_store_explicit(count, 0, memory_order_relaxed);
+		while (tmp < 9) {
+				tmp =
+					atomic_fetch_add_explicit(count, 1u, memory_order_relaxed);
+				ret += 2 * tmp + 1;
+		}
+		return ret;
 }
 
 unsigned accut(unsigned *restrict count)
 {
-        unsigned ret = 0;
-        unsigned tmp = 0;
-        (*count) = 0;
-        while (tmp < 10) {
-                ret += 2 * tmp + 1;
-                (*count) = ++tmp;
-        }
-        return ret;
+		unsigned ret = 0;
+		unsigned tmp = 0;
+		(*count) = 0;
+		while (tmp < 10) {
+				ret += 2 * tmp + 1;
+				(*count) = ++tmp;
+		}
+		return ret;
 }
 
 unsigned accutv(volatile unsigned *restrict count)
 {
-        unsigned ret = 0;
-        unsigned tmp = 0;
-        (*count) = 0;
-        while (tmp < 10) {
-                ret += 2 * tmp + 1;
-                (*count) = ++tmp;
-        }
-        return ret;
+		unsigned ret = 0;
+		unsigned tmp = 0;
+		(*count) = 0;
+		while (tmp < 10) {
+				ret += 2 * tmp + 1;
+				(*count) = ++tmp;
+		}
+		return ret;
 }
 
 unsigned accuta(_Atomic(unsigned) *restrict count)
 {
-        unsigned ret = 0;
-        unsigned tmp = 0;
-        (*count) = 0;
-        while (tmp < 10) {
-                ret += 2 * tmp + 1;
-                (*count) = ++tmp;
-        }
-        return ret;
+		unsigned ret = 0;
+		unsigned tmp = 0;
+		(*count) = 0;
+		while (tmp < 10) {
+				ret += 2 * tmp + 1;
+				(*count) = ++tmp;
+		}
+		return ret;
 }
 
 unsigned accutav(_Atomic(unsigned) volatile *restrict count)
 {
-        unsigned ret = 0;
-        unsigned tmp = 0;
-        (*count) = 0;
-        while (tmp < 10) {
-                ret += 2 * tmp + 1;
-                (*count) = ++tmp;
-        }
-        return ret;
+		unsigned ret = 0;
+		unsigned tmp = 0;
+		(*count) = 0;
+		while (tmp < 10) {
+				ret += 2 * tmp + 1;
+				(*count) = ++tmp;
+		}
+		return ret;
 }
 
 unsigned accutar(_Atomic(unsigned) *restrict count)
 {
-        unsigned ret = 0;
-        unsigned tmp = 0;
-        atomic_store_explicit(count, 0, memory_order_relaxed);
-        while (tmp < 10) {
-                ret += 2 * tmp + 1;
-                atomic_store_explicit(count, ++tmp, memory_order_relaxed);
-        }
-        return ret;
+		unsigned ret = 0;
+		unsigned tmp = 0;
+		atomic_store_explicit(count, 0, memory_order_relaxed);
+		while (tmp < 10) {
+				ret += 2 * tmp + 1;
+				atomic_store_explicit(count, ++tmp, memory_order_relaxed);
+		}
+		return ret;
 }
 
 unsigned accutavr(_Atomic(unsigned) volatile *restrict count)
 {
-        unsigned ret = 0;
-        unsigned tmp = 0;
-        atomic_store_explicit(count, 0, memory_order_relaxed);
-        while (tmp < 10) {
-                ret += 2 * tmp + 1;
-                atomic_store_explicit(count, ++tmp, memory_order_relaxed);
-        }
-        return ret;
+		unsigned ret = 0;
+		unsigned tmp = 0;
+		atomic_store_explicit(count, 0, memory_order_relaxed);
+		while (tmp < 10) {
+				ret += 2 * tmp + 1;
+				atomic_store_explicit(count, ++tmp, memory_order_relaxed);
+		}
+		return ret;
 }

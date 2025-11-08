@@ -3,8 +3,8 @@
 #ifdef USE_STRUCT
 typedef struct two two;
 struct two {
-        double e1;
-        double e2;
+		double e1;
+		double e2;
 };
 #define FRST(X) ((X).e1)
 #define SEC(X) ((X).e2)
@@ -16,26 +16,26 @@ typedef double two[2];
 
 void func0(void)
 {
-        for (two sp =
+		for (two sp =
                  {
                      1,
                      1,
                  };
              FRST(sp) + SEC(sp) < 10; FRST(sp) += SEC(sp)) {
-                printf("two values %g %g\n", FRST(sp), SEC(sp));
-                SEC(sp) += (FRST(sp) + SEC(sp)) / 2;
-        }
+				printf("two values %g %g\n", FRST(sp), SEC(sp));
+				SEC(sp) += (FRST(sp) + SEC(sp)) / 2;
+		}
 }
 
 void func1(void)
 {
-        for (register two sp =
+		for (register two sp =
                  {
                      1,
                      1,
                  };
              FRST(sp) + SEC(sp) < 10; FRST(sp) += SEC(sp)) {
-                printf("two values %g %g\n", FRST(sp), SEC(sp));
-                SEC(sp) += (FRST(sp) + SEC(sp)) / 2;
-        }
+				printf("two values %g %g\n", FRST(sp), SEC(sp));
+				SEC(sp) += (FRST(sp) + SEC(sp)) / 2;
+		}
 }

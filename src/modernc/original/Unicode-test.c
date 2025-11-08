@@ -23,8 +23,8 @@ double ʃ(double a, double b, double φ(double)); // IPA is also acceptable
 typedef double 각; // valid, Hangul generally maps to itself
 각 α = 1;
 enum : bool {
-        응 = true,
-        wɛ = true,
+		응 = true,
+		wɛ = true,
 };
 const char 얜읐[] = "얜읐";
 int a١ = 1; // valid, Arabic digits are considered different

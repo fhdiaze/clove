@@ -99,58 +99,58 @@
 #define ESC_BGREY ESC_CSI "48;2;128;128;128m"
 
 enum {
-        esc_top = 1,
-        esc_bottom = 2,
-        esc_left = 4,
-        esc_right = 8,
+		esc_top = 1,
+		esc_bottom = 2,
+		esc_left = 4,
+		esc_right = 8,
 };
 
 #define ESC_BORDER                                               \
-        ((char const *const[]){                                  \
-            [0] = " ",                                           \
-            [esc_top] = "━",                                     \
-            [esc_bottom] = "━",                                  \
-            [esc_bottom | esc_top] = "━",                        \
-            [esc_left] = "┃",                                    \
-            [esc_left | esc_top] = "┏",                          \
-            [esc_left | esc_bottom] = "┗",                       \
-            [esc_left | esc_bottom | esc_top] = "┣",             \
-            [esc_right] = "┃",                                   \
-            [esc_right | esc_top] = "┓",                         \
-            [esc_right | esc_bottom] = "┛",                      \
-            [esc_right | esc_bottom | esc_top] = "┫",            \
-            [esc_right | esc_left] = "┃",                        \
-            [esc_right | esc_left | esc_top] = "┳",              \
-            [esc_right | esc_left | esc_bottom] = "┻",           \
-            [esc_right | esc_left | esc_bottom | esc_top] = "╋", \
-        })
+		((char const *const[]){                                  \
+			[0] = " ",                                           \
+			[esc_top] = "━",                                     \
+			[esc_bottom] = "━",                                  \
+			[esc_bottom | esc_top] = "━",                        \
+			[esc_left] = "┃",                                    \
+			[esc_left | esc_top] = "┏",                          \
+			[esc_left | esc_bottom] = "┗",                       \
+			[esc_left | esc_bottom | esc_top] = "┣",             \
+			[esc_right] = "┃",                                   \
+			[esc_right | esc_top] = "┓",                         \
+			[esc_right | esc_bottom] = "┛",                      \
+			[esc_right | esc_bottom | esc_top] = "┫",            \
+			[esc_right | esc_left] = "┃",                        \
+			[esc_right | esc_left | esc_top] = "┳",              \
+			[esc_right | esc_left | esc_bottom] = "┻",           \
+			[esc_right | esc_left | esc_bottom | esc_top] = "╋", \
+		})
 
 enum {
-        esc_nw = 1,
-        esc_ne = 2,
-        esc_sw = 4,
-        esc_se = 8,
+		esc_nw = 1,
+		esc_ne = 2,
+		esc_sw = 4,
+		esc_se = 8,
 };
 
 #define ESC_BLOCK                                      \
-        ((char const *const[]){                        \
-            [0] = " ",                                 \
-            [esc_nw] = "▘",                            \
-            [esc_ne] = "▝",                            \
-            [esc_ne | esc_nw] = "▀",                   \
-            [esc_sw] = "▖",                            \
-            [esc_sw | esc_nw] = "▌",                   \
-            [esc_sw | esc_ne] = "▞",                   \
-            [esc_sw | esc_ne | esc_nw] = "▛",          \
-            [esc_se] = "▗",                            \
-            [esc_se | esc_nw] = "▚",                   \
-            [esc_se | esc_ne] = "▐",                   \
-            [esc_se | esc_ne | esc_nw] = "▜",          \
-            [esc_se | esc_sw] = "▄",                   \
-            [esc_se | esc_sw | esc_nw] = "▙",          \
-            [esc_se | esc_sw | esc_ne] = "▟",          \
-            [esc_se | esc_sw | esc_ne | esc_nw] = "█", \
-        })
+		((char const *const[]){                        \
+			[0] = " ",                                 \
+			[esc_nw] = "▘",                            \
+			[esc_ne] = "▝",                            \
+			[esc_ne | esc_nw] = "▀",                   \
+			[esc_sw] = "▖",                            \
+			[esc_sw | esc_nw] = "▌",                   \
+			[esc_sw | esc_ne] = "▞",                   \
+			[esc_sw | esc_ne | esc_nw] = "▛",          \
+			[esc_se] = "▗",                            \
+			[esc_se | esc_nw] = "▚",                   \
+			[esc_se | esc_ne] = "▐",                   \
+			[esc_se | esc_ne | esc_nw] = "▜",          \
+			[esc_se | esc_sw] = "▄",                   \
+			[esc_se | esc_sw | esc_nw] = "▙",          \
+			[esc_se | esc_sw | esc_ne] = "▟",          \
+			[esc_se | esc_sw | esc_ne | esc_nw] = "█", \
+		})
 
 /**
  ** @brief relative cursor movement
