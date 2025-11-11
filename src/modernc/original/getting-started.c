@@ -1,5 +1,5 @@
 /* This may look like nonsense, but really is -*- mode: C -*- */
-#include <stdio.h>  /*@\label{include-stdio}*/
+#include <stdio.h> /*@\label{include-stdio}*/
 #include <stdlib.h> /*@\label{include-stdlib}*/
 
 /* The main thing that this program does. */ /*@\label{C-comment}*/
@@ -16,9 +16,8 @@ int main(int argc, [[maybe_unused]] char *argv[argc + 1])
 
 	// Doing some work /*@\label{CPP-comment}*/
 	for (size_t i = 0; i < 5; ++i) { /*@\label{for-loop}*/
-		printf(
-		    "element %zu is %g, \tits square is %g\n", /*@\label{printf-start}*/
-		    i, A[i], A[i] * A[i]); /*@\label{printf-end}*/
+		printf("element %zu is %g, \tits square is %g\n", /*@\label{printf-start}*/
+		       i, A[i], A[i] * A[i]); /*@\label{printf-end}*/
 	} /*@\label{for-end}*/
 
 	return EXIT_SUCCESS; /*@\label{main-return}*/

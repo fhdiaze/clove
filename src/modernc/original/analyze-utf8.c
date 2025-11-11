@@ -34,7 +34,7 @@ int main(void)
 			p += r;
 			in += r;
 			char8_t *cont =
-			    ob + 1; // first character is already stored
+				ob + 1; // first character is already stored
 			while (mbrtoc8(cont, "", 1, &st) == mbstored) {
 				cont++;
 			}
@@ -56,7 +56,9 @@ int main(void)
 			}
 			in = 0;
 		}
-		if (*ob != u8 '\n') { fputs("incomplete line\n", stderr); }
+		if (*ob != u8 '\n') {
+			fputs("incomplete line\n", stderr);
+		}
 	}
 	return EXIT_SUCCESS;
 INVAL:

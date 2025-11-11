@@ -34,11 +34,11 @@ static const char *skipspace(const char s[static 1])
  **/
 enum {
 	execution = 0, //!< Normal execution
-	plusL,         //!< Too many left braces
-	plusR,         //!< Too many right braces
-	tooDeep,       //!< Nesting too deep to handle
-	eofOut,        //!< End of output
-	interrupted,   //!< Interrupted by a signal
+	plusL, //!< Too many left braces
+	plusR, //!< Too many right braces
+	tooDeep, //!< Nesting too deep to handle
+	eofOut, //!< End of output
+	interrupted, //!< Interrupted by a signal
 };
 
 /**
@@ -46,7 +46,8 @@ enum {
  **/
 static const char *end_line(const char s[static 1], jmp_buf jmpTarget)
 {
-	if (putchar('\n') == EOF) longjmp(jmpTarget, eofOut);
+	if (putchar('\n') == EOF)
+		longjmp(jmpTarget, eofOut);
 	return skipspace(s);
 }
 
@@ -61,13 +62,15 @@ static volatile sig_atomic_t interrupt = 0;
 static volatile unsigned deepest = 0;
 
 static const char *descend1(const char act[static 1], unsigned depth,
-                            size_t len, char buffer[restrict static len],
-                            jmp_buf jmpTarget)
+			    size_t len, char buffer[restrict static len],
+			    jmp_buf jmpTarget)
 {
-	if (depth + 2 > sizeof head) longjmp(jmpTarget, tooDeep);
-NEW_LINE:                 // loop on output
+	if (depth + 2 > sizeof head)
+		longjmp(jmpTarget, tooDeep);
+NEW_LINE: // loop on output
 	while (!act[0]) { // loop for input
-		if (interrupt) longjmp(jmpTarget, interrupted);
+		if (interrupt)
+			longjmp(jmpTarget, interrupted);
 		act = fgets(buffer, len, stdin);
 		if (!act) { // end of stream
 			deepest = depth;
@@ -96,16 +99,18 @@ NEW_LINE:                 // loop on output
 static void descend0(size_t len, char buffer[static len], jmp_buf jmpTarget)
 {
 	const char *act = nullptr;
-NEW_LINE:    // loop on output
+NEW_LINE: // loop on output
 	do { // loop for input
-		if (interrupt) longjmp(jmpTarget, interrupted);
+		if (interrupt)
+			longjmp(jmpTarget, interrupted);
 		act = fgets(buffer, len, stdin);
-		if (!act) return;
+		if (!act)
+			return;
 		act = skipspace(act);
 	} while (!act[0]);
 	// act is never 0 from here on
 	fputs(&head[sizeof head - 3], stdout); // header
-	for (; act[0]; ++act) {                // remainder of the line
+	for (; act[0]; ++act) { // remainder of the line
 		switch (act[0]) {
 		case left: // descend on left brace
 			act = end_line(act + 1, jmpTarget);
@@ -115,7 +120,8 @@ NEW_LINE:    // loop on output
 		case right: // right brace is an error
 			longjmp(jmpTarget, plusR);
 		default: // print char and go on
-			if (putchar(act[0]) == EOF) longjmp(jmpTarget, eofOut);
+			if (putchar(act[0]) == EOF)
+				longjmp(jmpTarget, eofOut);
 		}
 	}
 	goto NEW_LINE;
@@ -127,7 +133,7 @@ void basic_blocks(void)
 {
 	char buffer[maxline];
 	const char *format =
-	    "All matching %0.0d'%c' '%c' pairs have been closed correctly\n";
+		"All matching %0.0d'%c' '%c' pairs have been closed correctly\n";
 	jmp_buf jmpTarget;
 	switch (setjmp(jmpTarget)) {
 	case 0:
@@ -144,7 +150,7 @@ void basic_blocks(void)
 		break;
 	case tooDeep:
 		format =
-		    "Error: nesting (%d) of '%c' '%c' constructs is too deep\n";
+			"Error: nesting (%d) of '%c' '%c' constructs is too deep\n";
 		break;
 	case eofOut:
 		format = "Error: EOF for stdout at %d open '%c', expecting "
@@ -155,7 +161,7 @@ void basic_blocks(void)
 		break;
 	default:;
 		format =
-		    "Error: unknown error within (%d) '%c' '%c' constructs\n";
+			"Error: unknown error within (%d) '%c' '%c' constructs\n";
 	}
 	fflush(stdout);
 	fprintf(stderr, format, deepest, left, right);
@@ -200,8 +206,8 @@ void doAtExit(void)
 {
 	if (lastOpen && lastOpen[0]) {
 		fprintf(stderr,
-		        "\n***********\nabnormal exit, last open file was %s\n",
-		        lastOpen[0]);
+			"\n***********\nabnormal exit, last open file was %s\n",
+			lastOpen[0]);
 	}
 }
 
@@ -225,7 +231,8 @@ int main(int argc, char *argv[argc + 1])
 
 	// If there are no command-line arguments, reads from stdin
 	lastOpen = argv;
-	if (argc < 2) goto RUN;
+	if (argc < 2)
+		goto RUN;
 
 	// Runs basic_blocks for each command-line argument
 	for (++lastOpen; lastOpen[0]; ++lastOpen) {
@@ -234,7 +241,7 @@ int main(int argc, char *argv[argc + 1])
 			return EXIT_FAILURE;
 		}
 		printf("++++++++++ %s +++++++++++\n", lastOpen[0]);
-	RUN:
+RUN:
 		basic_blocks();
 	}
 	return EXIT_SUCCESS;

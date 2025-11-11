@@ -1,6 +1,9 @@
 #include "c23-fallback.h"
 
-void squareIt(double *p) [[__unsequenced__]] { *p *= *p; }
+void squareIt(double *p) [[__unsequenced__]]
+{
+	*p *= *p;
+}
 int main(void)
 {
 	double x = 35.0; /*@\label{line:decl-x}*/
@@ -13,9 +16,9 @@ int main(void)
 		/*@…*/
 		squareIt(xp);
 		/* Valid use of double x */ /*@\label{line:use-xp}*/
-					    /*@…*/
+		/*@…*/
 	} /*@\label{line:end-x-2}*/
 	/*@…*/
 	squareIt(&x); /* Refers to double x */ /*@\label{line:use-x-2}*/
-					       /*@…*/
+	/*@…*/
 }

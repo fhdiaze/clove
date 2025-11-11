@@ -7,7 +7,7 @@
 #endif
 
 #if !defined(__STDC_IEC_559__) && !defined(__STDC_IEC_60559_BFP__) && \
-    !FE_ALL_EXCEPT
+	!FE_ALL_EXCEPT
 #error "floating-point arithmetic is too weird"
 #endif
 
@@ -22,11 +22,11 @@ static_assert(FE_ALL_EXCEPT, "floating point exceptions are not supported");
 
 bool const has_inf =
 #ifdef INFINITY
-    (1.0 / 0.0 == INFINITY)
+	(1.0 / 0.0 == INFINITY)
 #else
-    false
+	false
 #endif
-    ;
+	;
 
 int excepts[] = {
 #ifdef FE_DIVBYZERO
@@ -69,7 +69,8 @@ void printexcept(void)
 	if (except) {
 		printf("[");
 		for (unsigned j = 0; except; except &= ~excepts[j], ++j)
-			if (excepts[j] & except) printf("%s ", name[j]);
+			if (excepts[j] & except)
+				printf("%s ", name[j]);
 		printf("]");
 	}
 }

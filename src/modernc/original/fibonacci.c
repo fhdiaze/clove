@@ -3,8 +3,10 @@
 
 size_t fib(size_t n) [[__unsequenced__]]
 {
-	if (n < 3) return 1;
-	else return fib(n - 1) + fib(n - 2);
+	if (n < 3)
+		return 1;
+	else
+		return fib(n - 1) + fib(n - 2);
 }
 
 int main(int argc, char *argv[])

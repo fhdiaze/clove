@@ -47,10 +47,11 @@ time_t isotime(const char t[static 1])
                 },
         };
 	int retscan = sscanf(t, "%i-%i-%i %i:%i:%i", &date->tm_year,
-	                     &date->tm_mon, &date->tm_mday, &date->tm_hour,
-	                     &date->tm_min, &date->tm_sec);
+			     &date->tm_mon, &date->tm_mday, &date->tm_hour,
+			     &date->tm_min, &date->tm_sec);
 	if (retscan <= 0) {
-		if (errno) perror("can't scan");
+		if (errno)
+			perror("can't scan");
 		return 0;
 	}
 	date->tm_year -= 1900;
@@ -70,9 +71,9 @@ void time2terran(time_t t)
 	 */
 	struct tm terranEpoch[1] = {
 		{
-		    .tm_year = 69, // year starts at 1900
-		    .tm_mon = 11,  // mon starts at 0
-		    .tm_mday = 23, // mday starts at 1
+			.tm_year = 69, // year starts at 1900
+			.tm_mon = 11, // mon starts at 0
+			.tm_mday = 23, // mday starts at 1
 		},
 	};
 	time_t epoch = mktime(terranEpoch);
@@ -93,7 +94,9 @@ void time2terran(time_t t)
 	  adjust with respect to the 128 year periods
 	 */
 	long per = days / dp;
-	if (days < 0) { per -= 1; }
+	if (days < 0) {
+		per -= 1;
+	}
 	long year = per * yp;
 	days -= per * dp;
 

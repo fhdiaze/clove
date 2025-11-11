@@ -19,9 +19,9 @@ typedef struct circular circular;
  */
 struct circular {
 	size_t start [[deprecated("privat")]]; /* First element     */
-	size_t len [[deprecated("privat")]];   /* Number of elements*/
-	size_t cap [[deprecated("privat")]];   /* Maximum capacity  */
-	double *tab [[deprecated("privat")]];  /* Data array        */
+	size_t len [[deprecated("privat")]]; /* Number of elements*/
+	size_t cap [[deprecated("privat")]]; /* Maximum capacity  */
+	double *tab [[deprecated("privat")]]; /* Data array        */
 };
 
 /**
@@ -65,8 +65,8 @@ inline void circular_delete(circular *c)
  ** with a call to ::circular_delete.
  **/
 [[nodiscard("pointer to allocated data dropped")]] [[__gnu__::__malloc__,
-                                                     __gnu_free__(
-							 circular_delete)]]
+						     __gnu_free__(
+							     circular_delete)]]
 inline circular *circular_new(size_t len)
 {
 	return circular_init(malloc(sizeof(circular)), len);

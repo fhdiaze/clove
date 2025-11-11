@@ -15,8 +15,8 @@ enum {
 
 #define MONTH(X)                                                       \
 	(char const *[]){                                              \
-		[1] = "Jan", [2] = "Feb",  [3] = "Mar",  [4] = "Apr",  \
-		[5] = "Mai", [6] = "Jun",  [7] = "Jul",  [8] = "Aug",  \
+		[1] = "Jan", [2] = "Feb",  [3] = "Mar",	 [4] = "Apr",  \
+		[5] = "Mai", [6] = "Jun",  [7] = "Jul",	 [8] = "Aug",  \
 		[9] = "Sep", [10] = "Oct", [11] = "Nov", [12] = "Dec", \
 	}[(X) % 100]
 
@@ -30,9 +30,9 @@ enum {
 		[0], STRINGIFY(X)[1], STRINGIFY(X)[2], STRINGIFY(X)[3], \
 	}
 
-#define VBAR "\u2502"     /**< a vertical bar character   */
-#define HBAR "\u2500"     /**< a horizontal bar character */
-#define TOPLEFT "\u250c"  /**< topleft corner character   */
+#define VBAR "\u2502" /**< a vertical bar character   */
+#define HBAR "\u2500" /**< a horizontal bar character */
+#define TOPLEFT "\u250c" /**< topleft corner character   */
 #define TOPRIGHT "\u2510" /**< topright corner character  */
 
 /**
@@ -94,21 +94,23 @@ int main(void)
 	char32_t c32butterfly[] = U"\U000272CA";
 	wchar_t wbutterfly[] = L"\U000272CA";
 	char u8butterfly[] = u8"\U000272CA";
-	bool mbs_u8 =
-	    (sizeof strvowel != sizeof u8vowel)
-		? false
-		: (!strcmp(strvowel, u8vowel)) &&
-		      (!strcmp("\U000272CA", (const char *)u8"\U000272CA"));
+	bool mbs_u8 = (sizeof strvowel != sizeof u8vowel) ?
+			      false :
+			      (!strcmp(strvowel, u8vowel)) &&
+				      (!strcmp("\U000272CA",
+					       (const char *)u8"\U000272CA"));
 	printf(VBAR "%ls world: switched \"%s\" \u21E8 \"%s\", multibyte "
-	            "strings are%s utf8, state%s\n",
+		    "strings are%s utf8, state%s\n",
 	       wcshello, locC, locLoc, mbs_u8 ? "" : " not",
 	       mblen(nullptr, 0) ? "full" : "less");
 	printf(VBAR "wchar_t (%ssigned) is %zu bit, wint_t (%ssigned) is %zu "
-	            "bit, WEOF is ",
+		    "bit, WEOF is ",
 	       (WCHAR_MIN ? "" : "un"), sizeof(wchar_t) * CHAR_BIT,
 	       (WINT_MIN ? "" : "un"), sizeof(wint_t) * CHAR_BIT);
-	if (WINT_MIN) printf("%lld\n", (long long)WEOF);
-	else printf("%#llx\n", (unsigned long long)WEOF);
+	if (WINT_MIN)
+		printf("%lld\n", (long long)WEOF);
+	else
+		printf("%#llx\n", (unsigned long long)WEOF);
 	printf(VBAR "wchar_t are Unicode code points as of %s %s, ",
 #ifdef __STDC_ISO_10646__
 	       MONTH(__STDC_ISO_10646__), YEAR(__STDC_ISO_10646__)
@@ -133,41 +135,41 @@ int main(void)
 #endif
 	draw_sep(g_table[g_u | g_d | g_r], g_table[g_l | g_u | g_d]);
 	printf(VBAR "testing character %ls, codepoint U+%lX, utf8 %hhx %hhx "
-	            "%hhx %hhx %hhx:\n",
+		    "%hhx %hhx %hhx:\n",
 	       wbutterfly, 0x272CALU, u8butterfly[0], u8butterfly[1],
 	       u8butterfly[2], u8butterfly[3], u8butterfly[4]);
 	printf(VBAR "\twchar_t,\tlength %zu,\t%s\n",
 	       (sizeof(wbutterfly) / sizeof(wbutterfly[0])) - 1,
-	       (sizeof(wbutterfly) / sizeof(wbutterfly[0])) == 2
-	           ? "one word encoding"
-	           : "surrogate encoding");
+	       (sizeof(wbutterfly) / sizeof(wbutterfly[0])) == 2 ?
+		       "one word encoding" :
+		       "surrogate encoding");
 	printf(VBAR "\tchar32_t,\tlength %zu,\t%s\n",
 	       (sizeof(c32butterfly) / sizeof(c32butterfly[0])) - 1,
-	       (sizeof(c32butterfly) / sizeof(c32butterfly[0])) == 2
-	           ? "one word encoding"
-	           : "surrogate encoding");
+	       (sizeof(c32butterfly) / sizeof(c32butterfly[0])) == 2 ?
+		       "one word encoding" :
+		       "surrogate encoding");
 	printf(VBAR "\tchar16_t,\tlength %zu,\t%s\n",
 	       (sizeof(c16butterfly) / sizeof(c16butterfly[0])) - 1,
-	       (sizeof(c16butterfly) / sizeof(c16butterfly[0])) == 2
-	           ? "one word encoding"
-	           : "surrogate encoding");
+	       (sizeof(c16butterfly) / sizeof(c16butterfly[0])) == 2 ?
+		       "one word encoding" :
+		       "surrogate encoding");
 	if (sizeof(wchar_t) == sizeof(char32_t))
 		printf(VBAR "\twchar_t and char32_t encoding %s\n",
 		       (sizeof(c32butterfly) == sizeof(wbutterfly) &&
-		        c32butterfly[0] == wbutterfly[0] &&
-		        c32butterfly[1] == wbutterfly[1])
-		           ? "are equal"
-		           : "differ");
+			c32butterfly[0] == wbutterfly[0] &&
+			c32butterfly[1] == wbutterfly[1]) ?
+			       "are equal" :
+			       "differ");
 	else if (sizeof(wchar_t) == sizeof(char16_t))
 		printf(VBAR "\twchar_t and char16_t encoding %s\n",
 		       (sizeof(c16butterfly) == sizeof(wbutterfly) &&
-		        c16butterfly[0] == wbutterfly[0] &&
-		        c16butterfly[1] == wbutterfly[1])
-		           ? "are equal"
-		           : "differ");
+			c16butterfly[0] == wbutterfly[0] &&
+			c16butterfly[1] == wbutterfly[1]) ?
+			       "are equal" :
+			       "differ");
 	else
 		printf(VBAR "\twchar_t, char32_t and char16_t types and "
-		            "encodings all differ\n");
+			    "encodings all differ\n");
 	const char mbs0[] = u8"ł";
 	const char *pos0 = mbsrmb(u8hello, nullptr, mbs0, 0);
 	draw_sep(g_table[g_u | g_d | g_r], g_table[g_l | g_u | g_d]);
@@ -190,16 +192,17 @@ int main(void)
 	       pos3, mbs3 + pos3);
 	draw_sep(g_table[g_u | g_d | g_r], g_table[g_l | g_u | g_d]);
 	printf(VBAR "floats (locale):\t%g (C with .)\t%g (C with ,)\t%g (with "
-	            ".)\t%g (with ,)\n",
+		    ".)\t%g (with ,)\n",
 	       strtod("9.3", nullptr), strtod("9,3", nullptr),
 	       mbsrtod("\u20039.3", nullptr, nullptr),
 	       mbsrtod("\u20039,3", nullptr, nullptr));
 	draw_sep(g_table[g_u | g_d | g_r], g_table[g_l | g_u | g_d]);
 	printf(VBAR "vowels\t%ls\n", wcsvowel);
 	char u8vowel2[MB_LEN_MAX + sizeof u8vowel];
-	char *partial =
-	    mbsrncpy(sizeof u8vowel - 2, u8vowel2, nullptr, u8vowel, nullptr);
-	if (partial[0]) partial[0] = 0;
+	char *partial = mbsrncpy(sizeof u8vowel - 2, u8vowel2, nullptr, u8vowel,
+				 nullptr);
+	if (partial[0])
+		partial[0] = 0;
 	printf(VBAR "partial\t%s\n", u8vowel2);
 	for (const char *s = strhello; s && s[0];) {
 		s += mbscspn(s, strvowel);

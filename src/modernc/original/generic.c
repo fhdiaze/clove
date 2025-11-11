@@ -10,13 +10,13 @@ unsigned long(maxul)(unsigned long a, unsigned long b) [[__unsequenced__]];
 unsigned long(maxusl)(unsigned long a, signed long b) [[__unsequenced__]];
 unsigned long(maxsul)(signed long a, unsigned long b) [[__unsequenced__]];
 signed long long(maxsll)(signed long long a, signed long long b)
-    [[__unsequenced__]];
+	[[__unsequenced__]];
 unsigned long long(maxull)(unsigned long long a, unsigned long long b)
-    [[__unsequenced__]];
+	[[__unsequenced__]];
 unsigned long long(maxusll)(unsigned long long a, signed long long b)
-    [[__unsequenced__]];
+	[[__unsequenced__]];
 unsigned long long(maxsull)(signed long long a, unsigned long long b)
-    [[__unsequenced__]];
+	[[__unsequenced__]];
 
 int main(int argc, char *argv[argc + 1])
 {

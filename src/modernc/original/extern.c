@@ -8,7 +8,7 @@ int main(void)
 	if (i) {
 		extern unsigned i;
 		/* An existing object */ /*@\label{line:decl-i-3}*/
-		printf("%u\n", i);       /* prints 1 */
+		printf("%u\n", i); /* prints 1 */
 	} else {
 		printf("%u\n", i); /* prints 2 */
 	}

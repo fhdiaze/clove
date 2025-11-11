@@ -13,7 +13,8 @@ static tss_t thrd_counter_key;
 static void cleanup(void *data)
 {
 	logi("cleaning up '%p'", data);
-	if (data) free(data);
+	if (data)
+		free(data);
 }
 
 static int thrd_counter_run(void *arg_thrd_id)
@@ -22,24 +23,28 @@ static int thrd_counter_run(void *arg_thrd_id)
 	logi("starting thrd_id='%u'", thrd_id);
 
 	char *thrd_name = malloc(THRD_NAME_BUFFER_SIZE);
-	if (!thrd_name) return EXIT_FAILURE;
+	if (!thrd_name)
+		return EXIT_FAILURE;
 	sprintf(thrd_name, "thrd_%u", thrd_id);
 	if (tss_set(thrd_name_key, thrd_name) != thrd_success)
 		return EXIT_FAILURE;
 
 	unsigned *thrd_counter = malloc(sizeof(unsigned));
-	if (!thrd_counter) return EXIT_FAILURE;
+	if (!thrd_counter)
+		return EXIT_FAILURE;
 	*thrd_counter = 0;
 	if (tss_set(thrd_counter_key, thrd_counter) != thrd_success)
 		return EXIT_FAILURE;
 
 	for (unsigned i = 0; i < 5; ++i) {
 		char *name = (char *)tss_get(thrd_name_key);
-		if (!name) return EXIT_FAILURE;
+		if (!name)
+			return EXIT_FAILURE;
 
 		logi("incrementing the counter for thrd_name='%s'", name);
 		unsigned *counter = (unsigned *)tss_get(thrd_counter_key);
-		if (!counter) return EXIT_FAILURE;
+		if (!counter)
+			return EXIT_FAILURE;
 		logi("thrd_name='%s' counter current value '%u'", name,
 		     *counter);
 		++(*counter);

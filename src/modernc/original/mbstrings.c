@@ -12,13 +12,15 @@
  **/
 
 size_t mbrtow(wchar_t *restrict C, const char c[restrict static 1],
-              mbstate_t *restrict state)
+	      mbstate_t *restrict state)
 {
-	if (!state) state = MBSTATE;
+	if (!state)
+		state = MBSTATE;
 	size_t len = -2;
 	for (size_t maxlen = MB_LEN_MAX; len >= mbincomplete; maxlen *= 2)
 		len = mbrtowc(C, c, maxlen, state);
-	if (len == mbinvalid) errno = 0;
+	if (len == mbinvalid)
+		errno = 0;
 	return len;
 }
 
@@ -34,7 +36,8 @@ size_t mbsrlen(const char *s, const mbstate_t *restrict state)
 	state = state ? state : MBSTATE;
 	mbstate_t st = *state;
 	size_t mblen = mbsrtowcs(nullptr, &s, 0, &st);
-	if (mblen == mbinvalid) errno = 0;
+	if (mblen == mbinvalid)
+		errno = 0;
 	return mblen;
 }
 
@@ -42,10 +45,12 @@ wchar_t *mbsrdup(const char *s, mbstate_t *restrict state)
 {
 	mbstate_t st = state ? *state : *MBSTATE;
 	size_t mblen = mbsrlen(s, &st);
-	if (mblen == mbinvalid) return nullptr;
+	if (mblen == mbinvalid)
+		return nullptr;
 	wchar_t *S = malloc(sizeof(wchar_t[mblen + 1]));
 	/* We know that s converts well, so no error check */
-	if (S) mbsrtowcs(S, &s, mblen + 1, state);
+	if (S)
+		mbsrtowcs(S, &s, mblen + 1, state);
 	return S;
 }
 
@@ -53,18 +58,31 @@ wchar_t *mbsrdup(const char *s, mbstate_t *restrict state)
 #define SURROG1 (SURROG0 + 1024)
 #define SURROG2 (SURROG1 + 1024)
 
-int iswhighsurrogate(wint_t x) { return (SURROG0 <= x) && (x < SURROG1); }
+int iswhighsurrogate(wint_t x)
+{
+	return (SURROG0 <= x) && (x < SURROG1);
+}
 
-int iswlowsurrogate(wint_t x) { return (SURROG1 <= x) && (x < SURROG2); }
+int iswlowsurrogate(wint_t x)
+{
+	return (SURROG1 <= x) && (x < SURROG2);
+}
 
-int iswsurrogate(wint_t x) { return (SURROG0 <= x) && (x < SURROG2); }
+int iswsurrogate(wint_t x)
+{
+	return (SURROG0 <= x) && (x < SURROG2);
+}
 
-int iswvalid(wint_t x) { return x && x != WEOF && !iswsurrogate(x); }
+int iswvalid(wint_t x)
+{
+	return x && x != WEOF && !iswsurrogate(x);
+}
 
 const char *mbsrwc(const char s[restrict static 1], mbstate_t *restrict state,
-                   wchar_t C, size_t occurrence)
+		   wchar_t C, size_t occurrence)
 {
-	if (!C || C == WEOF) return nullptr;
+	if (!C || C == WEOF)
+		return nullptr;
 	state = state ? state : MBSTATE;
 	const char *ret = nullptr;
 
@@ -73,11 +91,13 @@ const char *mbsrwc(const char s[restrict static 1], mbstate_t *restrict state,
 		mbstate_t backup = st;
 		wchar_t S = 0;
 		len = mbrtow(&S, s, &st);
-		if (!S) break;
+		if (!S)
+			break;
 		if (C == S) {
 			*state = backup;
 			ret = s;
-			if (!occurrence) break;
+			if (!occurrence)
+				break;
 			--occurrence;
 		}
 	}
@@ -85,7 +105,7 @@ const char *mbsrwc(const char s[restrict static 1], mbstate_t *restrict state,
 }
 
 const char *mbsrmb(const char s[static 1], mbstate_t *restrict state,
-                   const char c[static 1], size_t occurrence)
+		   const char c[static 1], size_t occurrence)
 {
 	state = state ? state : MBSTATE;
 	wint_t C = mbtow(c);
@@ -93,35 +113,37 @@ const char *mbsrmb(const char s[static 1], mbstate_t *restrict state,
 }
 
 const char *mbsrrwc(const char s[restrict static 1], mbstate_t *restrict state,
-                    wchar_t C)
+		    wchar_t C)
 {
 	return mbsrwc(s, state, C, SIZE_MAX);
 }
 
 const char *mbsrrmb(const char s[static 1], mbstate_t *restrict state,
-                    const char c[static 1])
+		    const char c[static 1])
 {
 	return mbsrmb(s, state, c, SIZE_MAX);
 }
 
 const char *mbsrwcjump(const char s1[static 1], mbstate_t *restrict state,
-                       size_t S2len, const wchar_t S2[S2len])
+		       size_t S2len, const wchar_t S2[S2len])
 {
 	state = state ? state : MBSTATE;
 	mbstate_t st = *state;
 	for (size_t i = 0; i < S2len; ++i) {
 		wchar_t S1 = 0;
 		s1 += mbrtow(&S1, s1, &st);
-		if (S1 != S2[i]) return nullptr;
+		if (S1 != S2[i])
+			return nullptr;
 	}
 	*state = st;
 	return s1;
 }
 
 const char *mbsrwcs(const char s1[static 1], mbstate_t *restrict state,
-                    const wchar_t *S2)
+		    const wchar_t *S2)
 {
-	if (!S2) return nullptr;
+	if (!S2)
+		return nullptr;
 	state = state ? state : MBSTATE;
 	size_t S2len = wcslen(S2);
 	switch (S2len) {
@@ -151,18 +173,19 @@ const char *mbsrwcs(const char s1[static 1], mbstate_t *restrict state,
 }
 
 const char *mbsrmbs(const char s1[static 1], mbstate_t *restrict state,
-                    const char *s2)
+		    const char *s2)
 {
 	state = state ? state : MBSTATE;
 	wchar_t *restrict S2 = mbsrdup(s2, nullptr);
-	if (!S2 || !S2[0]) return nullptr;
+	if (!S2 || !S2[0])
+		return nullptr;
 	s1 = mbsrwcs(s1, state, S2);
 	free(S2);
 	return s1;
 }
 
 const char *mbsrwcsskip(const char s1[static 1], mbstate_t *restrict state,
-                        const wchar_t *S2)
+			const wchar_t *S2)
 {
 	if (S2) {
 		state = state ? state : MBSTATE;
@@ -170,12 +193,15 @@ const char *mbsrwcsskip(const char s1[static 1], mbstate_t *restrict state,
 		for (size_t len; s1[0]; *state = st, s1 += len) {
 			wchar_t S1[3] = {};
 			len = mbrtow(&S1[0], s1, &st);
-			if (!S1[0]) break;
+			if (!S1[0])
+				break;
 			if (!iswlowsurrogate(S1[0])) {
-				if (!wcschr(S2, S1[0])) break;
+				if (!wcschr(S2, S1[0]))
+					break;
 			} else {
 				len += mbrtow(&S1[1], s1, &st);
-				if (!wcsstr(S2, S1)) break;
+				if (!wcsstr(S2, S1))
+					break;
 			}
 		}
 		*state = st;
@@ -184,7 +210,7 @@ const char *mbsrwcsskip(const char s1[static 1], mbstate_t *restrict state,
 }
 
 const char *mbsrskip(const char s1[static 1], mbstate_t *restrict state,
-                     const char *s2)
+		     const char *s2)
 {
 	state = state ? state : MBSTATE;
 	wchar_t *restrict S2 = mbsrdup(s2, nullptr);
@@ -199,13 +225,14 @@ size_t mbsspn(const char *s1, const char *s2)
 }
 
 const char *mbsrskip_class(const char s1[static 1], mbstate_t *restrict state,
-                           wcclass_t func)
+			   wcclass_t func)
 {
 	state = state ? state : MBSTATE;
 	for (size_t len; s1[0]; s1 += len) {
 		wchar_t S1 = 0;
 		len = mbrtow(&S1, s1, state);
-		if (!S1 || !func(S1)) break;
+		if (!S1 || !func(S1))
+			break;
 	}
 	return s1;
 }
@@ -216,13 +243,14 @@ size_t mbsspn_class(const char *s1, wcclass_t func)
 }
 
 const char *mbsrskip_type(const char s1[static 1], mbstate_t *restrict state,
-                          wctype_t type)
+			  wctype_t type)
 {
 	state = state ? state : MBSTATE;
 	for (size_t len; s1[0]; s1 += len) {
 		wchar_t S1 = 0;
 		len = mbrtow(&S1, s1, state);
-		if (!S1 || !iswctype(S1, type)) break;
+		if (!S1 || !iswctype(S1, type))
+			break;
 	}
 	return s1;
 }
@@ -238,7 +266,7 @@ size_t mbsspn_name(const char *s1, const char name[static 1])
 }
 
 const char *mbsrwcscskip(const char s1[static 1], mbstate_t *restrict state,
-                         const wchar_t *S2)
+			 const wchar_t *S2)
 {
 	state = state ? state : MBSTATE;
 	if (S2) {
@@ -246,12 +274,15 @@ const char *mbsrwcscskip(const char s1[static 1], mbstate_t *restrict state,
 		for (size_t len; s1[0]; s1 += len) {
 			wchar_t S1[3] = {};
 			len = mbrtow(&S1[0], s1, &st);
-			if (!S1[0]) break;
+			if (!S1[0])
+				break;
 			if (!iswlowsurrogate(S1[0])) {
-				if (wcschr(S2, S1[0])) break;
+				if (wcschr(S2, S1[0]))
+					break;
 			} else {
 				len += mbrtow(&S1[1], s1, &st);
-				if (wcsstr(S2, S1)) break;
+				if (wcsstr(S2, S1))
+					break;
 			}
 		}
 		*state = st;
@@ -274,53 +305,54 @@ size_t mbscspn(const char *s1, const char *s2)
 }
 
 double mbsrtod(const char *restrict s1, mbstate_t *restrict state,
-               char **restrict endptr)
+	       char **restrict endptr)
 {
 	state = state ? state : MBSTATE;
 	return strtod(mbsrskip_class(s1, state, iswspace), endptr);
 }
 
 long double mbsrtold(const char *restrict s1, mbstate_t *restrict state,
-                     char **restrict endptr)
+		     char **restrict endptr)
 {
 	state = state ? state : MBSTATE;
 	return strtold(mbsrskip_class(s1, state, iswspace), endptr);
 }
 
 long mbsrtol(const char *restrict s1, mbstate_t *restrict state,
-             char **restrict endptr, int base)
+	     char **restrict endptr, int base)
 {
 	state = state ? state : MBSTATE;
 	return strtol(mbsrskip_class(s1, state, iswspace), endptr, base);
 }
 
 long long mbsrtoll(const char *restrict s1, mbstate_t *restrict state,
-                   char **restrict endptr, int base)
+		   char **restrict endptr, int base)
 {
 	state = state ? state : MBSTATE;
 	return strtoll(mbsrskip_class(s1, state, iswspace), endptr, base);
 }
 
 unsigned long mbsrtoul(const char *restrict s1, mbstate_t *restrict state,
-                       char **restrict endptr, int base)
+		       char **restrict endptr, int base)
 {
 	state = state ? state : MBSTATE;
 	return strtoul(mbsrskip_class(s1, state, iswspace), endptr, base);
 }
 
 unsigned long long mbsrtoull(const char *restrict s1, mbstate_t *restrict state,
-                             char **restrict endptr, int base)
+			     char **restrict endptr, int base)
 {
 	state = state ? state : MBSTATE;
 	return strtoull(mbsrskip_class(s1, state, iswspace), endptr, base);
 }
 
 char *mbsrmbsncpy(size_t n, char t[restrict n], const mbstate_t *restrict state,
-                  const char s[restrict static 1])
+		  const char s[restrict static 1])
 {
 	/* Don't do anything if s wouldn't fit entirely into t */
 	const char *ep = memchr(s, 0, n);
-	if (!ep) return nullptr;
+	if (!ep)
+		return nullptr;
 	size_t slen = ep - s;
 	/* If the target is in non-initial state, try to reset it. */
 	if (!mbsinit(state)) {
@@ -329,25 +361,28 @@ char *mbsrmbsncpy(size_t n, char t[restrict n], const mbstate_t *restrict state,
 		mbstate_t st = *state;
 		size_t len = wcrtomb(buf, 0, &st);
 		/* See if shift characters plus s will fit into t. */
-		if (slen + len >= n) return nullptr;
+		if (slen + len >= n)
+			return nullptr;
 		/* write the bytes that end the shift state */
 		memcpy(t, buf, len);
 		t += len - 1;
 		n -= len - 1;
 	}
-	if (slen >= n) return nullptr;
+	if (slen >= n)
+		return nullptr;
 	memcpy(t, s, slen + 1);
 	return t + slen;
 }
 
 char *mbsrncpy(size_t n, char t[restrict n], mbstate_t *restrict tstate,
-               const char s[restrict static 1],
-               const mbstate_t *restrict sstate)
+	       const char s[restrict static 1],
+	       const mbstate_t *restrict sstate)
 {
 	/* First check if the bytes can just be copied over. */
 	if (mbsinit(sstate)) {
 		char *ret = mbsrmbsncpy(n, t, tstate, s);
-		if (ret) return ret;
+		if (ret)
+			return ret;
 	}
 	char *tt = t;
 	tstate = tstate ? tstate : MBSTATE;
@@ -362,10 +397,12 @@ char *mbsrncpy(size_t n, char t[restrict n], mbstate_t *restrict tstate,
 		const wchar_t *Sp = S;
 		mbstate_t tst = *tstate;
 		size_t tlen = wcsrtombs(buf, &Sp, n, &tst);
-		if (tlen > n) break;
+		if (tlen > n)
+			break;
 		*tstate = tst;
 		memcpy(tt, buf, tlen);
-		if (!S[0]) break;
+		if (!S[0])
+			break;
 		tt += tlen;
 		n -= tlen;
 	}

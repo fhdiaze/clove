@@ -14,9 +14,8 @@ void main()
 
 	// Doing some work
 	for (i = 0; i < 5; ++i) {
-		printf(
-		    "element %d is %g, \tits square is %g\n", /*@\label{printf-start-badly}*/
-		    i, A[i], A[i] * A[i]); /*@\label{printf-end-badly}*/
+		printf("element %d is %g, \tits square is %g\n", /*@\label{printf-start-badly}*/
+		       i, A[i], A[i] * A[i]); /*@\label{printf-end-badly}*/
 	}
 
 	return 0; /*@\label{main-return-badly}*/

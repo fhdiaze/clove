@@ -20,7 +20,8 @@ fibonaccipair fibonacci2(size_t n, fibonaccipair ret)
 {
 	if (n) {
 		return fibonacci2(n - 1, fiboNext(ret));
-	} else return ret;
+	} else
+		return ret;
 }
 
 fibonaccipair fibonacci3(size_t n, fibonaccipair ret)
@@ -37,13 +38,14 @@ size_t fibonacci(size_t n)
 		1,
 		1,
 	};
-	if (n > 2) res = fibonacci2(n - 2, res);
+	if (n > 2)
+		res = fibonacci2(n - 2, res);
 	return res.act;
 }
 
 int main(int argc, char *argv[argc + 1])
 {
-	for (int i = 1; i < argc; ++i) {                        // process args
+	for (int i = 1; i < argc; ++i) { // process args
 		const size_t n = strtoull(argv[i], nullptr, 0); // arg -> size_t
 		printf("fibonacci(%zu) is %zu\n", n, fibonacci(n));
 	}

@@ -7,7 +7,8 @@ double expk2(double a, unsigned k) [[__unsequenced__]]
 {
 	for (;;) {
 		k /= 2u;
-		if (!k) break;
+		if (!k)
+			break;
 		a *= a;
 	}
 	return a;
@@ -17,7 +18,8 @@ double expk_rec(double a, unsigned k) [[__unsequenced__]]
 {
 	switch (k)
 	default: {
-		if (k % 2u) case 3: {
+		if (k % 2u)
+		case 3: {
 			double ret = expk_rec(a, k / 2u);
 			ret *= ret;
 			a *= ret;
@@ -44,7 +46,8 @@ double expk_rec(double a, unsigned k) [[__unsequenced__]]
 
 double frexp_np(double x, signed exp[static 1]) [[__unsequenced__]]
 {
-	if (x < 0.0) return -frexp_np(-x, exp);
+	if (x < 0.0)
+		return -frexp_np(-x, exp);
 	signed ret = 0;
 	if (x > 0.0) {
 		if (x < 0.5) {
@@ -165,9 +168,12 @@ double heron1_estimate_dir_10(double a) [[__unsequenced__]]
 
 double heron1_estimate_dir(double a) [[__unsequenced__]]
 {
-	if (a < 0.5) return heron1_estimate_dir_05(a);
-	else if (a >= 1.0) return heron1_estimate_dir_10(a);
-	else return 1.0;
+	if (a < 0.5)
+		return heron1_estimate_dir_05(a);
+	else if (a >= 1.0)
+		return heron1_estimate_dir_10(a);
+	else
+		return 1.0;
 }
 
 double heron1(double a) [[__unsequenced__]]
@@ -185,9 +191,12 @@ double heron1(double a) [[__unsequenced__]]
 
 double expk(double a, signed k) [[__unsequenced__]]
 {
-	if (k < 0) return heron1(expk_rec(a, -k));
-	if (k) return expk_rec(a, k);
-	else return 1.0;
+	if (k < 0)
+		return heron1(expk_rec(a, -k));
+	if (k)
+		return expk_rec(a, k);
+	else
+		return 1.0;
 }
 
 double heron(double a, signed k) [[__unsequenced__]]
@@ -198,8 +207,10 @@ double heron(double a, signed k) [[__unsequenced__]]
 	case 1:
 		return a;
 	}
-	if (k < 0) return heron1(heron(a, -k));
-	if (a <= 0.0) return 0.0;
+	if (k < 0)
+		return heron1(heron(a, -k));
+	if (a <= 0.0)
+		return 0.0;
 	constexpr double eps = 1E-12;
 	const double k1 = heron1(k);
 	const double a1 = heron1(a);
@@ -207,7 +218,8 @@ double heron(double a, signed k) [[__unsequenced__]]
 	for (;;) {
 		double xk1 = expk(x, k - 1);
 		double axk1 = a * heron1(xk1);
-		if (fabs(1.0 - x * xk1 * a1) < eps) break;
+		if (fabs(1.0 - x * xk1 * a1) < eps)
+			break;
 		x = ((k - 1) * x + axk1) * k1;
 	}
 	return x;

@@ -23,7 +23,8 @@ struct tm time_set_yday(struct tm t)
 	// tm_mdays starts at 1.
 	t.tm_yday += DAYS_BEFORE[t.tm_mon] + t.tm_mday - 1;
 	// Takes care of leap years
-	if ((t.tm_mon > 1) && leapyear(t.tm_year + 1900)) ++t.tm_yday;
+	if ((t.tm_mon > 1) && leapyear(t.tm_year + 1900))
+		++t.tm_yday;
 	return t;
 }
 

@@ -33,7 +33,8 @@ unsigned long Strtoul_inner(const char s[static 1], size_t i, unsigned base)
 	unsigned long ret = 0;
 	while (s[i]) {
 		unsigned c = hexatridecimal(s[i]);
-		if (c >= base) break;
+		if (c >= base)
+			break;
 		/* Maximal representable value for 64 bit is
 		   3w5e11264sgsf in base 36 */
 		if (ULONG_MAX / base < ret) {
@@ -49,7 +50,7 @@ unsigned long Strtoul_inner(const char s[static 1], size_t i, unsigned base)
 }
 
 static unsigned find_prefix(const char s[static 1], size_t i,
-                            const char t[static 1])
+			    const char t[static 1])
 {
 	size_t ret = 0;
 	while (s[i + ret] && (tolower(s[i + ret]) == tolower(t[ret]))) {
@@ -60,12 +61,12 @@ static unsigned find_prefix(const char s[static 1], size_t i,
 
 unsigned long Strtoul(const char s[static 1], unsigned base)
 {
-	if (base > 36u) {       /* Tests if base          */
+	if (base > 36u) { /* Tests if base          */
 		errno = EINVAL; /* Extends the specification */
 		return ULONG_MAX;
 	}
 	size_t i = strspn(s, " \f\n\r\t\v"); /* Skips spaces    */
-	bool switchsign = false;             /* Looks for a sign       */
+	bool switchsign = false; /* Looks for a sign       */
 	switch (s[i]) {
 	case '-':
 		switchsign = true;
@@ -74,37 +75,45 @@ unsigned long Strtoul(const char s[static 1], unsigned base)
 		++i;
 	}
 	/* Test if there is anything left in the string. */
-	if (!s[i]) return 0;
+	if (!s[i])
+		return 0;
 	if (!base || base == 16 || base == 2) { /* use prefix */
 		size_t adj = find_prefix(s, i, "0x");
 		switch (adj) {
 		case 2: // There is a 0x or a 0X prefix
-			if (!base || base == 16) base = 16;
+			if (!base || base == 16)
+				base = 16;
 			// If we are looking for another base, the x is the end
-			else return 0;
+			else
+				return 0;
 			break;
 		case 1: // There is a 0 prefix
 			adj = find_prefix(s, i, "0b");
 			switch (adj) {
 			case 1: // There is only a 0 prefix
-				if (!base) base = 8;
+				if (!base)
+					base = 8;
 				break;
 			default: // There is a 0b or a 0B prefix
-				if (!base || base == 2) base = 2;
+				if (!base || base == 2)
+					base = 2;
 				// If we are looking for another base, the b is
 				// the end
-				else return 0;
+				else
+					return 0;
 				break;
 			}
 			break;
 		default:
-			if (!base) base = 10;
+			if (!base)
+				base = 10;
 			break;
 		}
 		i += adj;
 	}
 	/* Test again, maybe the prefix 0 was the only digit. */
-	if (!s[i]) return 0;
+	if (!s[i])
+		return 0;
 	/* Now, starts the real conversion */
 	unsigned long ret = Strtoul_inner(s, i, base);
 	return (switchsign) ? -ret : ret;
@@ -143,9 +152,9 @@ int main(int argc, char *argv[argc + 1])
 			if (res == ULONG_MAX && errno) {
 				puts("");
 				fprintf(stderr,
-				        "invalid conversion with base %u and "
-				        "\"%s\"\n",
-				        code[j], argv[i]);
+					"invalid conversion with base %u and "
+					"\"%s\"\n",
+					code[j], argv[i]);
 				perror("error");
 				errno = 0;
 			} else {

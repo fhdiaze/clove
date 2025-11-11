@@ -55,34 +55,35 @@ unsigned long sh_counted(int);
 #define SH_DOC "\t%s,\t%s"
 
 void sh_print(FILE *io, int sig, char const *filename, size_t line,
-              char const *string)
+	      char const *string)
 {
-	const char *doc = (sig < sh_known && sh_pairs[sig].name)
-	                      ? sh_pairs[sig].desc
-	                      : "unknown signal number";
+	const char *doc = (sig < sh_known && sh_pairs[sig].name) ?
+				  sh_pairs[sig].desc :
+				  "unknown signal number";
 	if (errno) {
 		const char *err = strerror(errno);
 		errno = 0;
 		if (!sig)
 			fprintf(io, SH_HEAD "\t%s:\t%s\n", filename, line,
-			        string, err);
+				string, err);
 		else if (sig < sh_known && sh_pairs[sig].name)
 			fprintf(io, SH_HEAD "%s" SH_COU SH_DOC ":\t%s\n",
-			        filename, line, sh_pairs[sig].name,
-			        sh_counted(sig), doc, string, err);
+				filename, line, sh_pairs[sig].name,
+				sh_counted(sig), doc, string, err);
 		else
 			fprintf(io, SH_HEAD "#%d" SH_COU SH_DOC ":\t%s\n",
-			        filename, line, sig, sh_counted(sig), doc,
-			        string, err);
+				filename, line, sig, sh_counted(sig), doc,
+				string, err);
 	} else {
-		if (!sig) fprintf(io, SH_HEAD "\t%s\n", filename, line, string);
+		if (!sig)
+			fprintf(io, SH_HEAD "\t%s\n", filename, line, string);
 		else if (sig < sh_known && sh_pairs[sig].name)
 			fprintf(io, SH_HEAD "%s" SH_COU SH_DOC "\n", filename,
-			        line, sh_pairs[sig].name, sh_counted(sig), doc,
-			        string);
+				line, sh_pairs[sig].name, sh_counted(sig), doc,
+				string);
 		else
 			fprintf(io, SH_HEAD "#%d" SH_COU SH_DOC "\n", filename,
-			        line, sig, sh_counted(sig), doc, string);
+				line, sig, sh_counted(sig), doc, string);
 	}
 }
 

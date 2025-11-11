@@ -4,12 +4,12 @@ static_assert('Z' - 'A' == 25, "uppercase leters are not contiguous")
 
 #include <ctype.h>
 
-    /* Converts an alphanumeric digit to an unsigned */
-    /* ’0’ ... ’9’ => 0 .. 9u */
-    /* ’A’ ... ’Z’ => 10 .. 35u */
-    /* ’a’ ... ’z’ => 10 .. 35u */
-    /* Other values => Greater */
-    unsigned hexatridecimal(int a)
+	/* Converts an alphanumeric digit to an unsigned */
+	/* ’0’ ... ’9’ => 0 .. 9u */
+	/* ’A’ ... ’Z’ => 10 .. 35u */
+	/* ’a’ ... ’z’ => 10 .. 35u */
+	/* Other values => Greater */
+	unsigned hexatridecimal(int a)
 {
 	if (isdigit(a)) {
 		/* This is guaranteed to work: decimal digits

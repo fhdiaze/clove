@@ -59,7 +59,8 @@ static bool termin_read_csi(size_t len, char command[len])
 	for (char *p = command, *stop = command + len - 1; p < stop; ++p) {
 		int c = getchar();
 		// catch all: EOF, 0, control characters
-		if (c < ' ') return false;
+		if (c < ' ')
+			return false;
 		p[0] = c;
 		if ('@' <= c && c <= '~') {
 			p[1] = 0;

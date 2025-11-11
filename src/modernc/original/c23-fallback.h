@@ -117,7 +117,7 @@
 #if (__STDC_UTF_16__ != 1) || (__STDC_UTF_32__ != 1)
 #ifndef C23_FALLBACK_SILENT
 #warning \
-    "C23 imposes that char16_t and char32_t use UTF-16 and UTF-32 encodings"
+	"C23 imposes that char16_t and char32_t use UTF-16 and UTF-32 encodings"
 #endif
 #endif
 
@@ -239,10 +239,10 @@
 // The feature for fixed underlying types for enums has been so long
 // in clang, that they don't even seem to have a feature test for it.
 #if !__has_feature(c_fixed_enum) && defined(__clang_major__) && \
-    (__clang_major__ < 8)
+	(__clang_major__ < 8)
 #ifndef C23_FALLBACK_SILENT
 #warning \
-    "syntax for fixed underlying integer type of enumerations is not supported"
+	"syntax for fixed underlying integer type of enumerations is not supported"
 #endif
 #endif
 
@@ -339,36 +339,37 @@ typedef typeof(nullptr) nullptr_t;
 
 #ifndef C23_FALLBACK_SILENT
 #warning \
-    "using fallback for nullptr to enumeration constant based on _BitInt type"
+	"using fallback for nullptr to enumeration constant based on _BitInt type"
 #else
 #pragma GCC diagnostic ignored "-Wnon-literal-null-conversion"
 #endif
 
 enum
 #if __has_c_attribute(clang::enum_extensibility)
-    [[__clang__::__enum_extensibility__(closed)]]
+	[[__clang__::__enum_extensibility__(closed)]]
 #endif
-    nullptr_t : __typeof__((unsigned _BitInt(sizeof(void *) * CHAR_BIT))0) {
-	    nullptr,
-    };
+	nullptr_t : __typeof__((unsigned _BitInt(sizeof(void *) * CHAR_BIT))0) {
+		nullptr,
+	};
 
 #else
 
 #ifndef C23_FALLBACK_SILENT
 #warning \
-    "using fallback for nullptr to enumeration constant based on standard integer type"
+	"using fallback for nullptr to enumeration constant based on standard integer type"
 #endif
 
 enum
 #if __has_c_attribute(clang::enum_extensibility)
-    [[__clang__::__enum_extensibility__(closed)]]
+	[[__clang__::__enum_extensibility__(closed)]]
 #endif
-    nullptr_t {
-	    nullptr,
-	    __nullptr_max = GENERIC_IF(
-		(sizeof(void *) == sizeof(int)), -1U,
-		GENERIC_IF((sizeof(void *) == sizeof(long)), -1UL, -1ULL)),
-    };
+	nullptr_t {
+		nullptr,
+		__nullptr_max =
+			GENERIC_IF((sizeof(void *) == sizeof(int)), -1U,
+				   GENERIC_IF((sizeof(void *) == sizeof(long)),
+					      -1UL, -1ULL)),
+	};
 
 // Unfortunately such an enumeration type is not yet good enough for
 // all compilers. In particular some gcc version has nullptr and
@@ -437,7 +438,7 @@ static inline void call_once(once_flag *flag, void callback(void))
 	if (*flag != once_final) {
 		unsigned expected = once_initial;
 		if (atomic_compare_exchange_strong(flag, &expected,
-		                                   once_inter)) {
+						   once_inter)) {
 			callback();
 			*flag = once_final;
 		} else {
@@ -472,7 +473,7 @@ static inline void call_once(once_flag *flag, void callback(void))
 #if __has_c_attribute(__gnu__::__const__)
 #ifndef C23_FALLBACK_SILENT
 #warning \
-    "unsequenced attribute could be emulated via gnu attribute by using c23_unsequenced"
+	"unsequenced attribute could be emulated via gnu attribute by using c23_unsequenced"
 #endif
 #define c23_unsequenced __attribute__((__const__))
 #endif
@@ -486,14 +487,14 @@ static inline void call_once(once_flag *flag, void callback(void))
 #if __has_c_attribute(__gnu__::__pure__)
 #ifndef C23_FALLBACK_SILENT
 #warning \
-    "reproducible attribute could be emulated via gnu attribute by using c23_reproducible"
+	"reproducible attribute could be emulated via gnu attribute by using c23_reproducible"
 #endif
 #define c23_reproducible __attribute__((__pure__))
 #endif
 #endif
 
 #if !__has_c_attribute(__deprecated__) && \
-    __has_c_attribute(__gnu__::__deprecated__)
+	__has_c_attribute(__gnu__::__deprecated__)
 #ifndef C23_FALLBACK_SILENT
 #warning "emulating deprecated attribute via gnu attribute"
 #endif
@@ -501,7 +502,7 @@ static inline void call_once(once_flag *flag, void callback(void))
 #endif
 
 #if !__has_c_attribute(__nodiscard__) && \
-    __has_c_attribute(__gnu__::__warn_unused_result__)
+	__has_c_attribute(__gnu__::__warn_unused_result__)
 #ifndef C23_FALLBACK_SILENT
 #warning "emulating nodiscard attribute via gnu attribute"
 #endif
@@ -509,7 +510,7 @@ static inline void call_once(once_flag *flag, void callback(void))
 #endif
 
 #if !__has_c_attribute(__maybe_unused__) && \
-    __has_c_attribute(__gnu__::__unused__)
+	__has_c_attribute(__gnu__::__unused__)
 #ifndef C23_FALLBACK_SILENT
 #warning "emulating maybe_unused attribute via gnu attribute"
 #endif
@@ -524,7 +525,7 @@ static inline void call_once(once_flag *flag, void callback(void))
 #endif
 
 #if !__has_c_attribute(__fallthrough__) && \
-    __has_c_attribute(__gnu__::__fallthrough__)
+	__has_c_attribute(__gnu__::__fallthrough__)
 #warning "emulating fallthrough attribute via gnu attribute"
 #define __fallthrough__ __gnu__::__fallthrough__
 #endif
@@ -544,7 +545,7 @@ static inline void call_once(once_flag *flag, void callback(void))
 // development, yet. But we suppose that there will be at least a
 // partial solution in clang-18 final.
 #if __has_c_attribute(__gnu__::__malloc__) && \
-    !(defined(__clang_major__) && __clang_major__ <= 19)
+	!(defined(__clang_major__) && __clang_major__ <= 19)
 #define __gnu_free__(...) __gnu__::__malloc__(__VA_ARGS__)
 #else
 #define __gnu_free__(...)
@@ -774,7 +775,7 @@ are on a compiler claiming compatibility with gcc. */
 #if defined(__clang_major__) && (__clang_major__ < 18)
 #ifndef C23_FALLBACK_SILENT
 #warning \
-    "not using compiler intrinsic for int128_t, please upgrade to clang version ≥ 18"
+	"not using compiler intrinsic for int128_t, please upgrade to clang version ≥ 18"
 #endif
 #else
 #define __has_int128
@@ -787,7 +788,7 @@ are on a compiler claiming compatibility with gcc. */
 #if defined(__clang_major__) && (__clang_major__ < 18)
 #ifndef C23_FALLBACK_SILENT
 #warning \
-    "not using compiler intrinsic for int256_t, please upgrade to clang version ≥ 18"
+	"not using compiler intrinsic for int256_t, please upgrade to clang version ≥ 18"
 #endif
 #else
 #define __has_int256
@@ -836,13 +837,13 @@ typedef unsigned __int256 uint256_t;
 #if __STDC_VERSION_INTTYPES_H__ < 202311L
 #ifndef C23_FALLBACK_SILENT
 #warning \
-    "native C23 library support for %b printf or scanf formats may be missing"
+	"native C23 library support for %b printf or scanf formats may be missing"
 #endif
 #ifndef PRIb32
 #if __GLIBC__ > 1 && defined(__PRI64_PREFIX)
 #ifndef C23_FALLBACK_SILENT
 #warning \
-    "no C23 support for %b printf formats found, emulating with glibc features"
+	"no C23 support for %b printf formats found, emulating with glibc features"
 #endif
 #define PRIB16 "B"
 #define PRIB32 "B"
@@ -919,8 +920,8 @@ union _C23_complex {
 // unfortunately.
 static const _C23_complex _C23_I = {
 	{
-	    0.0F,
-	    1.0F,
+		0.0F,
+		1.0F,
 	},
 };
 #define _COMPLEX_I (_C23_I._C23_c)
@@ -960,28 +961,28 @@ static const _C23_complex _C23_I = {
 #define _C23_Decimal128_CASE
 #endif
 
-#define isdecimalfloating(...)                       \
-	(_Generic((__VA_ARGS__) + 0,                 \
-	     _C23_Decimal32_CASE _C23_Decimal64_CASE \
-	         _C23_Decimal128_CASE default: false))
+#define isdecimalfloating(...)                           \
+	(_Generic((__VA_ARGS__) + 0,                     \
+		 _C23_Decimal32_CASE _C23_Decimal64_CASE \
+			 _C23_Decimal128_CASE default: false))
 #ifndef iscomplex
-#define iscomplex(...)                                        \
-	(_Generic((__VA_ARGS__) + 0,                          \
-	     _C23_float_Complex_CASE _C23_double_Complex_CASE \
-	         _C23_long_double_Complex_CASE default: false))
+#define iscomplex(...)                                            \
+	(_Generic((__VA_ARGS__) + 0,                              \
+		 _C23_float_Complex_CASE _C23_double_Complex_CASE \
+			 _C23_long_double_Complex_CASE default: false))
 #endif
 #define isstandardrealfloating(...)  \
 	(_Generic((__VA_ARGS__) + 0, \
-	     float: true,            \
-	     double: true,           \
-	     long double: true,      \
-	     default: false))
+		 float: true,        \
+		 double: true,       \
+		 long double: true,  \
+		 default: false))
 #define isstandardfloating(...) \
 	((bool)(isstandardrealfloating(__VA_ARGS__) || iscomplex(__VA_ARGS__)))
 #ifndef isfloating
 #define isfloating(...)                            \
 	((bool)(isstandardfloating(__VA_ARGS__) || \
-	        isdecimalfloating(__VA_ARGS__)))
+		isdecimalfloating(__VA_ARGS__)))
 #endif
 
 /**********************************************************************************************/
@@ -1009,16 +1010,16 @@ static const _C23_complex _C23_I = {
 #ifndef is_const_target
 #define is_const_target(...)                       \
 	(_Generic((1 ? (__VA_ARGS__) : (void *)1), \
-	     void const *: true,                   \
-	     void const volatile *: true,          \
-	     default: false))
+		 void const *: true,               \
+		 void const volatile *: true,      \
+		 default: false))
 #endif
 #ifndef is_volatile_target
 #define is_volatile_target(...)                    \
 	(_Generic((1 ? (__VA_ARGS__) : (void *)1), \
-	     void volatile *: true,                \
-	     void const volatile *: true,          \
-	     default: false))
+		 void volatile *: true,            \
+		 void const volatile *: true,      \
+		 default: false))
 #endif
 #ifndef is_const
 #define is_const(...) is_const_target(&(typeof(__VA_ARGS__)){ 0 })
@@ -1028,11 +1029,11 @@ static const _C23_complex _C23_I = {
 #endif
 #ifndef is_null_pointer_constant
 struct do_not_use_this_otherwise;
-#define is_null_pointer_constant(...)                              \
-	(_Generic((1 ? (struct do_not_use_this_otherwise *)nullptr \
-	             : (__VA_ARGS__)),                             \
-	     struct do_not_use_this_otherwise *: true,             \
-	     default: false))
+#define is_null_pointer_constant(...)                                \
+	(_Generic((1 ? (struct do_not_use_this_otherwise *)nullptr : \
+		       (__VA_ARGS__)),                               \
+		 struct do_not_use_this_otherwise *: true,           \
+		 default: false))
 #endif
 #ifndef is_zero_ice
 #define is_zero_ice(...) \
@@ -1044,12 +1045,12 @@ struct do_not_use_this_otherwise;
 #ifndef issigned
 #define issigned(...)                                   \
 	((bool)(is_potentially_negative(__VA_ARGS__) && \
-	        isinteger(__VA_ARGS__) && !iscompatible(__VA_ARGS__, char)))
+		isinteger(__VA_ARGS__) && !iscompatible(__VA_ARGS__, char)))
 #endif
 #ifndef isunsigned
 #define isunsigned(...)                                  \
 	((bool)(!is_potentially_negative(__VA_ARGS__) && \
-	        isinteger(__VA_ARGS__) && !iscompatible(__VA_ARGS__, char)))
+		isinteger(__VA_ARGS__) && !iscompatible(__VA_ARGS__, char)))
 #endif
 #ifndef isice
 #define isice(...) is_zero_ice(!((__VA_ARGS__) || 1))
@@ -1060,8 +1061,8 @@ struct do_not_use_this_otherwise;
 #ifndef isxwide
 #define isxwide(...)                                                     \
 	((bool)(isinteger(__VA_ARGS__) && _Generic((__VA_ARGS__) + 0ULL, \
-	            unsigned long long: false,                           \
-	            default: true)))
+			unsigned long long: false,                       \
+			default: true)))
 #endif
 
 #ifndef is_pointer
@@ -1070,15 +1071,15 @@ struct do_not_use_this_otherwise {
 };
 #define get_fla(...)                   \
 	GENERIC_IF(isvla(__VA_ARGS__), \
-	           (struct do_not_use_this_otherwise[1]){ 0 }, (__VA_ARGS__))
-#define is_pointer_nvla(...)                            \
-	(_Generic((typeof(__VA_ARGS__) *)0,             \
-	     typeof(get_fla(*(__VA_ARGS__))) * *: true, \
-	     default: false))
-#define is_pointer_vla(...)                                       \
-	(_Generic((typeof(get_fla(*(__VA_ARGS__))) *)0,           \
-	     typeof(struct do_not_use_this_otherwise[1]) *: true, \
-	     default: false))
+		   (struct do_not_use_this_otherwise[1]){ 0 }, (__VA_ARGS__))
+#define is_pointer_nvla(...)                                \
+	(_Generic((typeof(__VA_ARGS__) *)0,                 \
+		 typeof(get_fla(*(__VA_ARGS__))) * *: true, \
+		 default: false))
+#define is_pointer_vla(...)                                           \
+	(_Generic((typeof(get_fla(*(__VA_ARGS__))) *)0,               \
+		 typeof(struct do_not_use_this_otherwise[1]) *: true, \
+		 default: false))
 #define is_pointer(...) \
 	((bool)(is_pointer_nvla(__VA_ARGS__) || is_pointer_vla(__VA_ARGS__)))
 #endif
@@ -1092,8 +1093,8 @@ struct do_not_use_this_otherwise {
 #ifndef is_void_pointer
 #define is_void_pointer(...)                                       \
 	_Generic((typeof(*(__VA_ARGS__)) const volatile *)nullptr, \
-	    void const volatile *: true,                           \
-	    default: false)
+		void const volatile *: true,                       \
+		default: false)
 #endif
 
 /**********************************************************************************************/
@@ -1169,7 +1170,7 @@ struct do_not_use_this_otherwise {
 #ifndef bsearch
 #define bsearch(KEY, BASE, NMEMB, SIZE, COMPAR)                          \
 	((typeof(1 ? (BASE) : (void *)1))bsearch((KEY), (BASE), (NMEMB), \
-	                                         (SIZE), (COMPAR)))
+						 (SIZE), (COMPAR)))
 #endif
 
 #endif
@@ -1235,48 +1236,50 @@ generic_value_type stdc_bit_ceil(generic_value_type value);
   will just be a zero of the same type.
  */
 
-#define shift_xright(...)                                                 \
-	GENERIC_IF(isxwide(__VA_ARGS__),                                  \
-	           (__VA_ARGS__) >>                                       \
-	               GENERIC_IF(isxwide(__VA_ARGS__), ULLONG_WIDTH, 0), \
-	           tozero(__VA_ARGS__))
+#define shift_xright(...)                                                     \
+	GENERIC_IF(isxwide(__VA_ARGS__),                                      \
+		   (__VA_ARGS__) >>                                           \
+			   GENERIC_IF(isxwide(__VA_ARGS__), ULLONG_WIDTH, 0), \
+		   tozero(__VA_ARGS__))
 
 #ifndef stdc_count_ones
 #ifdef __GNUC__
 
-#define stdc_trailing_zeros(...)                                               \
-	({                                                                     \
-		auto s_t_z_x = (__VA_ARGS__);                                  \
-		static_assert(isunsigned(s_t_z_x),                             \
-		              "bit operation needs unsigned type");            \
-		(s_t_z_x)                                                      \
-		    ? _Generic((s_t_z_x),                                      \
-		        bool: __builtin_ctz((unsigned)s_t_z_x),                \
-		        unsigned char: __builtin_ctz((unsigned)s_t_z_x),       \
-		        unsigned short: __builtin_ctz((unsigned)s_t_z_x),      \
-		        unsigned: __builtin_ctz(s_t_z_x),                      \
-		        unsigned long: __builtin_ctzl(s_t_z_x),                \
-		        unsigned long long: __builtin_ctzll(s_t_z_x),          \
-		        default: ({                                            \
-				       size_t s_t_z_ret = 0;                   \
-				       while (s_t_z_x) {                       \
-					       unsigned long long s_t_z_z =    \
-						   s_t_z_x;                    \
-					       if (s_t_z_z) {                  \
-						       s_t_z_ret +=            \
-							   __builtin_ctzll(    \
-							       s_t_z_z);       \
-						       s_t_z_x = 0;            \
-					       } else {                        \
-						       s_t_z_ret +=            \
-							   ULLONG_WIDTH;       \
-						       s_t_z_x = shift_xright( \
-							   s_t_z_x);           \
-					       }                               \
-				       }                                       \
-				       s_t_z_ret;                              \
-			       }))                                             \
-		    : stdc_count_ones(tominusone(s_t_z_x));                    \
+#define stdc_trailing_zeros(...)                                                   \
+	({                                                                         \
+		auto s_t_z_x = (__VA_ARGS__);                                      \
+		static_assert(isunsigned(s_t_z_x),                                 \
+			      "bit operation needs unsigned type");                \
+		(s_t_z_x) ?                                                        \
+			_Generic((s_t_z_x),                                        \
+				bool: __builtin_ctz((unsigned)s_t_z_x),            \
+				unsigned char: __builtin_ctz(                      \
+					 (unsigned)s_t_z_x),                       \
+				unsigned short: __builtin_ctz(                     \
+					 (unsigned)s_t_z_x),                       \
+				unsigned: __builtin_ctz(s_t_z_x),                  \
+				unsigned long: __builtin_ctzl(s_t_z_x),            \
+				unsigned long long: __builtin_ctzll(s_t_z_x),      \
+				default: ({                                        \
+					 size_t s_t_z_ret = 0;                     \
+					 while (s_t_z_x) {                         \
+						 unsigned long long s_t_z_z =      \
+							 s_t_z_x;                  \
+						 if (s_t_z_z) {                    \
+							 s_t_z_ret +=              \
+								 __builtin_ctzll(  \
+									 s_t_z_z); \
+							 s_t_z_x = 0;              \
+						 } else {                          \
+							 s_t_z_ret +=              \
+								 ULLONG_WIDTH;     \
+							 s_t_z_x = shift_xright(   \
+								 s_t_z_x);         \
+						 }                                 \
+					 }                                         \
+					 s_t_z_ret;                                \
+				 })) :                                             \
+			stdc_count_ones(tominusone(s_t_z_x));                      \
 	})
 
 /* This counts the least significant 1-bits of the specific type of the
@@ -1286,44 +1289,56 @@ generic_value_type stdc_bit_ceil(generic_value_type value);
 #define stdc_trailing_ones(...) \
 	stdc_trailing_zeros((typeof(__VA_ARGS__))~(__VA_ARGS__))
 
-#define stdc_leading_zeros(...)                                                \
-	({                                                                     \
-		auto s_l_o_x = (__VA_ARGS__);                                  \
-		static_assert(isunsigned(s_l_o_x),                             \
-		              "bit operation needs unsigned type");            \
-		(s_l_o_x) ? _Generic((s_l_o_x),                                \
-		        unsigned char: __builtin_clz((unsigned)s_l_o_x) -      \
-		            __builtin_clz((unsigned)tominusone(s_l_o_x)),      \
-		        unsigned short: __builtin_clz((unsigned)s_l_o_x) -     \
-		            __builtin_clz((unsigned)tominusone(s_l_o_x)),      \
-		        unsigned: __builtin_clz(s_l_o_x),                      \
-		        unsigned long: __builtin_clzl(s_l_o_x),                \
-		        unsigned long long: __builtin_clzll(s_l_o_x),          \
-		        default: ((!isxwide(s_l_o_x)) /* Should only trigger   \
-		                                         for _BitInt types. */ \
-		                      ? (__builtin_clzll(s_l_o_x) -            \
-		                         __builtin_clzll(tominusone(           \
-					     s_l_o_x))) /* determine the long  \
+#define stdc_leading_zeros(...)                                                              \
+	({                                                                                   \
+		auto s_l_o_x = (__VA_ARGS__);                                                \
+		static_assert(isunsigned(s_l_o_x),                                           \
+			      "bit operation needs unsigned type");                          \
+		(s_l_o_x) ?                                                                  \
+			_Generic(                                                            \
+				(s_l_o_x),                                                   \
+				unsigned char: __builtin_clz(                                \
+					(unsigned)s_l_o_x) -                                 \
+					__builtin_clz((unsigned)tominusone(                  \
+						s_l_o_x)),                                   \
+				unsigned short: __builtin_clz(                               \
+					(unsigned)s_l_o_x) -                                 \
+					__builtin_clz((unsigned)tominusone(                  \
+						s_l_o_x)),                                   \
+				unsigned: __builtin_clz(s_l_o_x),                            \
+				unsigned long: __builtin_clzl(s_l_o_x),                      \
+				unsigned long long: __builtin_clzll(s_l_o_x),                \
+				default: (                                                   \
+					(!isxwide(                                           \
+						s_l_o_x)) /* Should only trigger   \
+		                                         for _BitInt types. */         \
+						?                                            \
+						(__builtin_clzll(s_l_o_x) -                  \
+						 __builtin_clzll(tominusone(                 \
+							 s_l_o_x))) /* determine the long  \
 		               long word with                                  \
-		               highest 1-bit . */                              \
-		                      : ({                                     \
-						size_t s_l_o_w =               \
-						    stdc_count_ones(           \
-							tominusone(s_l_o_x)) - \
-						    ULLONG_WIDTH;              \
-						while ((s_l_o_x + 0UL) >       \
-			                               ULLONG_MAX) {           \
-							s_l_o_x =              \
-							    shift_xright(      \
-								s_l_o_x);      \
-							s_l_o_w -=             \
-							    ULLONG_WIDTH;      \
-						}                              \
-						__builtin_clzll(s_l_o_x) +     \
-						    s_l_o_w;                   \
-					}))) /* This should resolve to a       \
-		        compile time constant. */                              \
-			  : stdc_count_ones(tominusone(s_l_o_x));              \
+		               highest 1-bit . */ \
+						:                                            \
+						({                                           \
+							size_t s_l_o_w =                     \
+								stdc_count_ones(tominusone(  \
+									s_l_o_x)) -          \
+								ULLONG_WIDTH;                \
+							while ((s_l_o_x +                    \
+								0UL) >                       \
+							       ULLONG_MAX) {                 \
+								s_l_o_x = shift_xright(      \
+									s_l_o_x);            \
+								s_l_o_w -=                   \
+									ULLONG_WIDTH;        \
+							}                                    \
+							__builtin_clzll(                     \
+								s_l_o_x) +                   \
+								s_l_o_w;                     \
+						}))) /* This should resolve to a       \
+		        compile time constant. */     \
+			:                                                                    \
+			stdc_count_ones(tominusone(s_l_o_x));                                \
 	})
 
 /* This counts the most significant 1-bits of the specific type of the
@@ -1333,26 +1348,27 @@ generic_value_type stdc_bit_ceil(generic_value_type value);
 #define stdc_leading_ones(...) \
 	stdc_leading_zeros((typeof(__VA_ARGS__))~(__VA_ARGS__))
 
-#define stdc_count_ones(...)                                                  \
-	_Generic((__VA_ARGS__),                                               \
-	    bool: __builtin_popcount((unsigned)(__VA_ARGS__)),                \
-	    unsigned char: __builtin_popcount((unsigned)(__VA_ARGS__)),       \
-	    unsigned short: __builtin_popcount((unsigned)(__VA_ARGS__)),      \
-	    unsigned: __builtin_popcount((unsigned)(__VA_ARGS__)),            \
-	    unsigned long: __builtin_popcountl((unsigned long)(__VA_ARGS__)), \
-	    unsigned long long: __builtin_popcountll(                         \
-		     (unsigned long long)(__VA_ARGS__)),                      \
-	    default: ({                                                       \
-			 auto s_c_o_x = (__VA_ARGS__);                        \
-			 static_assert(isunsigned(s_c_o_x),                   \
-		                       "bit operation needs unsigned type");  \
-			 size_t s_c_o_ret = 0;                                \
-			 while (s_c_o_x) {                                    \
-				 s_c_o_ret += __builtin_popcountll(           \
-				     (unsigned long long)s_c_o_x);            \
-				 s_c_o_x = shift_xright(s_c_o_x);             \
-			 }                                                    \
-			 s_c_o_ret;                                           \
+#define stdc_count_ones(...)                                                 \
+	_Generic((__VA_ARGS__),                                              \
+		bool: __builtin_popcount((unsigned)(__VA_ARGS__)),           \
+		unsigned char: __builtin_popcount((unsigned)(__VA_ARGS__)),  \
+		unsigned short: __builtin_popcount((unsigned)(__VA_ARGS__)), \
+		unsigned: __builtin_popcount((unsigned)(__VA_ARGS__)),       \
+		unsigned long: __builtin_popcountl(                          \
+			 (unsigned long)(__VA_ARGS__)),                      \
+		unsigned long long: __builtin_popcountll(                    \
+			 (unsigned long long)(__VA_ARGS__)),                 \
+		default: ({                                                  \
+			 auto s_c_o_x = (__VA_ARGS__);                       \
+			 static_assert(isunsigned(s_c_o_x),                  \
+				       "bit operation needs unsigned type"); \
+			 size_t s_c_o_ret = 0;                               \
+			 while (s_c_o_x) {                                   \
+				 s_c_o_ret += __builtin_popcountll(          \
+					 (unsigned long long)s_c_o_x);       \
+				 s_c_o_x = shift_xright(s_c_o_x);            \
+			 }                                                   \
+			 s_c_o_ret;                                          \
 		 }))
 
 /* This counts the 0-bits of the specific type of the
@@ -1366,7 +1382,7 @@ generic_value_type stdc_bit_ceil(generic_value_type value);
 	({                                                                    \
 		auto s_h_s_b_x = (__VA_ARGS__);                               \
 		static_assert(isunsigned(s_h_s_b_x),                          \
-		              "bit operation needs unsigned type");           \
+			      "bit operation needs unsigned type");           \
 		(bool)(s_h_s_b_x &&                                           \
 		       !((s_h_s_b_x != 1) && (s_h_s_b_x & (s_h_s_b_x - 1)))); \
 	})
@@ -1375,19 +1391,19 @@ generic_value_type stdc_bit_ceil(generic_value_type value);
 	({                                                          \
 		auto s_b_w_x = (__VA_ARGS__);                       \
 		static_assert(isunsigned(s_b_w_x),                  \
-		              "bit operation needs unsigned type"); \
+			      "bit operation needs unsigned type"); \
 		stdc_count_ones(tominusone(s_b_w_x)) -              \
-		    stdc_leading_zeros(s_b_w_x);                    \
+			stdc_leading_zeros(s_b_w_x);                \
 	})
 
-#define stdc_bit_floor(...)                                              \
-	({                                                               \
-		auto s_b_f_x = (__VA_ARGS__);                            \
-		static_assert(isunsigned(s_b_f_x),                       \
-		              "bit operation needs unsigned type");      \
-		(!s_b_f_x)                                               \
-		    ? 0                                                  \
-		    : (toone(s_b_f_x) << (stdc_bit_width(s_b_f_x) - 1)); \
+#define stdc_bit_floor(...)                                                \
+	({                                                                 \
+		auto s_b_f_x = (__VA_ARGS__);                              \
+		static_assert(isunsigned(s_b_f_x),                         \
+			      "bit operation needs unsigned type");        \
+		(!s_b_f_x) ?                                               \
+			0 :                                                \
+			(toone(s_b_f_x) << (stdc_bit_width(s_b_f_x) - 1)); \
 	})
 
 #define stdc_bit_ceil(...) (toone(__VA_ARGS__) << stdc_bit_width(__VA_ARGS__))

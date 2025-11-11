@@ -3,7 +3,10 @@
 #include <stdlib.h>
 
 extern int logger_verbose(const char *, ...);
-static int logger_ignore(const char *, ...) { return 0; }
+static int logger_ignore(const char *, ...)
+{
+	return 0;
+}
 logger_function *logger = logger_ignore;
 [[__maybe_unused__]] static logger_function *loggers[] = {
 	[log_pri] = printf,

@@ -8,11 +8,13 @@ int main(int argc, char *argv[])
 	circular *c = circular_new(len);
 	circular_fput(c, stderr);
 	for (size_t i = 0; i < len - 1; ++i) {
-		if (!circular_append(c, i)) break;
+		if (!circular_append(c, i))
+			break;
 	}
 	circular_fput(c, stderr);
 	for (size_t i = 0; i < len / 2; ++i) {
-		if (!circular_append(c, circular_pop(c))) break;
+		if (!circular_append(c, circular_pop(c)))
+			break;
 	}
 	circular_fput(c, stderr);
 	c = circular_resize(c, 2 * len);

@@ -12,10 +12,11 @@ AGAIN:
 		       (q == p) ? "equal" : "unequal", *p);
 	q = p;
 	p = &((unsigned){
-	    j,
+		j,
 	}); /*@\label{lifetime_compound_literal}*/
 	++j;
-	if (j <= n) goto AGAIN;
+	if (j <= n)
+		goto AGAIN;
 }
 
 void fgotoblock(unsigned n)
@@ -24,16 +25,17 @@ void fgotoblock(unsigned n)
 	unsigned *p = nullptr;
 	unsigned *q;
 AGAIN: // Using a compound statement creates a new object at each iteration.
-{      // A good modern compiler should complain that it is uninitialized.
+{ // A good modern compiler should complain that it is uninitialized.
 	if (p)
 		printf("%u: p and q are %s, *p is %u\n", j,
 		       (q == p) ? "equal" : "unequal", *p);
 	q = p;
 	p = &((unsigned){
-	    j,
+		j,
 	});
 	++j;
-	if (j <= n) goto AGAIN;
+	if (j <= n)
+		goto AGAIN;
 }
 }
 
@@ -80,7 +82,8 @@ AGAIN: {
 		VLA[i] = j;
 	p = VLA;
 	++j;
-	if (j <= n) goto AGAIN;
+	if (j <= n)
+		goto AGAIN;
 }
 }
 

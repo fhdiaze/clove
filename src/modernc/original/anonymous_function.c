@@ -47,8 +47,10 @@
 
 #define MAXU(A, B)                                       \
 	ANONYMOUS(uintmax_t)(uintmax_t a, uintmax_t b)({ \
-		if (a < b) return b;                     \
-		else return a;                           \
+		if (a < b)                               \
+			return b;                        \
+		else                                     \
+			return a;                        \
 	})((A), (B))
 
 #define MAX(A, B)                                              \
@@ -57,11 +59,13 @@
 	ANONYMOUS(__typeof__(1 ? (A) : (B)))                   \
 	/*and then argument list */                            \
 	(__typeof__(A) a, __typeof__(B) b) /* function body */ \
-	    ({                                                 \
-		    if (a < b) return b;                       \
-		    else return a;                             \
-	    }) /* function call */                             \
-	    ((A), (B))
+		({                                             \
+			if (a < b)                             \
+				return b;                      \
+			else                                   \
+				return a;                      \
+		}) /* function call */                         \
+		((A), (B))
 
 /**
  ** Test to see if that even works when such functions are nested.
@@ -78,10 +82,15 @@ void g(unsigned level, unsigned depth)
 		       depth, MAX(2 * a, depth));
 		return;
 	});
-	if (level) g(level - 1, depth + 1);
+	if (level)
+		g(level - 1, depth + 1);
 	else
 		for (unsigned i = 0; i < 5; ++i)
-			if (Df[i]) Df[i](i);
+			if (Df[i])
+				Df[i](i);
 }
 
-int main(int argc, [[maybe_unused]] char *argv[]) { g(argc, 0); }
+int main(int argc, [[maybe_unused]] char *argv[])
+{
+	g(argc, 0);
+}

@@ -46,13 +46,16 @@ static int update_thread(void *Lv)
 			life_wait(&L->upda, &L->mtx);
 
 		// VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV
-		if (birth9 != L->birth9) life_torus(L);
+		if (birth9 != L->birth9)
+			life_torus(L);
 		life_count(L);
 		changed = life_update(L);
 		life_torus(L);
 		birth9 = L->birth9;
-		if (L->iteration != SIZE_MAX) L->iteration++;
-		else L->finished = true;
+		if (L->iteration != SIZE_MAX)
+			L->iteration++;
+		else
+			L->finished = true;
 		// ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 		cnd_signal(&L->acco);
@@ -82,8 +85,10 @@ static int draw_thread(void *Lv)
 			life_wait(&L->draw, &L->mtx);
 
 		// VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV
-		if (L->n0 <= 30) life_draw(L);
-		else life_draw4(L);
+		if (L->n0 <= 30)
+			life_draw(L);
+		else
+			life_draw4(L);
 		L->drawn++;
 		// ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -158,10 +163,12 @@ static int input_thread(void *Lv)
 			       stdin);
 			continue;
 		case '+':
-			if (L->frames < 128) L->frames++;
+			if (L->frames < 128)
+				L->frames++;
 			continue;
 		case '-':
-			if (L->frames > 1) L->frames--;
+			if (L->frames > 1)
+				L->frames--;
 			continue;
 		case ' ':
 		case 'b':
@@ -200,61 +207,61 @@ bool M[n][m] = {
 	  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 1, 0, 0, 0 },
 	{ 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0 },
 	{
-	    0,
-	    0,
-	    0,
-	    0,
-	    1,
-	    0,
-	    1,
-	    0,
-	    1,
-	    0,
-	    0,
-	    0,
-	    1,
-	    0,
-	    0,
-	    0,
-	    1,
+		0,
+		0,
+		0,
+		0,
+		1,
+		0,
+		1,
+		0,
+		1,
+		0,
+		0,
+		0,
+		1,
+		0,
+		0,
+		0,
+		1,
 	},
 	{
-	    0,
-	    0,
-	    0,
-	    0,
-	    1,
-	    0,
-	    0,
-	    0,
-	    1,
-	    0,
-	    0,
-	    0,
-	    1,
-	    0,
-	    0,
-	    0,
-	    1,
+		0,
+		0,
+		0,
+		0,
+		1,
+		0,
+		0,
+		0,
+		1,
+		0,
+		0,
+		0,
+		1,
+		0,
+		0,
+		0,
+		1,
 	},
 	{
-	    0,
-	    0,
-	    0,
-	    0,
-	    1,
-	    1,
-	    1,
-	    1,
-	    1,
-	    0,
-	    0,
-	    0,
-	    1,
-	    0,
-	    0,
-	    0,
-	    1,
+		0,
+		0,
+		0,
+		0,
+		1,
+		1,
+		1,
+		1,
+		1,
+		0,
+		0,
+		0,
+		1,
+		0,
+		0,
+		0,
+		1,
 	},
 	{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0 },
 	{ 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0 },
@@ -293,8 +300,10 @@ int main(int argc, char *argv[argc + 1])
 	/* Uses command-line arguments for the size of the board */
 	size_t n0 = 30;
 	size_t n1 = 80;
-	if (argc > 1) n0 = strtoull(argv[1], nullptr, 0);
-	if (argc > 2) n1 = strtoull(argv[2], nullptr, 0);
+	if (argc > 1)
+		n0 = strtoull(argv[1], nullptr, 0);
+	if (argc > 2)
+		n1 = strtoull(argv[2], nullptr, 0);
 	/* Create an object that holds the game's data. */
 	life_init(&L, n0, n1, M);
 	atexit(B9_atexit);

@@ -17,13 +17,14 @@ size_t fib2(size_t n)
 		1,
 		1,
 	};
-	if (n > 2) fib2rec(n - 2, res);
+	if (n > 2)
+		fib2rec(n - 2, res);
 	return res[0];
 }
 
 int main(int argc, char *argv[argc + 1])
 {
-	for (int i = 1; i < argc; ++i) {                        // process args
+	for (int i = 1; i < argc; ++i) { // process args
 		const size_t n = strtoull(argv[i], nullptr, 0); // arg -> size_t
 		printf("fib(%zu) is %zu\n", n, fib2(n));
 	}

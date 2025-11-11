@@ -59,7 +59,8 @@ int main(int argc, [[maybe_unused]] char *argv[argc + 1])
 
 	const size_t Gi = (1ull << 30);
 	for (size_t step = 0; step < 10 * Gi; ++step) {
-		if (!(step % Gi)) printf("step %zu\n", step);
+		if (!(step % Gi))
+			printf("step %zu\n", step);
 		switch (received) {
 		case SIGINT:
 			fprintf(stderr, "\ryou called?\n");

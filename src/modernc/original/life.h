@@ -13,37 +13,37 @@ enum {
 
 typedef struct life life;
 struct life {
-	mtx_t mtx;  //< Mutex that protects Mv
+	mtx_t mtx; //< Mutex that protects Mv
 	cnd_t draw; //< cnd that controls drawing
 	cnd_t acco; //< cnd that controls accounting
 	cnd_t upda; //< cnd that controls updating
 
-	void *restrict Mv;           //< bool M[n0][n1];
+	void *restrict Mv; //< bool M[n0][n1];
 	bool (*visited)[life_maxit]; //< Hashing constellations
 
 	// A bunch of parameters that are not subject to change
-	size_t n0;         //< Number of rows
-	size_t n1;         //< Number of columns
-	size_t off0;       //< Start row
-	size_t len0;       //< Number of rows to be handled
-	size_t off1;       //< Start column
-	size_t len1;       //< Number of columns to be handled
+	size_t n0; //< Number of rows
+	size_t n1; //< Number of columns
+	size_t off0; //< Start row
+	size_t len0; //< Number of rows to be handled
+	size_t off1; //< Start column
+	size_t len1; //< Number of columns to be handled
 	void *restrict Bv; //< Unsigned char B[len0][len1];
 
 	// Parameters that are updated but that are protected by the mutex
 	size_t iteration; //< Current iteration
 	size_t accounted; //< Last accounted iteration
-	size_t drawn;     //< Last drawn iteration
-	size_t last;      //< Last iteration with new state
-	size_t birth9;    //< Number of birth9 calls
+	size_t drawn; //< Last drawn iteration
+	size_t last; //< Last iteration with new state
+	size_t birth9; //< Number of birth9 calls
 
 	// Parameters that will dynamically be changed by
 	// different threads
 	_Atomic(size_t) constellations; //< Constellations visited
-	_Atomic(size_t) x0;             //< Cursor position, row
-	_Atomic(size_t) x1;             //< Cursor position, column
-	_Atomic(size_t) frames;         //< FPS for display
-	_Atomic(bool) finished;         //< This game is finished.
+	_Atomic(size_t) x0; //< Cursor position, row
+	_Atomic(size_t) x1; //< Cursor position, column
+	_Atomic(size_t) frames; //< FPS for display
+	_Atomic(bool) finished; //< This game is finished.
 };
 
 inline void life_advance(life *L, signed t0, signed t1)

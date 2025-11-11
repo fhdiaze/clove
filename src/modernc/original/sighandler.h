@@ -50,7 +50,8 @@ extern _Atomic(unsigned long) sh_counts[];
  **/
 inline void sh_count(int sig)
 {
-	if (sig < sh_known) ++sh_counts[sig];
+	if (sig < sh_known)
+		++sh_counts[sig];
 }
 
 inline unsigned long sh_counted(int sig)
@@ -64,7 +65,10 @@ inline void sh_count(int sig)
 	// empty
 }
 
-inline unsigned long sh_counted(int sig) { return 0; }
+inline unsigned long sh_counted(int sig)
+{
+	return 0;
+}
 #endif
 
 /**
@@ -78,7 +82,7 @@ typedef void sh_handler(int);
  ** @see PRINT_SIG for a convenient user interface
  **/
 void sh_print(FILE *io, int sig, const char *filename, size_t line,
-              const char *string);
+	      const char *string);
 
 /**
  ** @brief Pretty-prints signal information

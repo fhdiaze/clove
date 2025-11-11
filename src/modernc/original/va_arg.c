@@ -46,10 +46,11 @@ int printf_debug(const char *format, ...)
 
 int main(int argc, char *argv[argc + 1])
 {
-	if (argc < 4) return EXIT_FAILURE;
+	if (argc < 4)
+		return EXIT_FAILURE;
 	iodebug = stderr;
 	printf_debug("%g\n",
-	             sumIt(3, strtod(argv[1], nullptr),
-	                   strtod(argv[2], nullptr), strtod(argv[3], nullptr)));
+		     sumIt(3, strtod(argv[1], nullptr),
+			   strtod(argv[2], nullptr), strtod(argv[3], nullptr)));
 	return EXIT_SUCCESS;
 }

@@ -105,24 +105,24 @@ enum {
 	esc_right = 8,
 };
 
-#define ESC_BORDER                                               \
-	((char const *const[]){                                  \
-	    [0] = " ",                                           \
-	    [esc_top] = "━",                                     \
-	    [esc_bottom] = "━",                                  \
-	    [esc_bottom | esc_top] = "━",                        \
-	    [esc_left] = "┃",                                    \
-	    [esc_left | esc_top] = "┏",                          \
-	    [esc_left | esc_bottom] = "┗",                       \
-	    [esc_left | esc_bottom | esc_top] = "┣",             \
-	    [esc_right] = "┃",                                   \
-	    [esc_right | esc_top] = "┓",                         \
-	    [esc_right | esc_bottom] = "┛",                      \
-	    [esc_right | esc_bottom | esc_top] = "┫",            \
-	    [esc_right | esc_left] = "┃",                        \
-	    [esc_right | esc_left | esc_top] = "┳",              \
-	    [esc_right | esc_left | esc_bottom] = "┻",           \
-	    [esc_right | esc_left | esc_bottom | esc_top] = "╋", \
+#define ESC_BORDER                                                   \
+	((char const *const[]){                                      \
+		[0] = " ",                                           \
+		[esc_top] = "━",                                     \
+		[esc_bottom] = "━",                                  \
+		[esc_bottom | esc_top] = "━",                        \
+		[esc_left] = "┃",                                    \
+		[esc_left | esc_top] = "┏",                          \
+		[esc_left | esc_bottom] = "┗",                       \
+		[esc_left | esc_bottom | esc_top] = "┣",             \
+		[esc_right] = "┃",                                   \
+		[esc_right | esc_top] = "┓",                         \
+		[esc_right | esc_bottom] = "┛",                      \
+		[esc_right | esc_bottom | esc_top] = "┫",            \
+		[esc_right | esc_left] = "┃",                        \
+		[esc_right | esc_left | esc_top] = "┳",              \
+		[esc_right | esc_left | esc_bottom] = "┻",           \
+		[esc_right | esc_left | esc_bottom | esc_top] = "╋", \
 	})
 
 enum {
@@ -132,24 +132,24 @@ enum {
 	esc_se = 8,
 };
 
-#define ESC_BLOCK                                      \
-	((char const *const[]){                        \
-	    [0] = " ",                                 \
-	    [esc_nw] = "▘",                            \
-	    [esc_ne] = "▝",                            \
-	    [esc_ne | esc_nw] = "▀",                   \
-	    [esc_sw] = "▖",                            \
-	    [esc_sw | esc_nw] = "▌",                   \
-	    [esc_sw | esc_ne] = "▞",                   \
-	    [esc_sw | esc_ne | esc_nw] = "▛",          \
-	    [esc_se] = "▗",                            \
-	    [esc_se | esc_nw] = "▚",                   \
-	    [esc_se | esc_ne] = "▐",                   \
-	    [esc_se | esc_ne | esc_nw] = "▜",          \
-	    [esc_se | esc_sw] = "▄",                   \
-	    [esc_se | esc_sw | esc_nw] = "▙",          \
-	    [esc_se | esc_sw | esc_ne] = "▟",          \
-	    [esc_se | esc_sw | esc_ne | esc_nw] = "█", \
+#define ESC_BLOCK                                          \
+	((char const *const[]){                            \
+		[0] = " ",                                 \
+		[esc_nw] = "▘",                            \
+		[esc_ne] = "▝",                            \
+		[esc_ne | esc_nw] = "▀",                   \
+		[esc_sw] = "▖",                            \
+		[esc_sw | esc_nw] = "▌",                   \
+		[esc_sw | esc_ne] = "▞",                   \
+		[esc_sw | esc_ne | esc_nw] = "▛",          \
+		[esc_se] = "▗",                            \
+		[esc_se | esc_nw] = "▚",                   \
+		[esc_se | esc_ne] = "▐",                   \
+		[esc_se | esc_ne | esc_nw] = "▜",          \
+		[esc_se | esc_sw] = "▄",                   \
+		[esc_se | esc_sw | esc_nw] = "▙",          \
+		[esc_se | esc_sw | esc_ne] = "▟",          \
+		[esc_se | esc_sw | esc_ne | esc_nw] = "█", \
 	})
 
 /**

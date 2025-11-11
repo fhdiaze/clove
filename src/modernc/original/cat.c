@@ -10,7 +10,7 @@ int main(int argc, char *argv[argc + 1])
 {
 	int ret = EXIT_FAILURE;
 	char buffer[buf_max] = {};
-	for (int i = 1; i < argc; ++i) {              // Processes args
+	for (int i = 1; i < argc; ++i) { // Processes args
 		FILE *instream = fopen(argv[i], "r"); // as filenames
 		if (instream) {
 			while (fgets(buffer, buf_max, instream)) {

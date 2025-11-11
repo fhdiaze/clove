@@ -11,7 +11,7 @@ int main(int argc, char *argv[static argc + 1])
 {
 	// this doesn't fit, diagnose?
 	_BitInt(15) s15 =
-	    0b1010101 '01010101wb; unsigned _BitInt(15) u15 = 0b1010101' 01010101wbu;
+		0b1010101 '01010101wb; unsigned _BitInt(15) u15 = 0b1010101' 01010101wbu;
 	// this doesn't fit, diagnose?
 	_BitInt(15) su15 = u15;
 
@@ -22,10 +22,10 @@ int main(int argc, char *argv[static argc + 1])
 	typeof(u65) o65 = 0x2 'FFFF' FFFF 'FFFF' FFFFwbu;
 
 	auto s65 = 0xFFFF 'FFFF' FFFF'FFFFwb;
-	    // signed arithmetic overflows, diagnostic?
-	    auto sa65 = 0xFFFF 'FFFF' FFFF'FFFFwb + 1wb;
-	    // constant too wide, diagnostic?
-	    typeof(s65) os65 = 0x1 'FFFF' FFFF 'FFFF' FFFFwb;
+		// signed arithmetic overflows, diagnostic?
+		auto sa65 = 0xFFFF 'FFFF' FFFF'FFFFwb + 1wb;
+		// constant too wide, diagnostic?
+		typeof(s65) os65 = 0x1 'FFFF' FFFF 'FFFF' FFFFwb;
 
 		unsigned _BitInt(128) max128s =
             0x7FFF 'FFFF' FFFF 'FFFF' FFFF 'FFFF' FFFF'FFFFwb; unsigned _BitInt(
@@ -47,5 +47,5 @@ int main(int argc, char *argv[static argc + 1])
 		printf("4 bit arithm:\t%u\n", (unsigned)(max4u + 1wbu));
 		printf("int arithm:\t%u\n", (unsigned)(max4u + 1));
 		return s15 + su15 + u15 + u65 + oa65 + o65 + s65 + sa65 + os65 +
-	               !max128s + !min128s;
+		       !max128s + !min128s;
 }

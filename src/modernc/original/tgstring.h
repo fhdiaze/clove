@@ -153,8 +153,8 @@ const void *memchr_const(const void *_s, int _c, size_t _n)
  **/
 #define memchr(_0, _1, _2)             \
 	_Generic(1 ? (_0) : (void *)1, \
-	    void *: memchr,            \
-	    void const *: memchr_const)((_0), (_1), (_2))
+		void *: memchr,        \
+		void const *: memchr_const)((_0), (_1), (_2))
 
 /**
  ** @brief An internal macro to select a const conserving string
@@ -178,10 +178,10 @@ const void *memchr_const(const void *_s, int _c, size_t _n)
  **/
 #define _TG_TO_CONST(SN, SC, WN, WC, X, ...) \
 	_Generic(&(X[0]),                    \
-	    char *: SN,                      \
-	    char const *: SC,                \
-	    wchar_t *: WN,                   \
-	    wchar_t const *: WC)((X), __VA_ARGS__)
+		char *: SN,                  \
+		char const *: SC,            \
+		wchar_t *: WN,               \
+		wchar_t const *: WC)((X), __VA_ARGS__)
 
 _TG_INLINE
 const wchar_t *wmemchr_const(const wchar_t _s[static 1], wchar_t _c, size_t _n)
@@ -194,17 +194,20 @@ const wchar_t *wmemchr_const(const wchar_t _s[static 1], wchar_t _c, size_t _n)
  ** This function only makes sense if it receives a `wchar_t`
  ** argument.
  **/
-#define wmemchr(...)                                        \
-	_TG_TO_CONST(nullptr,       /* char*: error   */    \
-	             nullptr,       /* const char*:error */ \
-	             wmemchr,       /* wchar_t*       */    \
-	             wmemchr_const, /* const wchar_t* */    \
-	             __VA_ARGS__)
+#define wmemchr(...)                                     \
+	_TG_TO_CONST(nullptr, /* char*: error   */       \
+		     nullptr, /* const char*:error */    \
+		     wmemchr, /* wchar_t*       */       \
+		     wmemchr_const, /* const wchar_t* */ \
+		     __VA_ARGS__)
 
 // char *strchr(char const *s, int c);
 
 _TG_INLINE
-const char *strchr_const(const char *_s, int _c) { return strchr(_s, _c); }
+const char *strchr_const(const char *_s, int _c)
+{
+	return strchr(_s, _c);
+}
 
 _TG_INLINE
 const wchar_t *wcschr_const(const wchar_t *_s, wchar_t _c)
@@ -233,12 +236,15 @@ const wchar_t *wcspbrk_const(const wchar_t *_s, const wchar_t *_t)
 #undef strpbrk
 #define strpbrk(...)                                                 \
 	_TG_TO_CONST(strpbrk, strpbrk_const, wcspbrk, wcspbrk_const, \
-	             __VA_ARGS__)
+		     __VA_ARGS__)
 
 // char *strrchr(char const *s, int c);
 
 _TG_INLINE
-const char *strrchr_const(const char *_s, int _c) { return strrchr(_s, _c); }
+const char *strrchr_const(const char *_s, int _c)
+{
+	return strrchr(_s, _c);
+}
 
 _TG_INLINE
 const wchar_t *wcsrchr_const(const wchar_t *_s, wchar_t _c)
@@ -249,7 +255,7 @@ const wchar_t *wcsrchr_const(const wchar_t *_s, wchar_t _c)
 #undef strrchr
 #define strrchr(...)                                                 \
 	_TG_TO_CONST(strrchr, strrchr_const, wcsrchr, wcsrchr_const, \
-	             __VA_ARGS__)
+		     __VA_ARGS__)
 
 // char *strstr(char const *_s, const char *_t);
 
@@ -267,11 +273,11 @@ const wchar_t *wcsstr_const(const wchar_t *_s, const wchar_t *_t)
 
 #undef strstr
 #define strstr(...)                                          \
-	_TG_TO_CONST(strstr,       /* char*               */ \
-	             strstr_const, /* const char*         */ \
-	             wcsstr,       /* wchar_t*            */ \
-	             wcsstr_const, /* const wchar_t*      */ \
-	             __VA_ARGS__)
+	_TG_TO_CONST(strstr, /* char*               */       \
+		     strstr_const, /* const char*         */ \
+		     wcsstr, /* wchar_t*            */       \
+		     wcsstr_const, /* const wchar_t*      */ \
+		     __VA_ARGS__)
 
 /**
  ** @brief An internal macro to select a string function according
@@ -296,12 +302,12 @@ const wchar_t *wcsstr_const(const wchar_t *_s, const wchar_t *_t)
  ** @see strcpy on how to integrate this into a type generic user
  ** interface
  **/
-#define _TG_STR(NAME, X, ...)        \
-	_Generic(&(X[0]),            \
-	    char *: str##NAME,       \
-	    char const *: str##NAME, \
-	    wchar_t *: wcs##NAME,    \
-	    wchar_t const *: wcs##NAME)((X), __VA_ARGS__)
+#define _TG_STR(NAME, X, ...)            \
+	_Generic(&(X[0]),                \
+		char *: str##NAME,       \
+		char const *: str##NAME, \
+		wchar_t *: wcs##NAME,    \
+		wchar_t const *: wcs##NAME)((X), __VA_ARGS__)
 
 #undef strcpy
 #define strcpy(...) _TG_STR(cpy, __VA_ARGS__)
@@ -344,7 +350,7 @@ const wchar_t *wcsstr_const(const wchar_t *_s, const wchar_t *_t)
 #define _TG_STR2F_FUNC_(C, NAME)                                              \
 	_TG_INLINE                                                            \
 	typeof(NAME((C[1]){ 0 }, nullptr)) _TG_##NAME##_c(C const *_p,        \
-	                                                  C const **_e)       \
+							  C const **_e)       \
 	{                                                                     \
 		return NAME(_p, (C **)_e);                                    \
 	}                                                                     \
@@ -354,9 +360,9 @@ const wchar_t *wcsstr_const(const wchar_t *_s, const wchar_t *_t)
 		return NAME(_p, _e);                                          \
 	}                                                                     \
 	typedef typeof(NAME((C[1]){ 0 }, nullptr)) _TG_##NAME##_c_ftype(      \
-	    C const *, C const **);                                           \
+		C const *, C const **);                                       \
 	typedef typeof(NAME((C[1]){ 0 }, nullptr)) _TG_##NAME##_nc_ftype(C *, \
-	                                                                 C **)
+									 C **)
 
 /**
  ** @brief An internal Xmacro to generate const conserving string
@@ -384,20 +390,20 @@ _TG_STR2F_FUNC(told);
 #define _TG_STR2I_FUNC_(C, NAME)                                             \
 	_TG_INLINE                                                           \
 	typeof(NAME((C[1]){ 0 }, nullptr, 0)) _TG_##NAME##_c(                \
-	    C const *_p, C const **_e, int _b)                               \
+		C const *_p, C const **_e, int _b)                           \
 	{                                                                    \
 		return NAME(_p, (C **)_e, _b);                               \
 	}                                                                    \
 	_TG_INLINE                                                           \
 	typeof(NAME((C[1]){ 0 }, nullptr, 0)) _TG_##NAME##_nc(C *_p, C **_e, \
-	                                                      int _b)        \
+							      int _b)        \
 	{                                                                    \
 		return NAME(_p, _e, _b);                                     \
 	}                                                                    \
 	typedef typeof(NAME((C[1]){ 0 }, nullptr, 0)) _TG_##NAME##_c_ftype(  \
-	    C const *, C const **, int);                                     \
+		C const *, C const **, int);                                 \
 	typedef typeof(NAME((C[1]){ 0 }, nullptr, 0)) _TG_##NAME##_nc_ftype( \
-	    C *, C **, int)
+		C *, C **, int)
 
 /**
  ** @brief An internal Xmacro to generate const conserving string
@@ -440,12 +446,12 @@ _TG_STR2I_FUNC(toumax);
  ** @see strtol on how to integrate this into a type generic user
  ** interface
  **/
-#define _TG_STR_FUNC3(NAME, X, P, B, ...)    \
-	_Generic(&((*P)[0]),                 \
-	    char *: _TG_str##NAME##_nc,      \
-	    char const *: _TG_str##NAME##_c, \
-	    wchar_t *: _TG_wcs##NAME##_nc,   \
-	    wchar_t const *: _TG_wcs##NAME##_c)((X), (P), (B))
+#define _TG_STR_FUNC3(NAME, X, P, B, ...)        \
+	_Generic(&((*P)[0]),                     \
+		char *: _TG_str##NAME##_nc,      \
+		char const *: _TG_str##NAME##_c, \
+		wchar_t *: _TG_wcs##NAME##_nc,   \
+		wchar_t const *: _TG_wcs##NAME##_c)((X), (P), (B))
 
 /**
  ** @brief An internal macro to select a const conserving string
@@ -453,12 +459,12 @@ _TG_STR2I_FUNC(toumax);
  **
  ** @see _TG_STR_FUNC3 for a complete description of the strategy
  **/
-#define _TG_STR_FUNC2(NAME, X, P, ...)       \
-	_Generic(&((*P)[0]),                 \
-	    char *: _TG_str##NAME##_nc,      \
-	    char const *: _TG_str##NAME##_c, \
-	    wchar_t *: _TG_wcs##NAME##_nc,   \
-	    wchar_t const *: _TG_wcs##NAME##_c)((X), (P))
+#define _TG_STR_FUNC2(NAME, X, P, ...)           \
+	_Generic(&((*P)[0]),                     \
+		char *: _TG_str##NAME##_nc,      \
+		char const *: _TG_str##NAME##_c, \
+		wchar_t *: _TG_wcs##NAME##_nc,   \
+		wchar_t const *: _TG_wcs##NAME##_c)((X), (P))
 
 #undef strtod
 #define strtod(...) _TG_STR_FUNC2(tod, __VA_ARGS__, 0, 0, 0)

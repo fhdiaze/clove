@@ -103,25 +103,29 @@ rat rat_get_prod2(rat x, rat y) [[__unsequenced__]]
 
 void rat_destroy(rat *rp) [[__unsequenced__]]
 {
-	if (rp) *rp = (rat){};
+	if (rp)
+		*rp = (rat){};
 }
 
 rat *rat_init(rat *rp, signed sign, size_t num, size_t denom)
-    [[__unsequenced__]]
+	[[__unsequenced__]]
 {
-	if (rp) *rp = rat_get(sign, num, denom);
+	if (rp)
+		*rp = rat_get(sign, num, denom);
 	return rp;
 }
 
 rat *rat_normalize(rat *rp) [[__unsequenced__]]
 {
-	if (rp) *rp = rat_get_normal(*rp);
+	if (rp)
+		*rp = rat_get_normal(*rp);
 	return rp;
 }
 
 rat *rat_extend(rat *rp, size_t f) [[__unsequenced__]]
 {
-	if (rp) *rp = rat_get_extended(*rp, f);
+	if (rp)
+		*rp = rat_get_extended(*rp, f);
 	return rp;
 }
 
@@ -154,7 +158,7 @@ const char *rat_print(size_t len, char tmp[len], const rat *x)
 {
 	if (x) {
 		snprintf(tmp, len, "%c%zu/%zu", (x->sign ? '-' : '+'), x->num,
-		         x->denom);
+			 x->denom);
 	} else {
 		tmp[0] = 0;
 	}

@@ -24,7 +24,10 @@ int life_wait(cnd_t *cnd, mtx_t *mtx)
 
 void life_advance(life *L, signed t0, signed t1);
 
-static bool life_alive(bool l, unsigned x) { return x == 3 || (l && x == 2); }
+static bool life_alive(bool l, unsigned x)
+{
+	return x == 3 || (l && x == 2);
+}
 
 // Computes the number of neighbors and stores them in B
 void life_count(life *L)
@@ -35,16 +38,17 @@ void life_count(life *L)
 	const size_t off1 = L->off1;
 	const size_t len0 = L->len0;
 	const size_t len1 = L->len1;
-	if (!L->Bv) L->Bv = malloc(sizeof(unsigned char[len0][len1]));
+	if (!L->Bv)
+		L->Bv = malloc(sizeof(unsigned char[len0][len1]));
 	unsigned char (*restrict B)[len1] = L->Bv;
 	for (size_t j0 = 0; j0 < len0; ++j0) {
 		size_t i0 = off0 + j0;
 		for (size_t j1 = 0; j1 < len1; ++j1) {
 			size_t i1 = off1 + j1;
 			B[j0][j1] = +M[i0 - 1][i1 - 1] + M[i0 - 1][i1] +
-			            M[i0 - 1][i1 + 1] + M[i0][i1 - 1] + 0 +
-			            M[i0][i1 + 1] + M[i0 + 1][i1 - 1] +
-			            M[i0 + 1][i1] + M[i0 + 1][i1 + 1];
+				    M[i0 - 1][i1 + 1] + M[i0][i1 - 1] + 0 +
+				    M[i0][i1 + 1] + M[i0 + 1][i1 - 1] +
+				    M[i0 + 1][i1] + M[i0 + 1][i1 + 1];
 		}
 	}
 }
@@ -130,7 +134,8 @@ void life_draw(life *L)
 		for (size_t i1 = off1; i1 < off1 + len1; ++i1) {
 			if (i1 == x1 && x0 == i0)
 				fputs(M[i0][i1] ? WROOK : BROOK, stdout);
-			else fputs(M[i0][i1] ? DOT : SPACE, stdout);
+			else
+				fputs(M[i0][i1] ? DOT : SPACE, stdout);
 		}
 		fputs(ESC_TRED, stdout);
 		fputs(ESC_BORDER[esc_right], stdout);
@@ -140,11 +145,11 @@ void life_draw(life *L)
 	border(len1, esc_bottom | esc_right | esc_left);
 	esc_goto(stdout, len0 + 3, 1);
 	fprintf(stdout,
-	        ESC_CLEAR "%3zu FPS, %5zu iterations, %5zu birth9, %5zu "
-	                  "constellations, " ESC_BOLD "%6.2f" ESC_NORMAL
-	                  " quotient",
-	        L->frames, L->iteration, L->birth9, L->constellations,
-	        L->constellations * 1.0 / L->birth9);
+		ESC_CLEAR "%3zu FPS, %5zu iterations, %5zu birth9, %5zu "
+			  "constellations, " ESC_BOLD "%6.2f" ESC_NORMAL
+			  " quotient",
+		L->frames, L->iteration, L->birth9, L->constellations,
+		L->constellations * 1.0 / L->birth9);
 	fputs(ESC_RESTORE ESC_SHOW, stdout);
 	esc_goto(stdout, len0 + 4, 1);
 }
@@ -174,22 +179,22 @@ void life_draw4(life *L)
 				// position, but the three cell positions are
 				// also hidden. We grey them out.
 				static const char *const corner[4] = {
-					[0] =
-					    ESC_TBLUE ESC_BGREY "▗" ESC_NORMAL,
-					[1] =
-					    ESC_TBLUE ESC_BGREY "▖" ESC_NORMAL,
-					[2] =
-					    ESC_TBLUE ESC_BGREY "▝" ESC_NORMAL,
-					[3] =
-					    ESC_TBLUE ESC_BGREY "▘" ESC_NORMAL,
+					[0] = ESC_TBLUE ESC_BGREY
+					"▗" ESC_NORMAL,
+					[1] = ESC_TBLUE ESC_BGREY
+					"▖" ESC_NORMAL,
+					[2] = ESC_TBLUE ESC_BGREY
+					"▝" ESC_NORMAL,
+					[3] = ESC_TBLUE ESC_BGREY
+					"▘" ESC_NORMAL,
 				};
 				unsigned ty = (x0 % 2) << 1 | (x1 % 2);
 				str = corner[ty];
 			} else {
 				unsigned val = M[i0][i1] |
-				               (M[i0][i1 + 1] << 1) |
-				               (M[i0 + 1][i1] << 2) |
-				               (M[i0 + 1][i1 + 1] << 3);
+					       (M[i0][i1 + 1] << 1) |
+					       (M[i0 + 1][i1] << 2) |
+					       (M[i0 + 1][i1 + 1] << 3);
 				str = ESC_BLOCK[val];
 			}
 			fputs(str, stdout);
@@ -202,11 +207,11 @@ void life_draw4(life *L)
 	border(len1 / 2, esc_bottom | esc_right | esc_left);
 	esc_goto(stdout, len0 / 2 + 3, 1);
 	fprintf(stdout,
-	        ESC_CLEAR "%3zu FPS, %5zu iterations, %5zu birth9, %5zu "
-	                  "constellations, " ESC_BOLD "%6.2f" ESC_NORMAL
-	                  " quotient",
-	        L->frames, L->iteration, L->birth9, L->constellations,
-	        L->constellations * 1.0 / L->birth9);
+		ESC_CLEAR "%3zu FPS, %5zu iterations, %5zu birth9, %5zu "
+			  "constellations, " ESC_BOLD "%6.2f" ESC_NORMAL
+			  " quotient",
+		L->frames, L->iteration, L->birth9, L->constellations,
+		L->constellations * 1.0 / L->birth9);
 	fputs(ESC_RESTORE ESC_SHOW, stdout);
 	esc_goto(stdout, len0 + 4, 1);
 }
@@ -280,5 +285,6 @@ life *life_init(struct life *L, size_t n, size_t m, bool mat[static n][m])
 
 void life_destroy(struct life *L)
 {
-	if (L) free(L->visited);
+	if (L)
+		free(L->visited);
 }

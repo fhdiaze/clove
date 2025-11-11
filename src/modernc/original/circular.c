@@ -19,7 +19,8 @@ circular *circular_init(circular *c, size_t cap)
 				.tab = malloc(sizeof(double[cap])),
 			};
 			// Allocation failed.
-			if (!c->tab) c->cap = 0;
+			if (!c->tab)
+				c->cap = 0;
 		} else {
 			*c = (circular){};
 		}
@@ -85,7 +86,8 @@ double circular_pop(circular *c)
 	double ret = 0.0;
 	if (c && c->len) {
 		double *p = circular_element(c, 0);
-		if (p) ret = *p;
+		if (p)
+			ret = *p;
 		++c->start;
 		--c->len;
 	}
@@ -93,12 +95,13 @@ double circular_pop(circular *c)
 }
 
 [[nodiscard("returned pointer replaces function argument")]] [[deprecated(
-    "implementation")]]
+	"implementation")]]
 circular *circular_resize(circular *c, size_t nlen)
 {
 	if (c) {
 		size_t len = c->len;
-		if (len > nlen) return nullptr;
+		if (len > nlen)
+			return nullptr;
 		size_t olen = c->cap;
 		if (nlen != olen) {
 			size_t ostart = circular_getpos(c, 0);
@@ -107,7 +110,8 @@ circular *circular_resize(circular *c, size_t nlen)
 			double *ntab;
 			if (nlen > olen) {
 				ntab = realloc(c->tab, sizeof(double[nlen]));
-				if (!ntab) return nullptr;
+				if (!ntab)
+					return nullptr;
 				// non-empty, and there were already two
 				// separate chunks
 				if (ostart + len > olen) {
@@ -123,8 +127,8 @@ circular *circular_resize(circular *c, size_t nlen)
 						 * new end. */ /*@\label{cpy-hichunk}*/
 						nstart = nlen - ulen;
 						memmove(ntab + nstart,
-						        ntab + ostart,
-						        ulen * sizeof(double));
+							ntab + ostart,
+							ulen * sizeof(double));
 					}
 				}
 			} else {
@@ -134,14 +138,14 @@ circular *circular_resize(circular *c, size_t nlen)
 					size_t ulen = olen - ostart;
 					nstart = nlen - ulen;
 					memmove(otab + nstart, otab + ostart,
-					        ulen * sizeof(double));
+						ulen * sizeof(double));
 				} else {
 					// A single chunk
 					if (ostart + len > nlen) {
 						// Reallocation cuts the
 						// existing chunk in two.
 						memmove(otab, otab + ostart,
-						        len * sizeof(double));
+							len * sizeof(double));
 						nstart = 0;
 					}
 				}
@@ -149,10 +153,11 @@ circular *circular_resize(circular *c, size_t nlen)
 					// Now all data is saved in the
 					// conserved part of the array.
 					ntab = realloc(c->tab,
-					               sizeof(double[nlen]));
+						       sizeof(double[nlen]));
 					// If realloc fails in this case (would
 					// be weird), just overrule it.
-					if (!ntab) ntab = otab;
+					if (!ntab)
+						ntab = otab;
 				} else {
 					// There had been no elements and we
 					// were asked to reduce the buffer to 0
@@ -181,12 +186,13 @@ void circular_fput(circular *c, FILE *s)
 		double *tab = c->tab;
 		if (tab) {
 			fprintf(s, "%p+%zu (%zu+%zu):", (void *)tab, c->cap,
-			        c->start, len);
+				c->start, len);
 			for (size_t i = 0; i < len; ++i) {
 				double *elp = circular_element(c, i);
 				// We know that c is not null, and so elp never
 				// will be.
-				if (!elp) unreachable();
+				if (!elp)
+					unreachable();
 				fprintf(s, "\t%g", *elp);
 			}
 			fputc('\n', s);

@@ -18,7 +18,7 @@
  **
  **/
 double timespec_diff(struct timespec const *later,
-                     struct timespec const *sooner)
+		     struct timespec const *sooner)
 {
 	/* Be careful: tv_sec could be an unsigned type */
 	if (later->tv_sec < sooner->tv_sec)
