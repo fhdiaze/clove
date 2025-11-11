@@ -12,7 +12,7 @@
  **/
 
 size_t mbrtow(wchar_t *restrict C, const char c[restrict static 1],
-	      mbstate_t *restrict state)
+              mbstate_t *restrict state)
 {
 	if (!state)
 		state = MBSTATE;
@@ -79,7 +79,7 @@ int iswvalid(wint_t x)
 }
 
 const char *mbsrwc(const char s[restrict static 1], mbstate_t *restrict state,
-		   wchar_t C, size_t occurrence)
+                   wchar_t C, size_t occurrence)
 {
 	if (!C || C == WEOF)
 		return nullptr;
@@ -105,7 +105,7 @@ const char *mbsrwc(const char s[restrict static 1], mbstate_t *restrict state,
 }
 
 const char *mbsrmb(const char s[static 1], mbstate_t *restrict state,
-		   const char c[static 1], size_t occurrence)
+                   const char c[static 1], size_t occurrence)
 {
 	state = state ? state : MBSTATE;
 	wint_t C = mbtow(c);
@@ -113,19 +113,19 @@ const char *mbsrmb(const char s[static 1], mbstate_t *restrict state,
 }
 
 const char *mbsrrwc(const char s[restrict static 1], mbstate_t *restrict state,
-		    wchar_t C)
+                    wchar_t C)
 {
 	return mbsrwc(s, state, C, SIZE_MAX);
 }
 
 const char *mbsrrmb(const char s[static 1], mbstate_t *restrict state,
-		    const char c[static 1])
+                    const char c[static 1])
 {
 	return mbsrmb(s, state, c, SIZE_MAX);
 }
 
 const char *mbsrwcjump(const char s1[static 1], mbstate_t *restrict state,
-		       size_t S2len, const wchar_t S2[S2len])
+                       size_t S2len, const wchar_t S2[S2len])
 {
 	state = state ? state : MBSTATE;
 	mbstate_t st = *state;
@@ -140,7 +140,7 @@ const char *mbsrwcjump(const char s1[static 1], mbstate_t *restrict state,
 }
 
 const char *mbsrwcs(const char s1[static 1], mbstate_t *restrict state,
-		    const wchar_t *S2)
+                    const wchar_t *S2)
 {
 	if (!S2)
 		return nullptr;
@@ -173,7 +173,7 @@ const char *mbsrwcs(const char s1[static 1], mbstate_t *restrict state,
 }
 
 const char *mbsrmbs(const char s1[static 1], mbstate_t *restrict state,
-		    const char *s2)
+                    const char *s2)
 {
 	state = state ? state : MBSTATE;
 	wchar_t *restrict S2 = mbsrdup(s2, nullptr);
@@ -185,7 +185,7 @@ const char *mbsrmbs(const char s1[static 1], mbstate_t *restrict state,
 }
 
 const char *mbsrwcsskip(const char s1[static 1], mbstate_t *restrict state,
-			const wchar_t *S2)
+                        const wchar_t *S2)
 {
 	if (S2) {
 		state = state ? state : MBSTATE;
@@ -210,7 +210,7 @@ const char *mbsrwcsskip(const char s1[static 1], mbstate_t *restrict state,
 }
 
 const char *mbsrskip(const char s1[static 1], mbstate_t *restrict state,
-		     const char *s2)
+                     const char *s2)
 {
 	state = state ? state : MBSTATE;
 	wchar_t *restrict S2 = mbsrdup(s2, nullptr);
@@ -225,7 +225,7 @@ size_t mbsspn(const char *s1, const char *s2)
 }
 
 const char *mbsrskip_class(const char s1[static 1], mbstate_t *restrict state,
-			   wcclass_t func)
+                           wcclass_t func)
 {
 	state = state ? state : MBSTATE;
 	for (size_t len; s1[0]; s1 += len) {
@@ -243,7 +243,7 @@ size_t mbsspn_class(const char *s1, wcclass_t func)
 }
 
 const char *mbsrskip_type(const char s1[static 1], mbstate_t *restrict state,
-			  wctype_t type)
+                          wctype_t type)
 {
 	state = state ? state : MBSTATE;
 	for (size_t len; s1[0]; s1 += len) {
@@ -266,7 +266,7 @@ size_t mbsspn_name(const char *s1, const char name[static 1])
 }
 
 const char *mbsrwcscskip(const char s1[static 1], mbstate_t *restrict state,
-			 const wchar_t *S2)
+                         const wchar_t *S2)
 {
 	state = state ? state : MBSTATE;
 	if (S2) {
@@ -305,49 +305,49 @@ size_t mbscspn(const char *s1, const char *s2)
 }
 
 double mbsrtod(const char *restrict s1, mbstate_t *restrict state,
-	       char **restrict endptr)
+               char **restrict endptr)
 {
 	state = state ? state : MBSTATE;
 	return strtod(mbsrskip_class(s1, state, iswspace), endptr);
 }
 
 long double mbsrtold(const char *restrict s1, mbstate_t *restrict state,
-		     char **restrict endptr)
+                     char **restrict endptr)
 {
 	state = state ? state : MBSTATE;
 	return strtold(mbsrskip_class(s1, state, iswspace), endptr);
 }
 
 long mbsrtol(const char *restrict s1, mbstate_t *restrict state,
-	     char **restrict endptr, int base)
+             char **restrict endptr, int base)
 {
 	state = state ? state : MBSTATE;
 	return strtol(mbsrskip_class(s1, state, iswspace), endptr, base);
 }
 
 long long mbsrtoll(const char *restrict s1, mbstate_t *restrict state,
-		   char **restrict endptr, int base)
+                   char **restrict endptr, int base)
 {
 	state = state ? state : MBSTATE;
 	return strtoll(mbsrskip_class(s1, state, iswspace), endptr, base);
 }
 
 unsigned long mbsrtoul(const char *restrict s1, mbstate_t *restrict state,
-		       char **restrict endptr, int base)
+                       char **restrict endptr, int base)
 {
 	state = state ? state : MBSTATE;
 	return strtoul(mbsrskip_class(s1, state, iswspace), endptr, base);
 }
 
 unsigned long long mbsrtoull(const char *restrict s1, mbstate_t *restrict state,
-			     char **restrict endptr, int base)
+                             char **restrict endptr, int base)
 {
 	state = state ? state : MBSTATE;
 	return strtoull(mbsrskip_class(s1, state, iswspace), endptr, base);
 }
 
 char *mbsrmbsncpy(size_t n, char t[restrict n], const mbstate_t *restrict state,
-		  const char s[restrict static 1])
+                  const char s[restrict static 1])
 {
 	/* Don't do anything if s wouldn't fit entirely into t */
 	const char *ep = memchr(s, 0, n);
@@ -375,8 +375,8 @@ char *mbsrmbsncpy(size_t n, char t[restrict n], const mbstate_t *restrict state,
 }
 
 char *mbsrncpy(size_t n, char t[restrict n], mbstate_t *restrict tstate,
-	       const char s[restrict static 1],
-	       const mbstate_t *restrict sstate)
+               const char s[restrict static 1],
+               const mbstate_t *restrict sstate)
 {
 	/* First check if the bytes can just be copied over. */
 	if (mbsinit(sstate)) {

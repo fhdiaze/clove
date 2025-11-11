@@ -65,7 +65,7 @@ inline void circular_delete(circular *c)
  ** with a call to ::circular_delete.
  **/
 [[nodiscard("pointer to allocated data dropped")]] [[__gnu__::__malloc__,
-						     __gnu_free__(
+                                                     __gnu_free__(
 							     circular_delete)]]
 inline circular *circular_new(size_t len)
 {

@@ -38,21 +38,21 @@ static inline float minf(float a, float b) [[__unsequenced__]]
  **/
 #define MAXVAL(X)                                           \
 	_Generic((X),                                       \
-		bool: (bool)+1,                             \
-		char: (char)+CHAR_MAX,                      \
-		signed char: (signed char)+SCHAR_MAX,       \
-		unsigned char: (unsigned char)+UCHAR_MAX,   \
-		signed short: (signed short)+SHRT_MAX,      \
-		unsigned short: (unsigned short)+USHRT_MAX, \
-		signed: INT_MAX,                            \
-		unsigned: UINT_MAX,                         \
-		signed long: LONG_MAX,                      \
-		unsigned long: ULONG_MAX,                   \
-		signed long long: LLONG_MAX,                \
-		unsigned long long: ULLONG_MAX,             \
-		float: FLT_MAX,                             \
-		double: DBL_MAX,                            \
-		long double: LDBL_MAX)
+	        bool: (bool)+1,                             \
+	        char: (char)+CHAR_MAX,                      \
+	        signed char: (signed char)+SCHAR_MAX,       \
+	        unsigned char: (unsigned char)+UCHAR_MAX,   \
+	        signed short: (signed short)+SHRT_MAX,      \
+	        unsigned short: (unsigned short)+USHRT_MAX, \
+	        signed: INT_MAX,                            \
+	        unsigned: UINT_MAX,                         \
+	        signed long: LONG_MAX,                      \
+	        unsigned long: ULONG_MAX,                   \
+	        signed long long: LLONG_MAX,                \
+	        unsigned long long: ULLONG_MAX,             \
+	        float: FLT_MAX,                             \
+	        double: DBL_MAX,                            \
+	        long double: LDBL_MAX)
 
 /**
  ** @brief The maximum promoted value for @a XT, where @a XT
@@ -66,45 +66,45 @@ static inline float minf(float a, float b) [[__unsequenced__]]
  **/
 #define maxof(XT)                               \
 	_Generic(0 + (XT) + 0,                  \
-		signed: INT_MAX,                \
-		unsigned: UINT_MAX,             \
-		signed long: LONG_MAX,          \
-		unsigned long: ULONG_MAX,       \
-		signed long long: LLONG_MAX,    \
-		unsigned long long: ULLONG_MAX, \
-		float: FLT_MAX,                 \
-		double: DBL_MAX,                \
-		long double: LDBL_MAX)
+	        signed: INT_MAX,                \
+	        unsigned: UINT_MAX,             \
+	        signed long: LONG_MAX,          \
+	        unsigned long: ULONG_MAX,       \
+	        signed long long: LLONG_MAX,    \
+	        unsigned long long: ULLONG_MAX, \
+	        float: FLT_MAX,                 \
+	        double: DBL_MAX,                \
+	        long double: LDBL_MAX)
 
 #define MINVAL(X)                                      \
 	_Generic((X),                                  \
-		bool: (bool)+0,                        \
-		char: (char)+CHAR_MIN,                 \
-		signed char: (signed char)+SCHAR_MIN,  \
-		unsigned char: (unsigned char)+0,      \
-		signed short: (signed short)+SHRT_MIN, \
-		unsigned short: (unsigned short)+0,    \
-		signed: INT_MIN,                       \
-		unsigned: 0U,                          \
-		signed long: LONG_MIN,                 \
-		unsigned long: 0UL,                    \
-		signed long long: LLONG_MIN,           \
-		unsigned long long: 0ULL,              \
-		float: -FLT_MAX,                       \
-		double: -DBL_MAX,                      \
-		long double: -LDBL_MAX)
+	        bool: (bool)+0,                        \
+	        char: (char)+CHAR_MIN,                 \
+	        signed char: (signed char)+SCHAR_MIN,  \
+	        unsigned char: (unsigned char)+0,      \
+	        signed short: (signed short)+SHRT_MIN, \
+	        unsigned short: (unsigned short)+0,    \
+	        signed: INT_MIN,                       \
+	        unsigned: 0U,                          \
+	        signed long: LONG_MIN,                 \
+	        unsigned long: 0UL,                    \
+	        signed long long: LLONG_MIN,           \
+	        unsigned long long: 0ULL,              \
+	        float: -FLT_MAX,                       \
+	        double: -DBL_MAX,                      \
+	        long double: -LDBL_MAX)
 
 #define minof(XT)                            \
 	_Generic(0 + (XT) + 0,               \
-		signed: INT_MIN,             \
-		unsigned: 0U,                \
-		signed long: LONG_MIN,       \
-		unsigned long: 0UL,          \
-		signed long long: LLONG_MIN, \
-		unsigned long long: 0ULL,    \
-		float: -FLT_MAX,             \
-		double: -DBL_MAX,            \
-		long double: -LDBL_MAX)
+	        signed: INT_MIN,             \
+	        unsigned: 0U,                \
+	        signed long: LONG_MIN,       \
+	        unsigned long: 0UL,          \
+	        signed long long: LLONG_MIN, \
+	        unsigned long long: 0ULL,    \
+	        float: -FLT_MAX,             \
+	        double: -DBL_MAX,            \
+	        long double: -LDBL_MAX)
 
 #define strtod(NPTR, ...) \
 	STRTOD_I __VA_OPT__(I)(NPTR __VA_OPT__(, ) __VA_ARGS__)
@@ -149,7 +149,7 @@ static inline float minf(float a, float b) [[__unsequenced__]]
  **/
 #define DEFAULT3(DEF0, DEF1, DEF2, ...)               \
 	ID_III##__VA_OPT__(Iplus_DEFAULT)(DEF0, DEF1, \
-					  DEF2 __VA_OPT__(, ) __VA_ARGS__)
+	                                  DEF2 __VA_OPT__(, ) __VA_ARGS__)
 #define ID_IIIIplus_DEFAULT(DEF0, DEF1, DEF2, _01, ...) \
 	DEFAULT1(DEF0, _01), DEFAULT2(DEF1, DEF2, __VA_ARGS__)
 
@@ -180,15 +180,15 @@ static inline float minf(float a, float b) [[__unsequenced__]]
 
 #define PROMOTE(XT, A)                                       \
 	_Generic(0 + (XT) + 0,                               \
-		signed: (signed)(A),                         \
-		unsigned: (unsigned)(A),                     \
-		signed long: (signed long)(A),               \
-		unsigned long: (unsigned long)(A),           \
-		signed long long: (signed long long)(A),     \
-		unsigned long long: (unsigned long long)(A), \
-		float: (float)(A),                           \
-		double: (double)(A),                         \
-		long double: (long double)(A))
+	        signed: (signed)(A),                         \
+	        unsigned: (unsigned)(A),                     \
+	        signed long: (signed long)(A),               \
+	        unsigned long: (unsigned long)(A),           \
+	        signed long long: (signed long long)(A),     \
+	        unsigned long long: (unsigned long long)(A), \
+	        float: (float)(A),                           \
+	        double: (double)(A),                         \
+	        long double: (long double)(A))
 
 #define SIGNEDNESS(XT) (PROMOTE(XT, -1) < PROMOTE(XT, 0))
 
@@ -258,36 +258,36 @@ inline unsigned long long maxsull(signed long long a, unsigned long long b)
 
 #define MAX(X, Y)                         \
 	_Generic((X) + (Y),               \
-		signed: maxs,             \
-		unsigned: maxu,           \
-		signed long: maxsl,       \
-		unsigned long: maxul,     \
-		signed long long: maxsll, \
-		unsigned long long: maxull)((X), (Y))
+	        signed: maxs,             \
+	        unsigned: maxu,           \
+	        signed long: maxsl,       \
+	        unsigned long: maxul,     \
+	        signed long long: maxsll, \
+	        unsigned long long: maxull)((X), (Y))
 
 #define MAXUS(X, Y)                        \
 	_Generic((X) + (Y),                \
-		signed: maxus,             \
-		unsigned: maxus,           \
-		signed long: maxusl,       \
-		unsigned long: maxusl,     \
-		signed long long: maxusll, \
-		unsigned long long: maxusll)((X), (Y))
+	        signed: maxus,             \
+	        unsigned: maxus,           \
+	        signed long: maxusl,       \
+	        unsigned long: maxusl,     \
+	        signed long long: maxusll, \
+	        unsigned long long: maxusll)((X), (Y))
 
 #define MAXSU(X, Y)                        \
 	_Generic((X) + (Y),                \
-		signed: maxsu,             \
-		unsigned: maxsu,           \
-		signed long: maxsul,       \
-		unsigned long: maxsul,     \
-		signed long long: maxsull, \
-		unsigned long long: maxsull)((X), (Y))
+	        signed: maxsu,             \
+	        unsigned: maxsu,           \
+	        signed long: maxsul,       \
+	        unsigned long: maxsul,     \
+	        signed long long: maxsull, \
+	        unsigned long long: maxsull)((X), (Y))
 
 #define mix(X, Y)                                              \
 	_Generic(&(char[SIGNEDNESS(X) - SIGNEDNESS(Y) + 2]){}, \
-		char (*)[1]: MAXUS((X), (Y)),                  \
-		char (*)[2]: MAX((X), (Y)),                    \
-		char (*)[3]: MAXSU((X), (Y)))
+	        char (*)[1]: MAXUS((X), (Y)),                  \
+	        char (*)[2]: MAX((X), (Y)),                    \
+	        char (*)[3]: MAXSU((X), (Y)))
 
 /**
  ** @brief Similar to `snprintf` but checks the buffer argument for
@@ -299,7 +299,7 @@ inline unsigned long long maxsull(signed long long a, unsigned long long b)
  **/
 [[maybe_unused, __gnu__::__format__(__printf__, 3, 4)]]
 static inline int snprintf_swapped(size_t n, char s[restrict static n],
-				   const char *restrict form, ...)
+                                   const char *restrict form, ...)
 {
 	va_list ap;
 	va_start(ap);
@@ -321,28 +321,28 @@ static inline int snprintf_swapped(size_t n, char s[restrict static n],
  **/
 #define snprintf(S, N, F, ...)                                               \
 	_Generic((S),                                                        \
-		nullptr_t: (snprintf)(nullptr, GENERIC_IF(isice(N), (N), 0), \
-				      F __VA_OPT__(, ) __VA_ARGS__),         \
-		default: snprintf_swapped(                                   \
+	        nullptr_t: (snprintf)(nullptr, GENERIC_IF(isice(N), (N), 0), \
+	                              F __VA_OPT__(, ) __VA_ARGS__),         \
+	        default: snprintf_swapped(                                   \
 			 _Generic((S), nullptr_t: 1, default: (N)),          \
 			 _Generic((S),                                       \
-				 nullptr_t: (char[1]){ 0 },                  \
-				 default: (S)),                              \
+	                         nullptr_t: (char[1]){ 0 },                  \
+	                         default: (S)),                              \
 			 (F)__VA_OPT__(, ) __VA_ARGS__))
 
-#define pow(X, Y)                                                                                                                                      \
-	_Generic((void (*)(typeof((X) + (Y) + 0ULL), typeof((Y) + 0ULL)))                                                                              \
-			 nullptr, /* Second argument is an integer. */                                                                                 \
-		void (*)(float, unsigned long long): pownf,                                                                                            \
-		void (*)(double, unsigned long long): pown,                                                                                            \
-		void (*)(unsigned long long, unsigned long long): pown,                                                                                \
-		void (*)(long double,                                                                                                                  \
-			 unsigned long long): pownl, /* Second argument is a floating point. */                                                        \
-		void (*)(float, float): powf,                                                                                                          \
-		void (*)(long double, float): powl,                                                                                                    \
-		void (*)(long double, double): powl,                                                                                                   \
-		void (*)(long double,                                                                                                                  \
-			 long double): powl, /* Second argument is a floating-point, and first */ /* is double or integer.                          */ \
-		default: pow)((X), (Y))
+#define pow(X, Y)                                                                                                         \
+	_Generic((void (*)(typeof((X) + (Y) + 0ULL), typeof((Y) + 0ULL)))                                                 \
+	                 nullptr, /* Second argument is an integer. */                                                    \
+	        void (*)(float, unsigned long long): pownf,                                                               \
+	        void (*)(double, unsigned long long): pown,                                                               \
+	        void (*)(unsigned long long, unsigned long long): pown,                                                   \
+	        void (*)(long double,                                                                                     \
+	                 unsigned long long): pownl, /* Second argument is a floating point. */                           \
+	        void (*)(float, float): powf,                                                                             \
+	        void (*)(long double, float): powl,                                                                       \
+	        void (*)(long double, double): powl,                                                                      \
+	        void (*)(long double, long double): powl,                                                                 \
+	        /* Second argument is a floating-point, and first */ /* is double or integer.                          */ \
+	        default: pow)((X), (Y))
 
 #endif

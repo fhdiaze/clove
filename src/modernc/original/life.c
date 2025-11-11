@@ -46,9 +46,9 @@ void life_count(life *L)
 		for (size_t j1 = 0; j1 < len1; ++j1) {
 			size_t i1 = off1 + j1;
 			B[j0][j1] = +M[i0 - 1][i1 - 1] + M[i0 - 1][i1] +
-				    M[i0 - 1][i1 + 1] + M[i0][i1 - 1] + 0 +
-				    M[i0][i1 + 1] + M[i0 + 1][i1 - 1] +
-				    M[i0 + 1][i1] + M[i0 + 1][i1 + 1];
+			            M[i0 - 1][i1 + 1] + M[i0][i1 - 1] + 0 +
+			            M[i0][i1 + 1] + M[i0 + 1][i1 - 1] +
+			            M[i0 + 1][i1] + M[i0 + 1][i1 + 1];
 		}
 	}
 }
@@ -145,11 +145,11 @@ void life_draw(life *L)
 	border(len1, esc_bottom | esc_right | esc_left);
 	esc_goto(stdout, len0 + 3, 1);
 	fprintf(stdout,
-		ESC_CLEAR "%3zu FPS, %5zu iterations, %5zu birth9, %5zu "
-			  "constellations, " ESC_BOLD "%6.2f" ESC_NORMAL
-			  " quotient",
-		L->frames, L->iteration, L->birth9, L->constellations,
-		L->constellations * 1.0 / L->birth9);
+	        ESC_CLEAR "%3zu FPS, %5zu iterations, %5zu birth9, %5zu "
+	                  "constellations, " ESC_BOLD "%6.2f" ESC_NORMAL
+	                  " quotient",
+	        L->frames, L->iteration, L->birth9, L->constellations,
+	        L->constellations * 1.0 / L->birth9);
 	fputs(ESC_RESTORE ESC_SHOW, stdout);
 	esc_goto(stdout, len0 + 4, 1);
 }
@@ -192,9 +192,9 @@ void life_draw4(life *L)
 				str = corner[ty];
 			} else {
 				unsigned val = M[i0][i1] |
-					       (M[i0][i1 + 1] << 1) |
-					       (M[i0 + 1][i1] << 2) |
-					       (M[i0 + 1][i1 + 1] << 3);
+				               (M[i0][i1 + 1] << 1) |
+				               (M[i0 + 1][i1] << 2) |
+				               (M[i0 + 1][i1 + 1] << 3);
 				str = ESC_BLOCK[val];
 			}
 			fputs(str, stdout);
@@ -207,11 +207,11 @@ void life_draw4(life *L)
 	border(len1 / 2, esc_bottom | esc_right | esc_left);
 	esc_goto(stdout, len0 / 2 + 3, 1);
 	fprintf(stdout,
-		ESC_CLEAR "%3zu FPS, %5zu iterations, %5zu birth9, %5zu "
-			  "constellations, " ESC_BOLD "%6.2f" ESC_NORMAL
-			  " quotient",
-		L->frames, L->iteration, L->birth9, L->constellations,
-		L->constellations * 1.0 / L->birth9);
+	        ESC_CLEAR "%3zu FPS, %5zu iterations, %5zu birth9, %5zu "
+	                  "constellations, " ESC_BOLD "%6.2f" ESC_NORMAL
+	                  " quotient",
+	        L->frames, L->iteration, L->birth9, L->constellations,
+	        L->constellations * 1.0 / L->birth9);
 	fputs(ESC_RESTORE ESC_SHOW, stdout);
 	esc_goto(stdout, len0 + 4, 1);
 }

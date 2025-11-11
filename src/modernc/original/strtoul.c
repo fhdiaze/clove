@@ -50,7 +50,7 @@ unsigned long Strtoul_inner(const char s[static 1], size_t i, unsigned base)
 }
 
 static unsigned find_prefix(const char s[static 1], size_t i,
-			    const char t[static 1])
+                            const char t[static 1])
 {
 	size_t ret = 0;
 	while (s[i + ret] && (tolower(s[i + ret]) == tolower(t[ret]))) {
@@ -152,9 +152,9 @@ int main(int argc, char *argv[argc + 1])
 			if (res == ULONG_MAX && errno) {
 				puts("");
 				fprintf(stderr,
-					"invalid conversion with base %u and "
-					"\"%s\"\n",
-					code[j], argv[i]);
+				        "invalid conversion with base %u and "
+				        "\"%s\"\n",
+				        code[j], argv[i]);
 				perror("error");
 				errno = 0;
 			} else {

@@ -47,8 +47,8 @@ time_t isotime(const char t[static 1])
                 },
         };
 	int retscan = sscanf(t, "%i-%i-%i %i:%i:%i", &date->tm_year,
-			     &date->tm_mon, &date->tm_mday, &date->tm_hour,
-			     &date->tm_min, &date->tm_sec);
+	                     &date->tm_mon, &date->tm_mday, &date->tm_hour,
+	                     &date->tm_min, &date->tm_sec);
 	if (retscan <= 0) {
 		if (errno)
 			perror("can't scan");

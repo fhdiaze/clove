@@ -55,9 +55,9 @@ static const char *end_line(const char s[static 1], jmp_buf jmpTarget)
 static volatile sig_atomic_t interrupt = 0;
 
 static const char *descend(const char *act,
-			   unsigned dp[restrict static 1], // Bad
-			   size_t len, char buffer[static len],
-			   jmp_buf jmpTarget)
+                           unsigned dp[restrict static 1], // Bad
+                           size_t len, char buffer[static len],
+                           jmp_buf jmpTarget)
 {
 	if (dp[0] + 3 > sizeof head)
 		longjmp(jmpTarget, tooDeep);
@@ -81,7 +81,7 @@ NEW_LINE: // Loops on output
 		case left: // Descends on left brace
 			act = end_line(act + 1, jmpTarget);
 			act = descend(act, dp, len, buffer,
-				      jmpTarget); /*@\label{lab:descend}*/
+			              jmpTarget); /*@\label{lab:descend}*/
 			act = end_line(act + 1, jmpTarget);
 			goto NEW_LINE;
 		case right: // Returns on right brace
@@ -186,8 +186,8 @@ void doAtExit(void)
 {
 	if (lastOpen && lastOpen[0]) {
 		fprintf(stderr,
-			"\n***********\nabnormal exit, last open file was %s\n",
-			lastOpen[0]);
+		        "\n***********\nabnormal exit, last open file was %s\n",
+		        lastOpen[0]);
 	}
 }
 

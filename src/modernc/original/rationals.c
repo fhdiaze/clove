@@ -158,7 +158,7 @@ const char *rat_print(size_t len, char tmp[len], const rat *x)
 {
 	if (x) {
 		snprintf(tmp, len, "%c%zu/%zu", (x->sign ? '-' : '+'), x->num,
-			 x->denom);
+		         x->denom);
 	} else {
 		tmp[0] = 0;
 	}

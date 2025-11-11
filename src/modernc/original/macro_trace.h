@@ -95,7 +95,7 @@
 	do {                                                         \
 		if (TRACE_ON)                                        \
 			fprintf(stderr, "%s:%lu: " F "\n", __func__, \
-				__LINE__ + 0UL, X);                  \
+			        __LINE__ + 0UL, X);                  \
 	} while (false)
 
 #define STRINGIFY(X) #X
@@ -106,8 +106,8 @@
 	do {                                                                \
 		if (TRACE_ON)                                               \
 			fprintf(stderr,                                     \
-				"%s:" STRGY(__LINE__) ":(" #X "): " F "\n", \
-				__func__, X);                               \
+			        "%s:" STRGY(__LINE__) ":(" #X "): " F "\n", \
+			        __func__, X);                               \
 	} while (false)
 
 /**
@@ -118,7 +118,7 @@
 	do {                                                               \
 		if (TRACE_ON)                                              \
 			fprintf(stderr, "%s:" STRGY(__LINE__) ": " F "\n", \
-				__func__, __VA_ARGS__);                    \
+			        __func__, __VA_ARGS__);                    \
 	} while (false)
 
 /** @brief Only traces with a text message; no values printed
@@ -127,8 +127,8 @@
 	do {                                                                 \
 		if (TRACE_ON)                                                \
 			fprintf(stderr,                                      \
-				"%s:" STRGY(__LINE__) ": " __VA_ARGS__ "\n", \
-				__func__);                                   \
+			        "%s:" STRGY(__LINE__) ": " __VA_ARGS__ "\n", \
+			        __func__);                                   \
 	} while (false)
 
 /**
@@ -157,7 +157,7 @@
 	do {                                                               \
 		if (TRACE_ON)                                              \
 			fprintf(stderr, "%s:" STRGY(__LINE__) ": " F "\n", \
-				__func__ __VA_OPT__(, ) __VA_ARGS__);      \
+			        __func__ __VA_OPT__(, ) __VA_ARGS__);      \
 	} while (false)
 
 /**
@@ -187,12 +187,12 @@ inline const char *trace_skip(const char expr[static 1])
  ** which will provide the necessary contextual information.
  **/
 inline void trace_values(FILE *s, const char func[static 1],
-			 const char line[static 1], const char expr[static 1],
-			 const char head[static 1], size_t len,
-			 const long double arr[len])
+                         const char line[static 1], const char expr[static 1],
+                         const char head[static 1], size_t len,
+                         const long double arr[len])
 {
 	fprintf(s, "%s:%s:(%s) %s %Lg", func, line, trace_skip(expr), head,
-		arr[0]);
+	        arr[0]);
 	for (size_t i = 1; i < len - 1; ++i)
 		fprintf(s, ", %Lg", arr[i]);
 	fputc('\n', s);
@@ -212,8 +212,8 @@ inline void trace_values(FILE *s, const char func[static 1],
 	      0x03, 0x02, 0x01, 0x00)
 
 #define ALEN0(_00, _01, _02, _03, _04, _05, _06, _07, _08, _09, _0A, _0B, _0C, \
-	      _0D, _0F, _0E, _10, _11, _12, _13, _14, _15, _16, _17, _18, _19, \
-	      _1A, _1B, _1C, _1D, _1F, _1E, ...)                               \
+              _0D, _0F, _0E, _10, _11, _12, _13, _14, _15, _16, _17, _18, _19, \
+              _1A, _1B, _1C, _1D, _1F, _1E, ...)                               \
 	_1E
 
 /**
@@ -232,14 +232,14 @@ inline void trace_values(FILE *s, const char func[static 1],
 		if (TRACE_ON) {                                           \
 			if (NARGS > 1)                                    \
 				trace_values(stderr, __func__,            \
-					     STRGY(__LINE__), "" EXPR "", \
-					     "" HEAD "", NARGS,           \
-					     (long double const[NARGS]){  \
+				             STRGY(__LINE__), "" EXPR "", \
+				             "" HEAD "", NARGS,           \
+				             (long double const[NARGS]){  \
 						     __VA_ARGS__ });      \
 			else                                              \
 				fprintf(stderr,                           \
-					"%s:" STRGY(__LINE__) ": %s\n",   \
-					__func__, HEAD);                  \
+				        "%s:" STRGY(__LINE__) ": %s\n",   \
+				        __func__, HEAD);                  \
 		}                                                         \
 	} while (false)
 
@@ -252,12 +252,12 @@ inline void trace_values(FILE *s, const char func[static 1],
  **/
 #define TRACE_FORMAT(F, X)                          \
 	_Generic((X) + 0LL,                         \
-		unsigned long long: "" F " %llu\n", \
-		long long: "" F " %lld\n",          \
-		float: "" F " %.8f\n",              \
-		double: "" F " %.12f\n",            \
-		long double: "" F " %.20Lf\n",      \
-		default: "" F " %p\n")
+	        unsigned long long: "" F " %llu\n", \
+	        long long: "" F " %lld\n",          \
+	        float: "" F " %.8f\n",              \
+	        double: "" F " %.12f\n",            \
+	        long double: "" F " %.20Lf\n",      \
+	        default: "" F " %p\n")
 
 /**
  ** @brief Returns a value that forcibly can be interpreted as
@@ -268,12 +268,12 @@ inline void trace_values(FILE *s, const char func[static 1],
  **/
 #define TRACE_POINTER(X)                     \
 	_Generic((X) + 0LL,                  \
-		unsigned long long: nullptr, \
-		long long: nullptr,          \
-		float: nullptr,              \
-		double: nullptr,             \
-		long double: nullptr,        \
-		default: (X))
+	        unsigned long long: nullptr, \
+	        long long: nullptr,          \
+	        float: nullptr,              \
+	        double: nullptr,             \
+	        long double: nullptr,        \
+	        default: (X))
 
 /**
  ** @brief Returns a value that is promoted either to a wide
@@ -282,12 +282,12 @@ inline void trace_values(FILE *s, const char func[static 1],
  **/
 #define TRACE_CONVERT(X)                       \
 	_Generic((X) + 0LL,                    \
-		unsigned long long: (X) + 0LL, \
-		long long: (X) + 0LL,          \
-		float: (X) + 0LL,              \
-		double: (X) + 0LL,             \
-		long double: (X) + 0LL,        \
-		default: ((void *){ nullptr } = TRACE_POINTER(X)))
+	        unsigned long long: (X) + 0LL, \
+	        long long: (X) + 0LL,          \
+	        float: (X) + 0LL,              \
+	        double: (X) + 0LL,             \
+	        long double: (X) + 0LL,        \
+	        default: ((void *){ nullptr } = TRACE_POINTER(X)))
 
 /**
  ** @brief Traces a value without having to specify a format
@@ -301,8 +301,8 @@ inline void trace_values(FILE *s, const char func[static 1],
 	do {                                                                   \
 		if (TRACE_ON)                                                  \
 			fprintf(stderr,                                        \
-				TRACE_FORMAT("%s:" STRGY(__LINE__) ": " F, X), \
-				__func__, TRACE_CONVERT(X));                   \
+			        TRACE_FORMAT("%s:" STRGY(__LINE__) ": " F, X), \
+			        __func__, TRACE_CONVERT(X));                   \
 	} while (false)
 
 #endif

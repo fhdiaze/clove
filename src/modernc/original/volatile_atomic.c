@@ -84,7 +84,7 @@ unsigned accuar(_Atomic(unsigned) *restrict count)
 	atomic_store_explicit(count, 0, memory_order_relaxed);
 	while (tmp < 9) {
 		tmp = atomic_fetch_add_explicit(count, 1u,
-						memory_order_relaxed);
+		                                memory_order_relaxed);
 		ret += 2 * tmp + 1;
 	}
 	return ret;
@@ -97,7 +97,7 @@ unsigned accuavr(_Atomic(unsigned) volatile *restrict count)
 	atomic_store_explicit(count, 0, memory_order_relaxed);
 	while (tmp < 9) {
 		tmp = atomic_fetch_add_explicit(count, 1u,
-						memory_order_relaxed);
+		                                memory_order_relaxed);
 		ret += 2 * tmp + 1;
 	}
 	return ret;

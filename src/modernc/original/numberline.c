@@ -18,7 +18,7 @@
  ** free the array that is returned.
  **/
 size_t *numberline(size_t size, const char lbuf[restrict static size],
-		   size_t *restrict np, int base);
+                   size_t *restrict np, int base);
 
 /**
  ** @brief read one text line of at most <code>size-1</code>
@@ -74,8 +74,8 @@ char *fgetline(size_t size, char s[restrict size], FILE *restrict stream);
  ** occurred on entry.
  **/
 int fprintnumbers(FILE *restrict stream, const char form[restrict static 1],
-		  const char sep[restrict static 1], size_t len,
-		  size_t numb[restrict len]);
+                  const char sep[restrict static 1], size_t len,
+                  size_t numb[restrict len]);
 
 /**
  ** @brief print a series of numbers @a nums in @a buf, using @c
@@ -88,12 +88,12 @@ int fprintnumbers(FILE *restrict stream, const char form[restrict static 1],
  ** that @a form is a format suitable to print @c size_t.
  **/
 int sprintnumbers(size_t tot, char buf[restrict tot],
-		  const char form[restrict static 1],
-		  const char sep[restrict static 1], size_t len,
-		  size_t nums[restrict static len]);
+                  const char form[restrict static 1],
+                  const char sep[restrict static 1], size_t len,
+                  size_t nums[restrict static len]);
 
 static size_t numberline_inner(const char *restrict act,
-			       size_t numb[restrict static 1], int base)
+                               size_t numb[restrict static 1], int base)
 {
 	size_t n = 0;
 	for (char *next = nullptr; act[0]; act = next) {
@@ -106,7 +106,7 @@ static size_t numberline_inner(const char *restrict act,
 }
 
 size_t *numberline(size_t size, const char lbuf[restrict static size],
-		   size_t *restrict np, int base)
+                   size_t *restrict np, int base)
 {
 	size_t *ret = nullptr;
 	size_t n = 0;
@@ -154,9 +154,9 @@ static inline int error_cleanup(int err, int prev)
 }
 
 int sprintnumbers(size_t tot, char buf[restrict tot],
-		  const char form[restrict static 1],
-		  const char sep[restrict static 1], size_t len,
-		  size_t nums[const restrict static len])
+                  const char form[restrict static 1],
+                  const char sep[restrict static 1], size_t len,
+                  size_t nums[const restrict static len])
 {
 	char *p = buf; /* next position in buf */
 	const size_t seplen = strlen(sep);
@@ -176,8 +176,8 @@ int sprintnumbers(size_t tot, char buf[restrict tot],
 }
 
 int fprintnumbers(FILE *restrict stream, const char form[restrict static 1],
-		  const char sep[restrict static 1], size_t len,
-		  size_t nums[restrict len])
+                  const char sep[restrict static 1], size_t len,
+                  size_t nums[restrict len])
 {
 	if (!stream)
 		return -EFAULT;
@@ -212,8 +212,8 @@ int fprintnumbers(FILE *restrict stream, const char form[restrict static 1],
 }
 
 int fprintnumbers_opt(FILE *restrict stream, const char form[restrict static 1],
-		      const char sep[restrict static 1], size_t len,
-		      size_t nums[restrict static len])
+                      const char sep[restrict static 1], size_t len,
+                      size_t nums[restrict static len])
 {
 	if (!stream)
 		return -EFAULT;
@@ -274,7 +274,7 @@ int main(void)
 				numberline(strlen(lbuf) + 1, lbuf, &n, 0);
 			if (nums) {
 				int ret = fprintnumbers(stdout, "%#zX", ",\t",
-							n, nums);
+				                        n, nums);
 				if (ret < 0)
 					return EXIT_FAILURE;
 				free(nums);
@@ -287,8 +287,8 @@ int main(void)
 						return EXIT_FAILURE;
 					if (c == '\n') {
 						fprintf(stderr,
-							"line too long: %s\n",
-							lbuf);
+						        "line too long: %s\n",
+						        lbuf);
 						break;
 					}
 				}

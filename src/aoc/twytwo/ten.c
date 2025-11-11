@@ -31,12 +31,12 @@ int main(void)
 	[[__maybe_unused__]] unsigned strengths = 0;
 	// 240 pixels + One new line character per row + end of string
 	char screen[247] = { [SCREEN_INDEX(40) + 1] = '\n',
-			     [SCREEN_INDEX(80) + 1] = '\n',
-			     [SCREEN_INDEX(120) + 1] = '\n',
-			     [SCREEN_INDEX(160) + 1] = '\n',
-			     [SCREEN_INDEX(200) + 1] = '\n',
-			     [SCREEN_INDEX(240) + 1] = '\n',
-			     [246] = '\0' };
+		             [SCREEN_INDEX(80) + 1] = '\n',
+		             [SCREEN_INDEX(120) + 1] = '\n',
+		             [SCREEN_INDEX(160) + 1] = '\n',
+		             [SCREEN_INDEX(200) + 1] = '\n',
+		             [SCREEN_INDEX(240) + 1] = '\n',
+		             [246] = '\0' };
 
 	while (true) {
 		logd("Starts Cycle=%llu, x=%d, v=%d, inst=%s", cycle, x, v,

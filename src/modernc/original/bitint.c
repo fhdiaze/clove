@@ -47,5 +47,5 @@ int main(int argc, char *argv[static argc + 1])
 		printf("4 bit arithm:\t%u\n", (unsigned)(max4u + 1wbu));
 		printf("int arithm:\t%u\n", (unsigned)(max4u + 1));
 		return s15 + su15 + u15 + u65 + oa65 + o65 + s65 + sa65 + os65 +
-		       !max128s + !min128s;
+	               !max128s + !min128s;
 }

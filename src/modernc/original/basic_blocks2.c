@@ -62,8 +62,8 @@ static volatile sig_atomic_t interrupt = 0;
 static volatile unsigned deepest = 0;
 
 static const char *descend1(const char act[static 1], unsigned depth,
-			    size_t len, char buffer[restrict static len],
-			    jmp_buf jmpTarget)
+                            size_t len, char buffer[restrict static len],
+                            jmp_buf jmpTarget)
 {
 	if (depth + 2 > sizeof head)
 		longjmp(jmpTarget, tooDeep);
@@ -206,8 +206,8 @@ void doAtExit(void)
 {
 	if (lastOpen && lastOpen[0]) {
 		fprintf(stderr,
-			"\n***********\nabnormal exit, last open file was %s\n",
-			lastOpen[0]);
+		        "\n***********\nabnormal exit, last open file was %s\n",
+		        lastOpen[0]);
 	}
 }
 

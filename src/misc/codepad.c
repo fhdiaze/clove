@@ -116,7 +116,7 @@ int main(void)
 	localtime_s(&now_buffer, &now);
 
 	strftime(now_as_string, sizeof(now_as_string),
-		 "%A %Y-%m-%d %H:%M:%S %Z", &now_buffer);
+	         "%A %Y-%m-%d %H:%M:%S %Z", &now_buffer);
 	printf("formatted time=%s\n", now_as_string);
 
 	[[__maybe_unused__]] Test test_structure = my_function();

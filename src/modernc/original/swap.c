@@ -3,10 +3,10 @@
 
 #define static_assert_compatible(A, B, REASON)                          \
 	static_assert(_Generic((typeof(A) *)nullptr,                    \
-			      typeof(B) *: true,                        \
-			      default: false),                          \
-		      "expected compatible types: " REASON ", have " #A \
-		      " and " #B "")
+	                      typeof(B) *: true,                        \
+	                      default: false),                          \
+	              "expected compatible types: " REASON ", have " #A \
+	              " and " #B "")
 
 #ifndef __GNUC__
 #define SWAP(X, Y)                                                          \
@@ -19,9 +19,9 @@
 		auto const swap_p1 = &(X);                                  \
 		auto const swap_p2 = &(Y);                                  \
 		static_assert_compatible(*swap_p1, *swap_p2,                \
-					 "to exchange values, '" #X         \
-					 "' and '" #Y                       \
-					 "' must have compatible types");   \
+		                         "to exchange values, '" #X         \
+		                         "' and '" #Y                       \
+		                         "' must have compatible types");   \
 		auto swap_tmp = *swap_p1;                                   \
 		*swap_p1 = *swap_p2;                                        \
 		*swap_p2 = swap_tmp;                                        \
@@ -38,9 +38,9 @@
 		auto const swap_p1 = &(X);                                  \
 		auto const swap_p2 = &(Y);                                  \
 		static_assert_compatible(*swap_p1, *swap_p2,                \
-					 "to exchange values, '" #X         \
-					 "' and '" #Y                       \
-					 "' must have compatible types");   \
+		                         "to exchange values, '" #X         \
+		                         "' and '" #Y                       \
+		                         "' must have compatible types");   \
 		auto swap_tmp = *swap_p1;                                   \
 		*swap_p1 = *swap_p2;                                        \
 		*swap_p2 = swap_tmp;                                        \
@@ -70,28 +70,28 @@
 		auto const max_y = (Y);                                  \
 		/* now the body starts */                                \
 		((isnegative(max_x) && !isnegative(max_y)) ?             \
-			 max_y :                                         \
-			 ((isnegative(max_y) && !isnegative(max_x)) ?    \
-				  max_x : /* both have the same sign  */ \
-				  ((max_x < max_y) ? max_y : max_x)));   \
+		         max_y :                                         \
+		         ((isnegative(max_y) && !isnegative(max_x)) ?    \
+		                  max_x : /* both have the same sign  */ \
+		                  ((max_x < max_y) ? max_y : max_x)));   \
 	})
 
 #define mincharacteristic(X, Y) ((issigned(X) << 2) | (issigned(Y) << 1) | 1)
 
 #define minunsigned(X, Y)                \
 	(_Generic(tozero(X) + tozero(Y), \
-		 typeof(X): tozero(Y),   \
-		 default: tozero(X)))
+	         typeof(X): tozero(Y),   \
+	         default: tozero(X)))
 
 #define minreturn(X, Y)                                                         \
 	_Generic((char (*)[mincharacteristic(                                   \
 			 X, Y)]){ 0 }, /* both signed, arithmetic conversion */ \
-		char (*)[4 | 2 | 1]: tozero(X) +                                \
-			tozero(Y), /* only one signed, use it */                \
-		char (*)[0 | 2 | 1]: tozero(Y),                                 \
-		char (*)[4 | 0 | 1]: tozero(                                    \
+	        char (*)[4 | 2 | 1]: tozero(X) +                                \
+	                tozero(Y), /* only one signed, use it */                \
+	        char (*)[0 | 2 | 1]: tozero(Y),                                 \
+	        char (*)[4 | 0 | 1]: tozero(                                    \
 			 X), /* both unsigned, use narrower */                  \
-		char (*)[0 | 0 | 1]: minunsigned(X, Y))
+	        char (*)[0 | 0 | 1]: minunsigned(X, Y))
 
 #define MIN(X, Y)                                                                 \
 	/* This starts the compound expression construct. */                      \
@@ -103,13 +103,13 @@
 		/* now the body starts */                                         \
 		typedef typeof(minreturn(min_x, min_y)) min_type;                 \
 		((isnegative(min_x) && !issigned(min_y)) ?                        \
-			 (min_type)min_x :                                        \
-			 ((isnegative(min_y) && !issigned(min_x)) ?               \
-				  (min_type)min_y :                               \
-				  (/* both have the same signedness or are both \
+		         (min_type)min_x :                                        \
+		         ((isnegative(min_y) && !issigned(min_x)) ?               \
+		                  (min_type)min_y :                               \
+		                  (/* both have the same signedness or are both \
 		                  positive */ \
-				   (min_x < min_y) ? (min_type)min_x :            \
-						     (min_type)min_y)));          \
+		                   (min_x < min_y) ? (min_type)min_x :            \
+		                                     (min_type)min_y)));          \
 	})
 
 int main(int argc, char *argv[static argc + 1])
