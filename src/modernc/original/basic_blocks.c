@@ -21,22 +21,22 @@ constexpr char head[] = ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>| ";
  **/
 static const char *skipspace(const char s[static 1])
 {
-		while (isspace(s[0])) {
-				++s;
-		}
-		return s;
+	while (isspace(s[0])) {
+		++s;
+	}
+	return s;
 }
 
 /**
  ** @brief Exceptional states of the parse algorithm
  **/
 enum state {
-		execution = 0, //!< Normal execution
-		plusL,         //!< Too many left braces
-		plusR,         //!< Too many right braces
-		tooDeep,       //!< Nesting too deep to handle
-		eofOut,        //!< End of output
-		interrupted,   //!< Interrupted by a signal
+	execution = 0, //!< Normal execution
+	plusL,         //!< Too many left braces
+	plusR,         //!< Too many right braces
+	tooDeep,       //!< Nesting too deep to handle
+	eofOut,        //!< End of output
+	interrupted,   //!< Interrupted by a signal
 };
 
 /**
@@ -44,8 +44,8 @@ enum state {
  **/
 static const char *end_line(const char s[static 1], jmp_buf jmpTarget)
 {
-		if (putchar('\n') == EOF) longjmp(jmpTarget, eofOut);
-		return skipspace(s);
+	if (putchar('\n') == EOF) longjmp(jmpTarget, eofOut);
+	return skipspace(s);
 }
 
 /**
@@ -58,90 +58,90 @@ static const char *descend(const char *act,
                            size_t len, char buffer[static len],
                            jmp_buf jmpTarget)
 {
-		if (dp[0] + 3 > sizeof head) longjmp(jmpTarget, tooDeep);
-		++dp[0];                  /*@\label{lab:incr-rec}*/
+	if (dp[0] + 3 > sizeof head) longjmp(jmpTarget, tooDeep);
+	++dp[0];                  /*@\label{lab:incr-rec}*/
 NEW_LINE:                         // Loops on output
-		while (!act || !act[0]) { // Loops for input
-				if (interrupt) longjmp(jmpTarget, interrupted);
-				act = skipspace(fgets(buffer, len, stdin));
-				if (!act) { // End of stream
-						if (dp[0] != 1) longjmp(jmpTarget, plusL);
-						else goto ASCEND;
-				}
+	while (!act || !act[0]) { // Loops for input
+		if (interrupt) longjmp(jmpTarget, interrupted);
+		act = skipspace(fgets(buffer, len, stdin));
+		if (!act) { // End of stream
+			if (dp[0] != 1) longjmp(jmpTarget, plusL);
+			else goto ASCEND;
 		}
-		fputs(&head[sizeof head - (dp[0] + 2)], stdout); // Header
+	}
+	fputs(&head[sizeof head - (dp[0] + 2)], stdout); // Header
 
-		for (; act && act[0]; ++act) { // Remainder of the line
-				switch (act[0]) {      /*@\label{lab:switch-char}*/
-				case left:             // Descends on left brace
-						act = end_line(act + 1, jmpTarget);
-						act = descend(act, dp, len, buffer,
-						              jmpTarget); /*@\label{lab:descend}*/
-						act = end_line(act + 1, jmpTarget);
-						goto NEW_LINE;
-				case right: // Returns on right brace
-						if (dp[0] == 1) longjmp(jmpTarget, plusR);
-						else goto ASCEND;
-				default: // Prints char and goes on
-						putchar(act[0]);
-				}
+	for (; act && act[0]; ++act) { // Remainder of the line
+		switch (act[0]) {      /*@\label{lab:switch-char}*/
+		case left:             // Descends on left brace
+			act = end_line(act + 1, jmpTarget);
+			act = descend(act, dp, len, buffer,
+			              jmpTarget); /*@\label{lab:descend}*/
+			act = end_line(act + 1, jmpTarget);
+			goto NEW_LINE;
+		case right: // Returns on right brace
+			if (dp[0] == 1) longjmp(jmpTarget, plusR);
+			else goto ASCEND;
+		default: // Prints char and goes on
+			putchar(act[0]);
 		}
-		goto NEW_LINE;
+	}
+	goto NEW_LINE;
 ASCEND:
-		--dp[0]; /*@\label{lab:decr-rec}*/
-		return act;
+	--dp[0]; /*@\label{lab:decr-rec}*/
+	return act;
 }
 
 constexpr unsigned maxline = 256;
 
 void basic_blocks(void)
 {
-		auto x1 = maxline;
-		char buffer[maxline];
-		unsigned x = 0;
-		unsigned depth = 0;
-		const char *format =
-			"All matching %0.0d'%c' '%c' pairs have been closed correctly\n";
-		jmp_buf jmpTarget;
-		switch (setjmp(jmpTarget)) {
-		case 0:
-				descend(nullptr, &depth, maxline, buffer, jmpTarget);
-				break;
-		case plusL:
-				format = "Warning: %d '%c' have not been closed properly "
-						 "(expected '%c')\n";
-				break;
-		case plusR:
-				format = "Error: closing too many (%d) '%c' parenthesis with "
-						 "additional '%c'\n";
-				// retry
-				if (!x) {
-						// jump for fun
-						x = 1;
-						longjmp(jmpTarget, plusR);
-				}
-				break;
-		case tooDeep:
-				format =
-					"Error: nesting (%d) of '%c' '%c' constructs is too deep\n";
-				break;
-		case eofOut:
-				format = "Error: EOF for stdout at %d open '%c', expecting "
-						 "same amount of '%c'\n";
-				break;
-		case interrupted:
-				format = "Interrupted at level %d of '%c' '%c' nesting\n";
-				break;
-		default:;
-				format =
-					"Error: unknown error within (%d) '%c' '%c' constructs\n";
+	auto x1 = maxline;
+	char buffer[maxline];
+	unsigned x = 0;
+	unsigned depth = 0;
+	const char *format =
+	    "All matching %0.0d'%c' '%c' pairs have been closed correctly\n";
+	jmp_buf jmpTarget;
+	switch (setjmp(jmpTarget)) {
+	case 0:
+		descend(nullptr, &depth, maxline, buffer, jmpTarget);
+		break;
+	case plusL:
+		format = "Warning: %d '%c' have not been closed properly "
+			 "(expected '%c')\n";
+		break;
+	case plusR:
+		format = "Error: closing too many (%d) '%c' parenthesis with "
+			 "additional '%c'\n";
+		// retry
+		if (!x) {
+			// jump for fun
+			x = 1;
+			longjmp(jmpTarget, plusR);
 		}
-		fflush(stdout);
-		fprintf(stderr, format, depth, left, right);
-		if (interrupt) {
-				SH_PRINT(stderr, interrupt, "is somebody trying to kill us?");
-				raise(interrupt);
-		}
+		break;
+	case tooDeep:
+		format =
+		    "Error: nesting (%d) of '%c' '%c' constructs is too deep\n";
+		break;
+	case eofOut:
+		format = "Error: EOF for stdout at %d open '%c', expecting "
+			 "same amount of '%c'\n";
+		break;
+	case interrupted:
+		format = "Interrupted at level %d of '%c' '%c' nesting\n";
+		break;
+	default:;
+		format =
+		    "Error: unknown error within (%d) '%c' '%c' constructs\n";
+	}
+	fflush(stdout);
+	fprintf(stderr, format, depth, left, right);
+	if (interrupt) {
+		SH_PRINT(stderr, interrupt, "is somebody trying to kill us?");
+		raise(interrupt);
+	}
 }
 
 /**
@@ -152,23 +152,23 @@ void basic_blocks(void)
  **/
 static void signal_handler(int sig)
 {
-		sh_count(sig);
-		switch (sig) {
-		case SIGTERM:
-				quick_exit(EXIT_FAILURE);
-		case SIGABRT:
-				_Exit(EXIT_FAILURE);
+	sh_count(sig);
+	switch (sig) {
+	case SIGTERM:
+		quick_exit(EXIT_FAILURE);
+	case SIGABRT:
+		_Exit(EXIT_FAILURE);
 #ifdef SIGCONT
-				// continue normal operation
-		case SIGCONT:
-				return;
+		// continue normal operation
+	case SIGCONT:
+		return;
 #endif
-		default:
-				/* reset the handling to its default */
-				signal(sig, SIG_DFL);
-				interrupt = sig;
-				return;
-		}
+	default:
+		/* reset the handling to its default */
+		signal(sig, SIG_DFL);
+		interrupt = sig;
+		return;
+	}
 }
 
 // Will point to the command-line arguments
@@ -177,44 +177,44 @@ static char **lastOpen = nullptr;
 // Checks if we were in the middle of an operation
 void doAtExit(void)
 {
-		if (lastOpen && lastOpen[0]) {
-				fprintf(stderr,
-				        "\n***********\nabnormal exit, last open file was %s\n",
-				        lastOpen[0]);
-		}
+	if (lastOpen && lastOpen[0]) {
+		fprintf(stderr,
+		        "\n***********\nabnormal exit, last open file was %s\n",
+		        lastOpen[0]);
+	}
 }
 
 int main(int argc, char *argv[argc + 1])
 {
-		// Ensures that stdout is line buffered
-		if (setvbuf(stdout, nullptr, _IOLBF, maxline + sizeof head + 2)) {
-				fputs("we could not establish line buffering for stdout, "
-				      "terminating.",
-				      stderr);
-				return EXIT_FAILURE;
+	// Ensures that stdout is line buffered
+	if (setvbuf(stdout, nullptr, _IOLBF, maxline + sizeof head + 2)) {
+		fputs("we could not establish line buffering for stdout, "
+		      "terminating.",
+		      stderr);
+		return EXIT_FAILURE;
+	}
+
+	// Establishes exit handlers
+	atexit(doAtExit);
+	at_quick_exit(doAtExit);
+
+	// Establishes signal handlers
+	for (unsigned i = 1; i < sh_known; ++i)
+		sh_enable(i, signal_handler);
+
+	// If there are no command-line arguments, reads from stdin
+	lastOpen = argv;
+	if (argc < 2) goto RUN;
+
+	// Runs basic_blocks for each command-line argument
+	for (++lastOpen; lastOpen[0]; ++lastOpen) {
+		if (!freopen(lastOpen[0], "r", stdin)) {
+			perror(lastOpen[0]);
+			return EXIT_FAILURE;
 		}
-
-		// Establishes exit handlers
-		atexit(doAtExit);
-		at_quick_exit(doAtExit);
-
-		// Establishes signal handlers
-		for (unsigned i = 1; i < sh_known; ++i)
-				sh_enable(i, signal_handler);
-
-		// If there are no command-line arguments, reads from stdin
-		lastOpen = argv;
-		if (argc < 2) goto RUN;
-
-		// Runs basic_blocks for each command-line argument
-		for (++lastOpen; lastOpen[0]; ++lastOpen) {
-				if (!freopen(lastOpen[0], "r", stdin)) {
-						perror(lastOpen[0]);
-						return EXIT_FAILURE;
-				}
-				printf("++++++++++ %s +++++++++++\n", lastOpen[0]);
-		RUN:
-				basic_blocks();
-		}
-		return EXIT_SUCCESS;
+		printf("++++++++++ %s +++++++++++\n", lastOpen[0]);
+	RUN:
+		basic_blocks();
+	}
+	return EXIT_SUCCESS;
 }

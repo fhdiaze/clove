@@ -11,8 +11,8 @@
  ** @brief A pair of strings to hold signal information
  **/
 struct sh_pair {
-		const char *name;
-		const char *desc;
+	const char *name;
+	const char *desc;
 };
 typedef struct sh_pair sh_pair;
 
@@ -50,18 +50,18 @@ extern _Atomic(unsigned long) sh_counts[];
  **/
 inline void sh_count(int sig)
 {
-		if (sig < sh_known) ++sh_counts[sig];
+	if (sig < sh_known) ++sh_counts[sig];
 }
 
 inline unsigned long sh_counted(int sig)
 {
-		return (sig < sh_known) ? sh_counts[sig] : 0;
+	return (sig < sh_known) ? sh_counts[sig] : 0;
 }
 
 #else
 inline void sh_count(int sig)
 {
-		// empty
+	// empty
 }
 
 inline unsigned long sh_counted(int sig) { return 0; }

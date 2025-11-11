@@ -24,7 +24,7 @@
  ** @f$2^{50} \approx 10^{15}@f$ samples.
  **/
 struct stats {
-		double moment[4];
+	double moment[4];
 };
 typedef struct stats stats;
 
@@ -34,7 +34,7 @@ typedef struct stats stats;
  **/
 inline double stats_samples(stats c[static 1]) [[__unsequenced__]]
 {
-		return c->moment[0];
+	return c->moment[0];
 }
 
 /**
@@ -43,7 +43,7 @@ inline double stats_samples(stats c[static 1]) [[__unsequenced__]]
  **/
 inline double stats_mean(stats c[static 1]) [[__unsequenced__]]
 {
-		return c->moment[1];
+	return c->moment[1];
 }
 
 /**
@@ -52,7 +52,7 @@ inline double stats_mean(stats c[static 1]) [[__unsequenced__]]
  **/
 inline double stats_var(stats c[static 1]) [[__reproducible__]]
 {
-		return c->moment[2] / stats_samples(c);
+	return c->moment[2] / stats_samples(c);
 }
 
 // Clang has this notorious design flaw in <tgmath.h> where they
@@ -70,7 +70,7 @@ inline double stats_var(stats c[static 1]) [[__reproducible__]]
  **/
 inline double stats_sdev(stats c[static 1]) [[__reproducible__]]
 {
-		return sqrt(stats_var(c));
+	return sqrt(stats_var(c));
 }
 
 /**
@@ -79,7 +79,7 @@ inline double stats_sdev(stats c[static 1]) [[__reproducible__]]
  **/
 inline double stats_rsdev(stats c[static 1]) [[__reproducible__]]
 {
-		return sqrt(stats_var(c)) / stats_mean(c);
+	return sqrt(stats_var(c)) / stats_mean(c);
 }
 
 /**
@@ -88,8 +88,8 @@ inline double stats_rsdev(stats c[static 1]) [[__reproducible__]]
  **/
 inline double stats_skew(stats c[static 1]) [[__reproducible__]]
 {
-		double var = stats_var(c);
-		return (c->moment[3] / pow(var, 1.5)) / stats_samples(c);
+	double var = stats_var(c);
+	return (c->moment[3] / pow(var, 1.5)) / stats_samples(c);
 }
 
 /**
@@ -101,7 +101,7 @@ inline double stats_skew(stats c[static 1]) [[__reproducible__]]
  **/
 inline double stats_var_unbiased(stats c[static 1]) [[__reproducible__]]
 {
-		return c->moment[2] / (stats_samples(c) - 1);
+	return c->moment[2] / (stats_samples(c) - 1);
 }
 
 /**
@@ -113,7 +113,7 @@ inline double stats_var_unbiased(stats c[static 1]) [[__reproducible__]]
  **/
 inline double stats_sdev_unbiased(stats c[static 1]) [[__reproducible__]]
 {
-		return sqrt(stats_var_unbiased(c));
+	return sqrt(stats_var_unbiased(c));
 }
 
 #if __clang_major__
@@ -126,7 +126,7 @@ inline double stats_sdev_unbiased(stats c[static 1]) [[__reproducible__]]
  **/
 inline double stats_rsdev_unbiased(stats c[static 1]) [[__reproducible__]]
 {
-		return stats_rsdev(c) * (1 + 1 / (4 * stats_samples(c)));
+	return stats_rsdev(c) * (1 + 1 / (4 * stats_samples(c)));
 }
 
 /**
@@ -136,28 +136,28 @@ inline double stats_rsdev_unbiased(stats c[static 1]) [[__reproducible__]]
  ** it has to be between `0` and `3`, including.
  **/
 inline void stats_collect(stats c[static 1], double val, unsigned moments)
-	[[__reproducible__]]
+    [[__reproducible__]]
 {
-		double n = stats_samples(c);
-		double n0 = n - 1;
-		double n1 = n + 1;
-		double delta0 = 1;
-		double delta = val - stats_mean(c);
-		double delta1 = delta / n1;
-		double delta2 = delta1 * delta * n;
-		switch (moments) {
-		default:
-				c->moment[3] += (delta2 * n0 - 3 * c->moment[2]) * delta1;
-				[[__fallthrough__]];
-		case 2:
-				c->moment[2] += delta2;
-				[[__fallthrough__]];
-		case 1:
-				c->moment[1] += delta1;
-				[[__fallthrough__]];
-		case 0:
-				c->moment[0] += delta0;
-		}
+	double n = stats_samples(c);
+	double n0 = n - 1;
+	double n1 = n + 1;
+	double delta0 = 1;
+	double delta = val - stats_mean(c);
+	double delta1 = delta / n1;
+	double delta2 = delta1 * delta * n;
+	switch (moments) {
+	default:
+		c->moment[3] += (delta2 * n0 - 3 * c->moment[2]) * delta1;
+		[[__fallthrough__]];
+	case 2:
+		c->moment[2] += delta2;
+		[[__fallthrough__]];
+	case 1:
+		c->moment[1] += delta1;
+		[[__fallthrough__]];
+	case 0:
+		c->moment[0] += delta0;
+	}
 }
 
 /**
@@ -167,7 +167,7 @@ inline void stats_collect(stats c[static 1], double val, unsigned moments)
  **/
 inline void stats_collect0(stats c[static 1], double val) [[__reproducible__]]
 {
-		stats_collect(c, val, 0);
+	stats_collect(c, val, 0);
 }
 
 /**
@@ -177,7 +177,7 @@ inline void stats_collect0(stats c[static 1], double val) [[__reproducible__]]
  **/
 inline void stats_collect1(stats c[static 1], double val) [[__reproducible__]]
 {
-		stats_collect(c, val, 1);
+	stats_collect(c, val, 1);
 }
 
 /**
@@ -187,7 +187,7 @@ inline void stats_collect1(stats c[static 1], double val) [[__reproducible__]]
  **/
 inline void stats_collect2(stats c[static 1], double val) [[__reproducible__]]
 {
-		stats_collect(c, val, 2);
+	stats_collect(c, val, 2);
 }
 
 /**
@@ -197,5 +197,5 @@ inline void stats_collect2(stats c[static 1], double val) [[__reproducible__]]
  **/
 inline void stats_collect3(stats c[static 1], double val) [[__reproducible__]]
 {
-		stats_collect(c, val, 3);
+	stats_collect(c, val, 3);
 }

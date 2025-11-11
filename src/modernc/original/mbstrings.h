@@ -66,8 +66,8 @@ typedef uint_least32_t char32_t;
  ** @see MBSTATE
  **/
 typedef union mbstate_t_ {
-		unsigned char bytes[sizeof(mbstate_t)];
-		mbstate_t state;
+	unsigned char bytes[sizeof(mbstate_t)];
+	mbstate_t state;
 } mbstate_t_;
 
 /**
@@ -601,12 +601,12 @@ unsigned long long mbsrtoull(const char *restrict s1, mbstate_t *restrict state,
  ** constants had been limited to `signed int`.
  **/
 enum mbcode {
-		//! An invalid encoding was encountered.
-		mbinvalid = (size_t)-1,
-		//! The encoding was incomplete.
-		mbincomplete = (size_t)-2,
-		//! A previously detect output character was stored.
-		mbstored = (size_t)-3,
+	//! An invalid encoding was encountered.
+	mbinvalid = (size_t)-1,
+	//! The encoding was incomplete.
+	mbincomplete = (size_t)-2,
+	//! A previously detect output character was stored.
+	mbstored = (size_t)-3,
 };
 
 static_assert(mbinvalid == SIZE_MAX,
