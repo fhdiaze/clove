@@ -20,8 +20,7 @@ rat rat_get_sum(rat x, rat y) [[__unsequenced__]];
 
 /* Functions that operate on pointers to rat. */
 void rat_destroy(rat *rp) [[__unsequenced__]];
-rat *rat_init(rat *rp, signed sign, size_t num, size_t denom)
-	[[__unsequenced__]];
+rat *rat_init(rat *rp, signed sign, size_t num, size_t denom) [[__unsequenced__]];
 rat *rat_normalize(rat *rp) [[__unsequenced__]];
 rat *rat_extend(rat *rp, size_t f) [[__unsequenced__]];
 rat *rat_sumup(rat *rp, rat y) [[__unsequenced__]];

@@ -33,14 +33,12 @@ int main(void)
 			}
 			p += r;
 			in += r;
-			char8_t *cont =
-				ob + 1; // first character is already stored
+			char8_t *cont = ob + 1; // first character is already stored
 			while (mbrtoc8(cont, "", 1, &st) == mbstored) {
 				cont++;
 			}
 			// Now we have the whole UTF-8. Analyze the result.
-			printf("%s",
-			       ((cont - ob) == 1) ? "ASCII\t" : "UTF-8\t");
+			printf("%s", ((cont - ob) == 1) ? "ASCII\t" : "UTF-8\t");
 			for (char8_t *o = ob; o < cont; ++o) {
 				printf("|%02hhx", *o);
 			}

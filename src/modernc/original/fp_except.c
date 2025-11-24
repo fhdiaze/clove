@@ -6,8 +6,7 @@
 #include <math.h>
 #endif
 
-#if !defined(__STDC_IEC_559__) && !defined(__STDC_IEC_60559_BFP__) && \
-	!FE_ALL_EXCEPT
+#if !defined(__STDC_IEC_559__) && !defined(__STDC_IEC_60559_BFP__) && !FE_ALL_EXCEPT
 #error "floating-point arithmetic is too weird"
 #endif
 
@@ -77,8 +76,7 @@ void printexcept(void)
 
 int main(int argc, char *argv[static argc + 1])
 {
-	printf("division by zero is %sequal to INFINITY\n",
-	       has_inf ? "" : "un");
+	printf("division by zero is %sequal to INFINITY\n", has_inf ? "" : "un");
 	for (unsigned i = 1; i < argc; i++) {
 		feclearexcept(FE_ALL_EXCEPT);
 		double x = strtod(argv[i], nullptr);

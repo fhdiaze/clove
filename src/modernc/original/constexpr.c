@@ -12,8 +12,7 @@
 
 [[__maybe_unused__]] static constexpr size_t size_max = (size_t)-1;
 
-[[__maybe_unused__]] constexpr long double π =
-	3.141 '592' 653 '589' 793 '238' 46;
+[[__maybe_unused__]] constexpr long double π = 3.141 '592' 653 '589' 793 '238' 46;
 [[__maybe_unused__]] constexpr long double π² = π * π;
 
 [[__maybe_unused__]] constexpr div_t one = {

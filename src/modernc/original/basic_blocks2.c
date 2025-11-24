@@ -61,9 +61,8 @@ static volatile sig_atomic_t interrupt = 0;
  **/
 static volatile unsigned deepest = 0;
 
-static const char *descend1(const char act[static 1], unsigned depth,
-                            size_t len, char buffer[restrict static len],
-                            jmp_buf jmpTarget)
+static const char *descend1(const char act[static 1], unsigned depth, size_t len,
+                            char buffer[restrict static len], jmp_buf jmpTarget)
 {
 	if (depth + 2 > sizeof head)
 		longjmp(jmpTarget, tooDeep);
@@ -132,8 +131,7 @@ enum { maxline = 256 };
 void basic_blocks(void)
 {
 	char buffer[maxline];
-	const char *format =
-		"All matching %0.0d'%c' '%c' pairs have been closed correctly\n";
+	const char *format = "All matching %0.0d'%c' '%c' pairs have been closed correctly\n";
 	jmp_buf jmpTarget;
 	switch (setjmp(jmpTarget)) {
 	case 0:
@@ -149,8 +147,7 @@ void basic_blocks(void)
 			 "additional '%c'\n";
 		break;
 	case tooDeep:
-		format =
-			"Error: nesting (%d) of '%c' '%c' constructs is too deep\n";
+		format = "Error: nesting (%d) of '%c' '%c' constructs is too deep\n";
 		break;
 	case eofOut:
 		format = "Error: EOF for stdout at %d open '%c', expecting "
@@ -160,8 +157,7 @@ void basic_blocks(void)
 		format = "Interrupted at level %d of '%c' '%c' nesting\n";
 		break;
 	default:;
-		format =
-			"Error: unknown error within (%d) '%c' '%c' constructs\n";
+		format = "Error: unknown error within (%d) '%c' '%c' constructs\n";
 	}
 	fflush(stdout);
 	fprintf(stderr, format, deepest, left, right);
@@ -205,8 +201,7 @@ static char **lastOpen = nullptr;
 void doAtExit(void)
 {
 	if (lastOpen && lastOpen[0]) {
-		fprintf(stderr,
-		        "\n***********\nabnormal exit, last open file was %s\n",
+		fprintf(stderr, "\n***********\nabnormal exit, last open file was %s\n",
 		        lastOpen[0]);
 	}
 }

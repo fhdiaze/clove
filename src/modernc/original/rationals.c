@@ -107,8 +107,7 @@ void rat_destroy(rat *rp) [[__unsequenced__]]
 		*rp = (rat){};
 }
 
-rat *rat_init(rat *rp, signed sign, size_t num, size_t denom)
-	[[__unsequenced__]]
+rat *rat_init(rat *rp, signed sign, size_t num, size_t denom) [[__unsequenced__]]
 {
 	if (rp)
 		*rp = rat_get(sign, num, denom);
@@ -157,8 +156,7 @@ rat *rat_rma(rat *rp, rat x, rat y) [[__unsequenced__]]
 const char *rat_print(size_t len, char tmp[len], const rat *x)
 {
 	if (x) {
-		snprintf(tmp, len, "%c%zu/%zu", (x->sign ? '-' : '+'), x->num,
-		         x->denom);
+		snprintf(tmp, len, "%c%zu/%zu", (x->sign ? '-' : '+'), x->num, x->denom);
 	} else {
 		tmp[0] = 0;
 	}
@@ -167,47 +165,34 @@ const char *rat_print(size_t len, char tmp[len], const rat *x)
 
 #define RAT_PRINT_MAX 256
 
-#define RAT_PRINT(X) \
-	rat_print(RAT_PRINT_MAX, (char[RAT_PRINT_MAX]){}, (rat[1]){ (X) })
+#define RAT_PRINT(X) rat_print(RAT_PRINT_MAX, (char[RAT_PRINT_MAX]){}, (rat[1]){ (X) })
 
 int main(void)
 {
 	rat third = rat_get(+1, 1, 3);
 	rat forth = rat_get(-1, 1, 4);
-	printf("%s, prod is %s, 3x %s\n", RAT_PRINT(third),
-	       RAT_PRINT(rat_get_prod(third, third)),
+	printf("%s, prod is %s, 3x %s\n", RAT_PRINT(third), RAT_PRINT(rat_get_prod(third, third)),
 	       RAT_PRINT(rat_get_prod(third, rat_get_prod(third, third))));
-	printf("%s, prod is %s, 3x %s\n", RAT_PRINT(forth),
-	       RAT_PRINT(rat_get_prod(forth, forth)),
+	printf("%s, prod is %s, 3x %s\n", RAT_PRINT(forth), RAT_PRINT(rat_get_prod(forth, forth)),
 	       RAT_PRINT(rat_get_prod(forth, rat_get_prod(forth, forth))));
-	printf("%s, prod is %s, 3x %s\n", RAT_PRINT(forth),
-	       RAT_PRINT(rat_get_prod(third, forth)),
+	printf("%s, prod is %s, 3x %s\n", RAT_PRINT(forth), RAT_PRINT(rat_get_prod(third, forth)),
 	       RAT_PRINT(rat_get_prod(forth, rat_get_prod(third, forth))));
-	printf("%s, prod is %s, 3x %s\n", RAT_PRINT(third),
-	       RAT_PRINT(rat_get_prod2(third, third)),
+	printf("%s, prod is %s, 3x %s\n", RAT_PRINT(third), RAT_PRINT(rat_get_prod2(third, third)),
 	       RAT_PRINT(rat_get_prod2(third, rat_get_prod2(third, third))));
-	printf("%s, prod is %s, 3x %s\n", RAT_PRINT(forth),
-	       RAT_PRINT(rat_get_prod2(forth, forth)),
+	printf("%s, prod is %s, 3x %s\n", RAT_PRINT(forth), RAT_PRINT(rat_get_prod2(forth, forth)),
 	       RAT_PRINT(rat_get_prod2(forth, rat_get_prod2(forth, forth))));
-	printf("%s, prod is %s, 3x %s\n", RAT_PRINT(forth),
-	       RAT_PRINT(rat_get_prod2(third, forth)),
+	printf("%s, prod is %s, 3x %s\n", RAT_PRINT(forth), RAT_PRINT(rat_get_prod2(third, forth)),
 	       RAT_PRINT(rat_get_prod2(forth, rat_get_prod2(third, forth))));
-	printf("%s, sum is %s, 3x %s\n", RAT_PRINT(third),
-	       RAT_PRINT(rat_get_sum(third, third)),
+	printf("%s, sum is %s, 3x %s\n", RAT_PRINT(third), RAT_PRINT(rat_get_sum(third, third)),
 	       RAT_PRINT(rat_get_sum(third, rat_get_sum(third, third))));
-	printf("%s, sum is %s, 3x %s\n", RAT_PRINT(forth),
-	       RAT_PRINT(rat_get_sum(forth, forth)),
+	printf("%s, sum is %s, 3x %s\n", RAT_PRINT(forth), RAT_PRINT(rat_get_sum(forth, forth)),
 	       RAT_PRINT(rat_get_sum(forth, rat_get_sum(forth, forth))));
-	printf("%s, sum is %s, 3x %s\n", RAT_PRINT(forth),
-	       RAT_PRINT(rat_get_sum(third, forth)),
+	printf("%s, sum is %s, 3x %s\n", RAT_PRINT(forth), RAT_PRINT(rat_get_sum(third, forth)),
 	       RAT_PRINT(rat_get_sum(forth, rat_get_sum(third, forth))));
-	printf("%s, sum is %s, 3x %s\n", RAT_PRINT(third),
-	       RAT_PRINT(rat_get_sum2(third, third)),
+	printf("%s, sum is %s, 3x %s\n", RAT_PRINT(third), RAT_PRINT(rat_get_sum2(third, third)),
 	       RAT_PRINT(rat_get_sum2(third, rat_get_sum2(third, third))));
-	printf("%s, sum is %s, 3x %s\n", RAT_PRINT(forth),
-	       RAT_PRINT(rat_get_sum2(forth, forth)),
+	printf("%s, sum is %s, 3x %s\n", RAT_PRINT(forth), RAT_PRINT(rat_get_sum2(forth, forth)),
 	       RAT_PRINT(rat_get_sum2(forth, rat_get_sum2(forth, forth))));
-	printf("%s, sum is %s, 3x %s\n", RAT_PRINT(forth),
-	       RAT_PRINT(rat_get_sum2(third, forth)),
+	printf("%s, sum is %s, 3x %s\n", RAT_PRINT(forth), RAT_PRINT(rat_get_sum2(third, forth)),
 	       RAT_PRINT(rat_get_sum2(forth, rat_get_sum2(third, forth))));
 }

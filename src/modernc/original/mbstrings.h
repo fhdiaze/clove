@@ -98,8 +98,7 @@ typedef int (*wcclass_t)(wint_t);
  ** @remark @a state of null indicates that @a c can be scanned
  ** without considering any context.
  **/
-size_t mbrtow(wchar_t *restrict C, const char c[restrict static 1],
-              mbstate_t *restrict state);
+size_t mbrtow(wchar_t *restrict C, const char c[restrict static 1], mbstate_t *restrict state);
 
 /**
  ** @brief Interpret a sequence of bytes in @a c as mb character and
@@ -205,8 +204,7 @@ char *mbsrmbsncpy(size_t n, char t[restrict n], const mbstate_t *restrict state,
  ** case @c *t is not written to and @a tstate is unchanged.
  **/
 char *mbsrncpy(size_t n, char t[restrict n], mbstate_t *restrict tstate,
-               const char s[restrict static 1],
-               const mbstate_t *restrict sstate);
+               const char s[restrict static 1], const mbstate_t *restrict sstate);
 
 /**
  ** @brief Interpret a sequence of bytes in @a s as mb string and
@@ -229,8 +227,8 @@ char *mbsrncpy(size_t n, char t[restrict n], mbstate_t *restrict tstate,
  ** @remark @a state of null indicates that @a s can be scanned
  ** without considering any context.
  **/
-const char *mbsrwc(const char s[restrict static 1], mbstate_t *restrict state,
-                   wchar_t C, size_t occurrence);
+const char *mbsrwc(const char s[restrict static 1], mbstate_t *restrict state, wchar_t C,
+                   size_t occurrence);
 
 /**
  ** @brief Interpret a sequence of bytes in @a s as mb string and
@@ -253,8 +251,8 @@ const char *mbsrwc(const char s[restrict static 1], mbstate_t *restrict state,
  ** @remark @a state of null indicates that @a s can be scanned
  ** without considering any context.
  **/
-const char *mbsrmb(const char s[static 1], mbstate_t *restrict state,
-                   const char c[static 1], size_t occurence);
+const char *mbsrmb(const char s[static 1], mbstate_t *restrict state, const char c[static 1],
+                   size_t occurence);
 
 /**
  ** @brief Interpret a sequence of bytes in @a s as mb string and
@@ -273,8 +271,7 @@ const char *mbsrmb(const char s[static 1], mbstate_t *restrict state,
  ** @remark @a state of null indicates that @a s can be scanned
  ** without considering any context.
  **/
-const char *mbsrrwc(const char s[restrict static 1], mbstate_t *restrict state,
-                    wchar_t C);
+const char *mbsrrwc(const char s[restrict static 1], mbstate_t *restrict state, wchar_t C);
 
 /**
  ** @brief Interpret a sequence of bytes in @a s as mb string and
@@ -293,8 +290,7 @@ const char *mbsrrwc(const char s[restrict static 1], mbstate_t *restrict state,
  ** @remark @a state of null indicates that @a s can be scanned
  ** without considering any context.
  **/
-const char *mbsrrmb(const char s[static 1], mbstate_t *restrict state,
-                    const char c[static 1]);
+const char *mbsrrmb(const char s[static 1], mbstate_t *restrict state, const char c[static 1]);
 
 /**
  ** @brief In mb string @a s1 jump over the initial segment
@@ -312,8 +308,8 @@ const char *mbsrrmb(const char s[static 1], mbstate_t *restrict state,
  ** @remark A @a state that is null indicates that @a s1 can be scanned
  ** without considering any context.
  **/
-const char *mbsrwcjump(const char s1[static 1], mbstate_t *restrict state,
-                       size_t S2len, const wchar_t S2[S2len]);
+const char *mbsrwcjump(const char s1[static 1], mbstate_t *restrict state, size_t S2len,
+                       const wchar_t S2[S2len]);
 
 /**
  ** @brief In mb string @a s1 find a segment corresponding to
@@ -331,8 +327,7 @@ const char *mbsrwcjump(const char s1[static 1], mbstate_t *restrict state,
  ** @remark A @a state of null indicates that @a s can be scanned
  ** without considering any context.
  **/
-const char *mbsrwcs(const char s1[static 1], mbstate_t *restrict state,
-                    const wchar_t *S2);
+const char *mbsrwcs(const char s1[static 1], mbstate_t *restrict state, const wchar_t *S2);
 
 /**
  ** @brief In mb string @a s1 find a segment corresponding to mb
@@ -350,8 +345,7 @@ const char *mbsrwcs(const char s1[static 1], mbstate_t *restrict state,
  ** @remark A @a state of null indicates that @a s can be scanned
  ** without considering any context.
  **/
-const char *mbsrmbs(const char s1[static 1], mbstate_t *restrict state,
-                    const char *s2);
+const char *mbsrmbs(const char s1[static 1], mbstate_t *restrict state, const char *s2);
 
 /**
  ** @brief In mb string @a s1 skip over the initial part of the
@@ -373,8 +367,7 @@ const char *mbsrmbs(const char s1[static 1], mbstate_t *restrict state,
  ** @remark A @a state of null indicates that @a s can be scanned
  ** without considering any context.
  **/
-const char *mbsrwcsskip(const char s1[static 1], mbstate_t *restrict state,
-                        const wchar_t *S2);
+const char *mbsrwcsskip(const char s1[static 1], mbstate_t *restrict state, const wchar_t *S2);
 
 /**
  ** @brief In mb string @a s1 skip over the initial part of the
@@ -396,8 +389,7 @@ const char *mbsrwcsskip(const char s1[static 1], mbstate_t *restrict state,
  ** @remark A @a state of null indicates that @a s can be scanned
  ** without considering any context.
  **/
-const char *mbsrskip(const char s1[static 1], mbstate_t *restrict state,
-                     const char *s2);
+const char *mbsrskip(const char s1[static 1], mbstate_t *restrict state, const char *s2);
 
 /**
  ** @brief In mb string @a s1 return the length of the initial
@@ -434,8 +426,7 @@ size_t mbsspn(const char *s1, const char *s2);
  ** @remark A @a state of null indicates that @a s can be scanned
  ** without considering any context.
  **/
-const char *mbsrskip_class(const char s1[static 1], mbstate_t *restrict state,
-                           wcclass_t func);
+const char *mbsrskip_class(const char s1[static 1], mbstate_t *restrict state, wcclass_t func);
 
 /**
  ** @brief In mb string @a s1 return the length of the initial
@@ -471,8 +462,7 @@ size_t mbsspn_class(const char *s1, wcclass_t func);
  ** @remark A @a state of null indicates that @a s can be scanned
  ** without considering any context.
  **/
-const char *mbsrskip_type(const char s1[static 1], mbstate_t *restrict state,
-                          wctype_t type);
+const char *mbsrskip_type(const char s1[static 1], mbstate_t *restrict state, wctype_t type);
 
 /**
  ** @brief In mb string @a s1 return the length of the initial
@@ -515,8 +505,7 @@ size_t mbsspn_name(const char *s1, const char name[static 1]);
  **
  ** @see mbsrwcsskip
  **/
-const char *mbsrwcscskip(const char s1[static 1], mbstate_t *restrict state,
-                         const wchar_t *S2);
+const char *mbsrwcscskip(const char s1[static 1], mbstate_t *restrict state, const wchar_t *S2);
 
 /**
  ** @brief In mb string @a s1 skip over the initial part of the
@@ -525,8 +514,7 @@ const char *mbsrwcscskip(const char s1[static 1], mbstate_t *restrict state,
  **
  ** @see mbsrskip
  **/
-const char *mbsrcskip(const char *s1, mbstate_t *restrict state,
-                      const char *s2);
+const char *mbsrcskip(const char *s1, mbstate_t *restrict state, const char *s2);
 
 /**
  ** @brief In mb string @a s1 skip over the initial part of the
@@ -542,16 +530,14 @@ size_t mbscspn(const char *s1, const char *s2);
  **
  ** @see strtod
  **/
-double mbsrtod(const char *restrict s1, mbstate_t *restrict state,
-               char **restrict endptr);
+double mbsrtod(const char *restrict s1, mbstate_t *restrict state, char **restrict endptr);
 
 /**
  ** @brief Convert mb string @a s1 to <code>long double</code>.
  **
  ** @see strtold
  **/
-long double mbsrtold(const char *restrict s1, mbstate_t *restrict state,
-                     char **restrict endptr);
+long double mbsrtold(const char *restrict s1, mbstate_t *restrict state, char **restrict endptr);
 
 /**
  ** @brief Convert mb string @a s1 to <code>long</code> according
@@ -559,8 +545,7 @@ long double mbsrtold(const char *restrict s1, mbstate_t *restrict state,
  **
  ** @see strtol
  **/
-long mbsrtol(const char *restrict s1, mbstate_t *restrict state,
-             char **restrict endptr, int base);
+long mbsrtol(const char *restrict s1, mbstate_t *restrict state, char **restrict endptr, int base);
 
 /**
  ** @brief Convert mb string @a s1 to <code>long long</code> according
@@ -568,8 +553,8 @@ long mbsrtol(const char *restrict s1, mbstate_t *restrict state,
  **
  ** @see strtoll
  **/
-long long mbsrtoll(const char *restrict s1, mbstate_t *restrict state,
-                   char **restrict endptr, int base);
+long long mbsrtoll(const char *restrict s1, mbstate_t *restrict state, char **restrict endptr,
+                   int base);
 
 /**
  ** @brief Convert mb string @a s1 to <code>unsigned long</code>
@@ -577,8 +562,8 @@ long long mbsrtoll(const char *restrict s1, mbstate_t *restrict state,
  **
  ** @see strtoul
  **/
-unsigned long mbsrtoul(const char *restrict s1, mbstate_t *restrict state,
-                       char **restrict endptr, int base);
+unsigned long mbsrtoul(const char *restrict s1, mbstate_t *restrict state, char **restrict endptr,
+                       int base);
 
 /**
  ** @brief Convert mb string @a s1 to <code>unsigned long
@@ -609,5 +594,4 @@ enum mbcode {
 	mbstored = (size_t)-3,
 };
 
-static_assert(mbinvalid == SIZE_MAX,
-              "enum mbcode should have size_t as underlying integer type");
+static_assert(mbinvalid == SIZE_MAX, "enum mbcode should have size_t as underlying integer type");

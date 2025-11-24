@@ -45,9 +45,8 @@ void life_count(life *L)
 		size_t i0 = off0 + j0;
 		for (size_t j1 = 0; j1 < len1; ++j1) {
 			size_t i1 = off1 + j1;
-			B[j0][j1] = +M[i0 - 1][i1 - 1] + M[i0 - 1][i1] +
-			            M[i0 - 1][i1 + 1] + M[i0][i1 - 1] + 0 +
-			            M[i0][i1 + 1] + M[i0 + 1][i1 - 1] +
+			B[j0][j1] = +M[i0 - 1][i1 - 1] + M[i0 - 1][i1] + M[i0 - 1][i1 + 1] +
+			            M[i0][i1 - 1] + 0 + M[i0][i1 + 1] + M[i0 + 1][i1 - 1] +
 			            M[i0 + 1][i1] + M[i0 + 1][i1 + 1];
 		}
 	}
@@ -146,8 +145,7 @@ void life_draw(life *L)
 	esc_goto(stdout, len0 + 3, 1);
 	fprintf(stdout,
 	        ESC_CLEAR "%3zu FPS, %5zu iterations, %5zu birth9, %5zu "
-	                  "constellations, " ESC_BOLD "%6.2f" ESC_NORMAL
-	                  " quotient",
+	                  "constellations, " ESC_BOLD "%6.2f" ESC_NORMAL " quotient",
 	        L->frames, L->iteration, L->birth9, L->constellations,
 	        L->constellations * 1.0 / L->birth9);
 	fputs(ESC_RESTORE ESC_SHOW, stdout);
@@ -173,28 +171,21 @@ void life_draw4(life *L)
 		fputs(ESC_NORMAL, stdout);
 		for (size_t i1 = off1; i1 < off1 + len1; i1 += 2) {
 			const char *str = nullptr;
-			if ((i1 == x1 || i1 + 1 == x1) &&
-			    (x0 == i0 || x0 == i0 + 1)) {
+			if ((i1 == x1 || i1 + 1 == x1) && (x0 == i0 || x0 == i0 + 1)) {
 				// The cursor is a blue dot in the correct
 				// position, but the three cell positions are
 				// also hidden. We grey them out.
 				static const char *const corner[4] = {
-					[0] = ESC_TBLUE ESC_BGREY
-					"▗" ESC_NORMAL,
-					[1] = ESC_TBLUE ESC_BGREY
-					"▖" ESC_NORMAL,
-					[2] = ESC_TBLUE ESC_BGREY
-					"▝" ESC_NORMAL,
-					[3] = ESC_TBLUE ESC_BGREY
-					"▘" ESC_NORMAL,
+					[0] = ESC_TBLUE ESC_BGREY "▗" ESC_NORMAL,
+					[1] = ESC_TBLUE ESC_BGREY "▖" ESC_NORMAL,
+					[2] = ESC_TBLUE ESC_BGREY "▝" ESC_NORMAL,
+					[3] = ESC_TBLUE ESC_BGREY "▘" ESC_NORMAL,
 				};
 				unsigned ty = (x0 % 2) << 1 | (x1 % 2);
 				str = corner[ty];
 			} else {
-				unsigned val = M[i0][i1] |
-				               (M[i0][i1 + 1] << 1) |
-				               (M[i0 + 1][i1] << 2) |
-				               (M[i0 + 1][i1 + 1] << 3);
+				unsigned val = M[i0][i1] | (M[i0][i1 + 1] << 1) |
+				               (M[i0 + 1][i1] << 2) | (M[i0 + 1][i1 + 1] << 3);
 				str = ESC_BLOCK[val];
 			}
 			fputs(str, stdout);
@@ -208,8 +199,7 @@ void life_draw4(life *L)
 	esc_goto(stdout, len0 / 2 + 3, 1);
 	fprintf(stdout,
 	        ESC_CLEAR "%3zu FPS, %5zu iterations, %5zu birth9, %5zu "
-	                  "constellations, " ESC_BOLD "%6.2f" ESC_NORMAL
-	                  " quotient",
+	                  "constellations, " ESC_BOLD "%6.2f" ESC_NORMAL " quotient",
 	        L->frames, L->iteration, L->birth9, L->constellations,
 	        L->constellations * 1.0 / L->birth9);
 	fputs(ESC_RESTORE ESC_SHOW, stdout);

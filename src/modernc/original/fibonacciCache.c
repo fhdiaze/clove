@@ -7,8 +7,7 @@
 size_t fibCacheRec(size_t n, size_t cache[static n])
 {
 	if (!cache[n - 1]) {
-		cache[n - 1] =
-			fibCacheRec(n - 1, cache) + fibCacheRec(n - 2, cache);
+		cache[n - 1] = fibCacheRec(n - 1, cache) + fibCacheRec(n - 2, cache);
 	}
 	return cache[n - 1];
 }
@@ -51,8 +50,8 @@ int main(int argc, char *argv[argc + 1])
 		const size_t n = strtoull(argv[i], nullptr, 0); // arg -> size_t
 		double golden = goldenRatio(n);
 		double control = golden * 2.0 - 1.0;
-		printf("fib(%zu) is %zu, golden ratio %.20g, control %.20g\n",
-		       n, fibCache(n), golden, control * control);
+		printf("fib(%zu) is %zu, golden ratio %.20g, control %.20g\n", n, fibCache(n),
+		       golden, control * control);
 	}
 	return EXIT_SUCCESS;
 }

@@ -45,8 +45,7 @@ static int thrd_counter_run(void *arg_thrd_id)
 		unsigned *counter = (unsigned *)tss_get(thrd_counter_key);
 		if (!counter)
 			return EXIT_FAILURE;
-		logi("thrd_name='%s' counter current value '%u'", name,
-		     *counter);
+		logi("thrd_name='%s' counter current value '%u'", name, *counter);
 		++(*counter);
 		logi("thrd_name='%s' counter new value '%u'", name, *counter);
 

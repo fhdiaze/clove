@@ -27,8 +27,7 @@ int main(int argc, char *argv[argc + 1])
 		while (alow * x < ahig)
 			x *= fact;
 		/* We are close, correct with the Heron factor. */
-		for (double prod = a * x; ((prod < epsM1) || (epsP1 < prod));
-		     prod = a * x) {
+		for (double prod = a * x; ((prod < epsM1) || (epsP1 < prod)); prod = a * x) {
 			x *= (2.0 - prod);
 		}
 		printf("heron: a=%.5e,\tx=%.5e,\ta*x=%.12f\n", a, x, a * x);

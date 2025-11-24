@@ -11,7 +11,6 @@ int main(int argc, char *argv[argc + 1])
 	if (!strcmp(name, argv[0])) {
 		printf("program name \"%s\" successfully copied\n", name);
 	} else {
-		printf("copying %s leads to different string %s\n", argv[0],
-		       name);
+		printf("copying %s leads to different string %s\n", argv[0], name);
 	}
 }

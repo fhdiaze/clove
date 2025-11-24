@@ -14,9 +14,7 @@
 /**
  ** @brief Type-generic minimum for floating-point values
  **/
-#define min(A, B)                                                           \
-	_Generic((A) + (B), float: minf, long double: minl, default: mind)( \
-		(A), (B))
+#define min(A, B) _Generic((A) + (B), float: minf, long double: minl, default: mind)((A), (B))
 
 static inline double mind(double a, double b) [[__unsequenced__]]
 {
@@ -106,16 +104,13 @@ static inline float minf(float a, float b) [[__unsequenced__]]
 	        double: -DBL_MAX,            \
 	        long double: -LDBL_MAX)
 
-#define strtod(NPTR, ...) \
-	STRTOD_I __VA_OPT__(I)(NPTR __VA_OPT__(, ) __VA_ARGS__)
+#define strtod(NPTR, ...) STRTOD_I __VA_OPT__(I)(NPTR __VA_OPT__(, ) __VA_ARGS__)
 #define STRTOD_I(NPTR) strtod(NPTR, nullptr)
 #define STRTOD_II(NPTR, ENDPTR) strtod(NPTR, ENDPTR)
-#define strtof(NPTR, ...) \
-	STRTOF_I __VA_OPT__(I)(NPTR __VA_OPT__(, ) __VA_ARGS__)
+#define strtof(NPTR, ...) STRTOF_I __VA_OPT__(I)(NPTR __VA_OPT__(, ) __VA_ARGS__)
 #define STRTOF_I(NPTR) strtof(NPTR, nullptr)
 #define STRTOF_II(NPTR, ENDPTR) strtof(NPTR, ENDPTR)
-#define strtold(NPTR, ...) \
-	STRTOLD_I __VA_OPT__(I)(NPTR __VA_OPT__(, ) __VA_ARGS__)
+#define strtold(NPTR, ...) STRTOLD_I __VA_OPT__(I)(NPTR __VA_OPT__(, ) __VA_ARGS__)
 #define STRTOLD_I(NPTR) strtold(NPTR, nullptr)
 #define STRTOLD_II(NPTR, ENDPTR) strtold(NPTR, ENDPTR)
 
@@ -123,8 +118,7 @@ static inline float minf(float a, float b) [[__unsequenced__]]
  **
  ** Error if more than two arguments are given.
  **/
-#define DEFAULT1(DEF0, ...) \
-	ID_I##__VA_OPT__(Iplus_DEFAULT)(DEF0 __VA_OPT__(, ) __VA_ARGS__)
+#define DEFAULT1(DEF0, ...) ID_I##__VA_OPT__(Iplus_DEFAULT)(DEF0 __VA_OPT__(, ) __VA_ARGS__)
 #define ID_IIplus_DEFAULT(_01, ...) ID_I(__VA_ARGS__)
 
 #define ID_()
@@ -139,24 +133,21 @@ static inline float minf(float a, float b) [[__unsequenced__]]
  **/
 #define DEFAULT2(DEF0, DEF1, ...) \
 	ID_II##__VA_OPT__(Iplus_DEFAULT)(DEF0, DEF1 __VA_OPT__(, ) __VA_ARGS__)
-#define ID_IIIplus_DEFAULT(DEF0, DEF1, _01, ...) \
-	DEFAULT1(DEF0, _01), DEFAULT1(DEF1, __VA_ARGS__)
+#define ID_IIIplus_DEFAULT(DEF0, DEF1, _01, ...) DEFAULT1(DEF0, _01), DEFAULT1(DEF1, __VA_ARGS__)
 
 /** @brief Output comma-separated arguments from the fourth position
  ** onward, fill with defaults from the first three.
  **
  ** Error if more than six arguments are given.
  **/
-#define DEFAULT3(DEF0, DEF1, DEF2, ...)               \
-	ID_III##__VA_OPT__(Iplus_DEFAULT)(DEF0, DEF1, \
-	                                  DEF2 __VA_OPT__(, ) __VA_ARGS__)
+#define DEFAULT3(DEF0, DEF1, DEF2, ...) \
+	ID_III##__VA_OPT__(Iplus_DEFAULT)(DEF0, DEF1, DEF2 __VA_OPT__(, ) __VA_ARGS__)
 #define ID_IIIIplus_DEFAULT(DEF0, DEF1, DEF2, _01, ...) \
 	DEFAULT1(DEF0, _01), DEFAULT2(DEF1, DEF2, __VA_ARGS__)
 
 #define CALL1(FUNC, DEF0, ...) FUNC(DEFAULT1(DEF0, __VA_ARGS__))
 #define CALL2(FUNC, DEF0, DEF1, ...) FUNC(DEFAULT2(DEF0, DEF1, __VA_ARGS__))
-#define CALL3(FUNC, DEF0, DEF1, DEF2, ...) \
-	FUNC(DEFAULT3(DEF0, DEF1, DEF2, __VA_ARGS__))
+#define CALL3(FUNC, DEF0, DEF1, DEF2, ...) FUNC(DEFAULT3(DEF0, DEF1, DEF2, __VA_ARGS__))
 
 #define strtoul(...) CALL3(strtoul, "0", nullptr, 0, __VA_ARGS__)
 #define strtoull(...) CALL3(strtoull, "0", nullptr, 0, __VA_ARGS__)
@@ -169,14 +160,10 @@ static inline float minf(float a, float b) [[__unsequenced__]]
  **
  ** @see strtoull10 for an example
  **/
-#define strtoul10(NPTR, ...) \
-	CALL3((strtoul), "0", nullptr, 10, NPTR __VA_OPT__(, ) __VA_ARGS__)
-#define strtoull10(NPTR, ...) \
-	CALL3((strtoull), "0", nullptr, 10, NPTR __VA_OPT__(, ) __VA_ARGS__)
-#define strtol10(NPTR, ...) \
-	CALL3((strtol), "0", nullptr, 10, NPTR __VA_OPT__(, ) __VA_ARGS__)
-#define strtoll10(NPTR, ...) \
-	CALL3((strtoll), "0", nullptr, 10, NPTR __VA_OPT__(, ) __VA_ARGS__)
+#define strtoul10(NPTR, ...) CALL3((strtoul), "0", nullptr, 10, NPTR __VA_OPT__(, ) __VA_ARGS__)
+#define strtoull10(NPTR, ...) CALL3((strtoull), "0", nullptr, 10, NPTR __VA_OPT__(, ) __VA_ARGS__)
+#define strtol10(NPTR, ...) CALL3((strtol), "0", nullptr, 10, NPTR __VA_OPT__(, ) __VA_ARGS__)
+#define strtoll10(NPTR, ...) CALL3((strtoll), "0", nullptr, 10, NPTR __VA_OPT__(, ) __VA_ARGS__)
 
 #define PROMOTE(XT, A)                                       \
 	_Generic(0 + (XT) + 0,                               \
@@ -232,26 +219,22 @@ inline unsigned long maxsul(signed long a, unsigned long b) [[__unsequenced__]]
 	return a < 0 ? b : maxul(a, b);
 }
 
-inline signed long long maxsll(signed long long a, signed long long b)
-	[[__unsequenced__]]
+inline signed long long maxsll(signed long long a, signed long long b) [[__unsequenced__]]
 {
 	return a < b ? b : a;
 }
 
-inline unsigned long long maxull(unsigned long long a, unsigned long long b)
-	[[__unsequenced__]]
+inline unsigned long long maxull(unsigned long long a, unsigned long long b) [[__unsequenced__]]
 {
 	return a < b ? b : a;
 }
 
-inline unsigned long long maxusll(unsigned long long a, signed long long b)
-	[[__unsequenced__]]
+inline unsigned long long maxusll(unsigned long long a, signed long long b) [[__unsequenced__]]
 {
 	return b < 0 ? a : maxull(a, b);
 }
 
-inline unsigned long long maxsull(signed long long a, unsigned long long b)
-	[[__unsequenced__]]
+inline unsigned long long maxsull(signed long long a, unsigned long long b) [[__unsequenced__]]
 {
 	return a < 0 ? b : maxull(a, b);
 }
@@ -298,8 +281,8 @@ inline unsigned long long maxsull(signed long long a, unsigned long long b)
  ** parameter that depends on the that size.
  **/
 [[maybe_unused, __gnu__::__format__(__printf__, 3, 4)]]
-static inline int snprintf_swapped(size_t n, char s[restrict static n],
-                                   const char *restrict form, ...)
+static inline int snprintf_swapped(size_t n, char s[restrict static n], const char *restrict form,
+                                   ...)
 {
 	va_list ap;
 	va_start(ap);
@@ -319,16 +302,13 @@ static inline int snprintf_swapped(size_t n, char s[restrict static n],
  ** buffer can be specified as array parameter that depends on the
  ** that size.
  **/
-#define snprintf(S, N, F, ...)                                               \
-	_Generic((S),                                                        \
-	        nullptr_t: (snprintf)(nullptr, GENERIC_IF(isice(N), (N), 0), \
-	                              F __VA_OPT__(, ) __VA_ARGS__),         \
-	        default: snprintf_swapped(                                   \
-			 _Generic((S), nullptr_t: 1, default: (N)),          \
-			 _Generic((S),                                       \
-	                         nullptr_t: (char[1]){ 0 },                  \
-	                         default: (S)),                              \
-			 (F)__VA_OPT__(, ) __VA_ARGS__))
+#define snprintf(S, N, F, ...)                                                                    \
+	_Generic((S),                                                                             \
+	        nullptr_t: (snprintf)(nullptr, GENERIC_IF(isice(N), (N), 0),                      \
+	                              F __VA_OPT__(, ) __VA_ARGS__),                              \
+	        default: snprintf_swapped(_Generic((S), nullptr_t: 1, default: (N)),              \
+	                                  _Generic((S), nullptr_t: (char[1]){ 0 }, default: (S)), \
+	                                  (F)__VA_OPT__(, ) __VA_ARGS__))
 
 #define pow(X, Y)                                                                                                         \
 	_Generic((void (*)(typeof((X) + (Y) + 0ULL), typeof((Y) + 0ULL)))                                                 \

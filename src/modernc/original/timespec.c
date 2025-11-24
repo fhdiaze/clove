@@ -17,8 +17,7 @@
  ** seconds, or 52 days.
  **
  **/
-double timespec_diff(struct timespec const *later,
-                     struct timespec const *sooner)
+double timespec_diff(struct timespec const *later, struct timespec const *sooner)
 {
 	/* Be careful: tv_sec could be an unsigned type */
 	if (later->tv_sec < sooner->tv_sec)
@@ -90,15 +89,13 @@ int main(int argc, char *argv[argc + 1])
 			stats_collect2(&sdummy[2], tdummy.tv_nsec);
 		}
 		timespec_get(&t[6], TIME_UTC);
-		for (uint64_t i = 0; i < iterations;
-		     ++i) { /*@\label{ln:collect3}*/
+		for (uint64_t i = 0; i < iterations; ++i) { /*@\label{ln:collect3}*/
 			timespec_get(&tdummy, TIME_UTC);
 			stats_collect3(&sdummy[3], tdummy.tv_nsec);
 		}
 		timespec_get(&t[7], TIME_UTC);
 		/* make sure to use values of volatiles after the loop */
-		printf("s, %zu iterations, accu0 %zx, accu1 %zx\n", s, accu0,
-		       accu1);
+		printf("s, %zu iterations, accu0 %zx, accu1 %zx\n", s, accu0, accu1);
 		for (size_t moment = 1; moment < 4; ++moment) {
 			double mean = stats_mean(&sdummy[moment]);
 			double sdev = stats_rsdev_unbiased(&sdummy[moment]);

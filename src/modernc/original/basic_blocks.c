@@ -56,8 +56,7 @@ static volatile sig_atomic_t interrupt = 0;
 
 static const char *descend(const char *act,
                            unsigned dp[restrict static 1], // Bad
-                           size_t len, char buffer[static len],
-                           jmp_buf jmpTarget)
+                           size_t len, char buffer[static len], jmp_buf jmpTarget)
 {
 	if (dp[0] + 3 > sizeof head)
 		longjmp(jmpTarget, tooDeep);
@@ -80,8 +79,7 @@ NEW_LINE: // Loops on output
 		switch (act[0]) { /*@\label{lab:switch-char}*/
 		case left: // Descends on left brace
 			act = end_line(act + 1, jmpTarget);
-			act = descend(act, dp, len, buffer,
-			              jmpTarget); /*@\label{lab:descend}*/
+			act = descend(act, dp, len, buffer, jmpTarget); /*@\label{lab:descend}*/
 			act = end_line(act + 1, jmpTarget);
 			goto NEW_LINE;
 		case right: // Returns on right brace
@@ -107,8 +105,7 @@ void basic_blocks(void)
 	char buffer[maxline];
 	unsigned x = 0;
 	unsigned depth = 0;
-	const char *format =
-		"All matching %0.0d'%c' '%c' pairs have been closed correctly\n";
+	const char *format = "All matching %0.0d'%c' '%c' pairs have been closed correctly\n";
 	jmp_buf jmpTarget;
 	switch (setjmp(jmpTarget)) {
 	case 0:
@@ -129,8 +126,7 @@ void basic_blocks(void)
 		}
 		break;
 	case tooDeep:
-		format =
-			"Error: nesting (%d) of '%c' '%c' constructs is too deep\n";
+		format = "Error: nesting (%d) of '%c' '%c' constructs is too deep\n";
 		break;
 	case eofOut:
 		format = "Error: EOF for stdout at %d open '%c', expecting "
@@ -140,8 +136,7 @@ void basic_blocks(void)
 		format = "Interrupted at level %d of '%c' '%c' nesting\n";
 		break;
 	default:;
-		format =
-			"Error: unknown error within (%d) '%c' '%c' constructs\n";
+		format = "Error: unknown error within (%d) '%c' '%c' constructs\n";
 	}
 	fflush(stdout);
 	fprintf(stderr, format, depth, left, right);
@@ -185,8 +180,7 @@ static char **lastOpen = nullptr;
 void doAtExit(void)
 {
 	if (lastOpen && lastOpen[0]) {
-		fprintf(stderr,
-		        "\n***********\nabnormal exit, last open file was %s\n",
+		fprintf(stderr, "\n***********\nabnormal exit, last open file was %s\n",
 		        lastOpen[0]);
 	}
 }

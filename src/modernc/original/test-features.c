@@ -8,8 +8,7 @@
 #include "c23-fallback.h"
 #include <stdio.h>
 
-#define test(...) \
-	printf("Testing " #__VA_ARGS__ ": %lld\n", (long long)(__VA_ARGS__))
+#define test(...) printf("Testing " #__VA_ARGS__ ": %lld\n", (long long)(__VA_ARGS__))
 
 int main(int argc, char *argv[argc + 1])
 {

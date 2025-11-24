@@ -46,9 +46,8 @@ time_t isotime(const char t[static 1])
                     .tm_mon = 1,
                 },
         };
-	int retscan = sscanf(t, "%i-%i-%i %i:%i:%i", &date->tm_year,
-	                     &date->tm_mon, &date->tm_mday, &date->tm_hour,
-	                     &date->tm_min, &date->tm_sec);
+	int retscan = sscanf(t, "%i-%i-%i %i:%i:%i", &date->tm_year, &date->tm_mon, &date->tm_mday,
+	                     &date->tm_hour, &date->tm_min, &date->tm_sec);
 	if (retscan <= 0) {
 		if (errno)
 			perror("can't scan");
@@ -134,8 +133,7 @@ void time2terran(time_t t)
 	secs -= hour * sh;
 	size_t min = secs / sm;
 	secs %= sm;
-	printf("%ld.%ld.%ld,%ld:%ld:%ld TC\n", year, lunar, days, hour, min,
-	       secs);
+	printf("%ld.%ld.%ld,%ld:%ld:%ld TC\n", year, lunar, days, hour, min, secs);
 }
 
 int main(int argc, char *argv[argc + 1])

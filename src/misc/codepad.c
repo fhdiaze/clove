@@ -55,8 +55,7 @@ void fgoto(unsigned n)
 
 AGAIN:
 	if (p)
-		logi("%u: p and q are %s, *p is %u", j,
-		     (q == p) ? "equal" : "unequal", *p);
+		logi("%u: p and q are %s, *p is %u", j, (q == p) ? "equal" : "unequal", *p);
 	q = p;
 	p = &((unsigned){ j });
 	++j;
@@ -73,8 +72,7 @@ Test my_function()
 }
 
 #define CONCAT(a, b) a##b
-#define strtod(NPTR, ...) \
-	STRTOD_I##__VA_OPT__(I)(NPTR __VA_OPT__(, ) __VA_ARGS__)
+#define strtod(NPTR, ...) STRTOD_I##__VA_OPT__(I)(NPTR __VA_OPT__(, ) __VA_ARGS__)
 #define STRTOD_I(NPTR) strtod(NPTR, nullptr)
 #define STRTOD_II(NPTR, ENDPTR) strtod(NPTR, ENDPTR)
 
@@ -115,8 +113,7 @@ int main(void)
 	struct tm now_buffer;
 	localtime_s(&now_buffer, &now);
 
-	strftime(now_as_string, sizeof(now_as_string),
-	         "%A %Y-%m-%d %H:%M:%S %Z", &now_buffer);
+	strftime(now_as_string, sizeof(now_as_string), "%A %Y-%m-%d %H:%M:%S %Z", &now_buffer);
 	printf("formatted time=%s\n", now_as_string);
 
 	[[__maybe_unused__]] Test test_structure = my_function();

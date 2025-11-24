@@ -81,8 +81,7 @@ typedef void sh_handler(int);
  **
  ** @see PRINT_SIG for a convenient user interface
  **/
-void sh_print(FILE *io, int sig, const char *filename, size_t line,
-              const char *string);
+void sh_print(FILE *io, int sig, const char *filename, size_t line, const char *string);
 
 /**
  ** @brief Pretty-prints signal information

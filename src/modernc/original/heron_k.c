@@ -80,8 +80,7 @@ double heron1_estimate_dir_05(double a) [[__unsequenced__]]
 	/*Something like (2 << (2 << k)) if only that would be representable
 	   in an integer type. */
 	const double tab[] = {
-		0x1P+000,  0x1P+001, 0x1P+002, 0x1P+004,
-		0x1P+008,  0x1P+016, 0x1P+032, 0x1P+064,
+		0x1P+000,  0x1P+001, 0x1P+002, 0x1P+004, 0x1P+008, 0x1P+016, 0x1P+032, 0x1P+064,
 #if (DBL_MAX_EXP * FLT_RDXRDX) > 128
 		0x1P+128,
 #endif
@@ -126,8 +125,7 @@ double heron1_estimate_dir_10(double a) [[__unsequenced__]]
 	/* Something like 1.0/(2 << (2 << k)) if only that would be
 	   representable in an integer type. */
 	const double tab[] = {
-		0x1P-000,  0x1P-001, 0x1P-002, 0x1P-004,
-		0x1P-008,  0x1P-016, 0x1P-032, 0x1P-064,
+		0x1P-000,  0x1P-001, 0x1P-002, 0x1P-004, 0x1P-008, 0x1P-016, 0x1P-032, 0x1P-064,
 #if (DBL_MIN_EXP * FLT_RDXRDX) < -128
 		0x1P-128,
 #endif
@@ -182,8 +180,7 @@ double heron1(double a) [[__unsequenced__]]
 	constexpr double epsM1 = 1.0 - 1E-9;
 	double x = heron1_estimate_dir(a);
 	/* We are close, correct with the Heron factor. */
-	for (double prod = a * x; ((prod < epsM1) || (epsP1 < prod));
-	     prod = a * x) {
+	for (double prod = a * x; ((prod < epsM1) || (epsP1 < prod)); prod = a * x) {
 		x *= (2.0 - prod);
 	}
 	return x;
@@ -239,8 +236,8 @@ int main(int argc, char *argv[argc + 1])
 		double m0 = frexp_np(x, &e0);
 		signed e1;
 		double m1 = frexp(x, &e1);
-		printf("heron: a=%.5e,\tx=%.5e,\tx**k=%.20e, %gT%+d, %gT%+d\n",
-		       a, x, expk(x, k), m0, e0, m1, e1);
+		printf("heron: a=%.5e,\tx=%.5e,\tx**k=%.20e, %gT%+d, %gT%+d\n", a, x, expk(x, k),
+		       m0, e0, m1, e1);
 	}
 	return EXIT_SUCCESS;
 }

@@ -135,8 +135,7 @@ inline double stats_rsdev_unbiased(stats c[static 1]) [[__reproducible__]]
  ** @c moments is the number of statistic moments that is collected,
  ** it has to be between `0` and `3`, including.
  **/
-inline void stats_collect(stats c[static 1], double val, unsigned moments)
-	[[__reproducible__]]
+inline void stats_collect(stats c[static 1], double val, unsigned moments) [[__reproducible__]]
 {
 	double n = stats_samples(c);
 	double n0 = n - 1;

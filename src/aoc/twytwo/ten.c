@@ -39,8 +39,7 @@ int main(void)
 		             [246] = '\0' };
 
 	while (true) {
-		logd("Starts Cycle=%llu, x=%d, v=%d, inst=%s", cycle, x, v,
-		     inst);
+		logd("Starts Cycle=%llu, x=%d, v=%d, inst=%s", cycle, x, v, inst);
 
 		// Update strengths
 		if (cycle % 40 == 20) {
@@ -76,8 +75,7 @@ int main(void)
 			// Read the instruction
 			size_t instlen = strlen(inst);
 			if (instlen == 0 || inst[instlen - 1] != '\n') {
-				logf("The instruction read is not valid: %s",
-				     inst);
+				logf("The instruction read is not valid: %s", inst);
 
 				exit(EXIT_FAILURE);
 			}
@@ -87,9 +85,7 @@ int main(void)
 
 			// Process the instruction
 			if (inst[3] == 'x') {
-				v = atoi(
-					inst +
-					5); // Process addx: inst is a pointer :)
+				v = atoi(inst + 5); // Process addx: inst is a pointer :)
 			} else {
 				inst[0] = '\0';
 			}
@@ -102,8 +98,7 @@ int main(void)
 		cycle++;
 	}
 
-	logt("End of prog: cycle=%llu, x=%d, v=%d, s=%u", cycle, x, v,
-	     strengths);
+	logt("End of prog: cycle=%llu, x=%d, v=%d, s=%u", cycle, x, v, strengths);
 
 	fclose(file);
 

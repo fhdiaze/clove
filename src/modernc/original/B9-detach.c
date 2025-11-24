@@ -80,8 +80,7 @@ static int draw_thread(void *Lv)
 	while (!L->finished) {
 		// Blocks until there is work
 		mtx_lock(&L->mtx);
-		while (!L->finished && (L->iteration <= L->drawn) &&
-		       (x0 == L->x0) && (x1 == L->x1))
+		while (!L->finished && (L->iteration <= L->drawn) && (x0 == L->x0) && (x1 == L->x1))
 			life_wait(&L->draw, &L->mtx);
 
 		// VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV
@@ -159,8 +158,7 @@ static int input_thread(void *Lv)
 			L->x1 = 1;
 			break;
 		case ESCAPE:
-			ungetc(termin_translate(termin_read_esc(len, command)),
-			       stdin);
+			ungetc(termin_translate(termin_read_esc(len, command)), stdin);
 			continue;
 		case '+':
 			if (L->frames < 128)
@@ -206,25 +204,7 @@ bool M[n][m] = {
 	{ 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0,
 	  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 1, 0, 0, 0 },
 	{ 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0 },
-	{
-		0,
-		0,
-		0,
-		0,
-		1,
-		0,
-		1,
-		0,
-		1,
-		0,
-		0,
-		0,
-		1,
-		0,
-		0,
-		0,
-		1,
-	},
+	{ 0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1 },
 	{
 		0,
 		0,

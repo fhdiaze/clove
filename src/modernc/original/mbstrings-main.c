@@ -13,11 +13,10 @@ enum {
 	g_d = 8,
 };
 
-#define MONTH(X)                                                       \
-	(char const *[]){                                              \
-		[1] = "Jan", [2] = "Feb",  [3] = "Mar",  [4] = "Apr",  \
-		[5] = "Mai", [6] = "Jun",  [7] = "Jul",  [8] = "Aug",  \
-		[9] = "Sep", [10] = "Oct", [11] = "Nov", [12] = "Dec", \
+#define MONTH(X)                                                                                 \
+	(char const *[]){                                                                        \
+		[1] = "Jan", [2] = "Feb", [3] = "Mar", [4] = "Apr",  [5] = "Mai",  [6] = "Jun",  \
+		[7] = "Jul", [8] = "Aug", [9] = "Sep", [10] = "Oct", [11] = "Nov", [12] = "Dec", \
 	}[(X) % 100]
 
 #define STRINGIFY_(X) #X
@@ -97,16 +96,14 @@ int main(void)
 	bool mbs_u8 = (sizeof strvowel != sizeof u8vowel) ?
 	                      false :
 	                      (!strcmp(strvowel, u8vowel)) &&
-	                              (!strcmp("\U000272CA",
-	                                       (const char *)u8"\U000272CA"));
+	                              (!strcmp("\U000272CA", (const char *)u8"\U000272CA"));
 	printf(VBAR "%ls world: switched \"%s\" \u21E8 \"%s\", multibyte "
 	            "strings are%s utf8, state%s\n",
-	       wcshello, locC, locLoc, mbs_u8 ? "" : " not",
-	       mblen(nullptr, 0) ? "full" : "less");
+	       wcshello, locC, locLoc, mbs_u8 ? "" : " not", mblen(nullptr, 0) ? "full" : "less");
 	printf(VBAR "wchar_t (%ssigned) is %zu bit, wint_t (%ssigned) is %zu "
 	            "bit, WEOF is ",
-	       (WCHAR_MIN ? "" : "un"), sizeof(wchar_t) * CHAR_BIT,
-	       (WINT_MIN ? "" : "un"), sizeof(wint_t) * CHAR_BIT);
+	       (WCHAR_MIN ? "" : "un"), sizeof(wchar_t) * CHAR_BIT, (WINT_MIN ? "" : "un"),
+	       sizeof(wint_t) * CHAR_BIT);
 	if (WINT_MIN)
 		printf("%lld\n", (long long)WEOF);
 	else
@@ -136,35 +133,30 @@ int main(void)
 	draw_sep(g_table[g_u | g_d | g_r], g_table[g_l | g_u | g_d]);
 	printf(VBAR "testing character %ls, codepoint U+%lX, utf8 %hhx %hhx "
 	            "%hhx %hhx %hhx:\n",
-	       wbutterfly, 0x272CALU, u8butterfly[0], u8butterfly[1],
-	       u8butterfly[2], u8butterfly[3], u8butterfly[4]);
+	       wbutterfly, 0x272CALU, u8butterfly[0], u8butterfly[1], u8butterfly[2],
+	       u8butterfly[3], u8butterfly[4]);
 	printf(VBAR "\twchar_t,\tlength %zu,\t%s\n",
 	       (sizeof(wbutterfly) / sizeof(wbutterfly[0])) - 1,
-	       (sizeof(wbutterfly) / sizeof(wbutterfly[0])) == 2 ?
-	               "one word encoding" :
-	               "surrogate encoding");
+	       (sizeof(wbutterfly) / sizeof(wbutterfly[0])) == 2 ? "one word encoding" :
+	                                                           "surrogate encoding");
 	printf(VBAR "\tchar32_t,\tlength %zu,\t%s\n",
 	       (sizeof(c32butterfly) / sizeof(c32butterfly[0])) - 1,
-	       (sizeof(c32butterfly) / sizeof(c32butterfly[0])) == 2 ?
-	               "one word encoding" :
-	               "surrogate encoding");
+	       (sizeof(c32butterfly) / sizeof(c32butterfly[0])) == 2 ? "one word encoding" :
+	                                                               "surrogate encoding");
 	printf(VBAR "\tchar16_t,\tlength %zu,\t%s\n",
 	       (sizeof(c16butterfly) / sizeof(c16butterfly[0])) - 1,
-	       (sizeof(c16butterfly) / sizeof(c16butterfly[0])) == 2 ?
-	               "one word encoding" :
-	               "surrogate encoding");
+	       (sizeof(c16butterfly) / sizeof(c16butterfly[0])) == 2 ? "one word encoding" :
+	                                                               "surrogate encoding");
 	if (sizeof(wchar_t) == sizeof(char32_t))
 		printf(VBAR "\twchar_t and char32_t encoding %s\n",
 		       (sizeof(c32butterfly) == sizeof(wbutterfly) &&
-		        c32butterfly[0] == wbutterfly[0] &&
-		        c32butterfly[1] == wbutterfly[1]) ?
+		        c32butterfly[0] == wbutterfly[0] && c32butterfly[1] == wbutterfly[1]) ?
 		               "are equal" :
 		               "differ");
 	else if (sizeof(wchar_t) == sizeof(char16_t))
 		printf(VBAR "\twchar_t and char16_t encoding %s\n",
 		       (sizeof(c16butterfly) == sizeof(wbutterfly) &&
-		        c16butterfly[0] == wbutterfly[0] &&
-		        c16butterfly[1] == wbutterfly[1]) ?
+		        c16butterfly[0] == wbutterfly[0] && c16butterfly[1] == wbutterfly[1]) ?
 		               "are equal" :
 		               "differ");
 	else
@@ -173,34 +165,29 @@ int main(void)
 	const char mbs0[] = u8"ł";
 	const char *pos0 = mbsrmb(u8hello, nullptr, mbs0, 0);
 	draw_sep(g_table[g_u | g_d | g_r], g_table[g_l | g_u | g_d]);
-	printf(VBAR "search first:\tfound \"%s\",\tposition %td, %s\n", mbs0,
-	       pos0 - u8hello, pos0);
+	printf(VBAR "search first:\tfound \"%s\",\tposition %td, %s\n", mbs0, pos0 - u8hello, pos0);
 	pos0 = mbsrmb(u8hello, nullptr, mbs0, 1);
-	printf(VBAR "search second:\tfound \"%s\",\tposition %td, %s\n", mbs0,
-	       pos0 - u8hello, pos0);
+	printf(VBAR "search second:\tfound \"%s\",\tposition %td, %s\n", mbs0, pos0 - u8hello,
+	       pos0);
 	const char mbs1[] = u8"ł";
 	const char *pos1 = mbsrrmb(u8hello, nullptr, mbs1);
-	printf(VBAR "search last:\tfound \"%s\",\tposition %td, %s\n", mbs1,
-	       pos1 - u8hello, pos1);
+	printf(VBAR "search last:\tfound \"%s\",\tposition %td, %s\n", mbs1, pos1 - u8hello, pos1);
 	const char mbs2[] = u8"łö";
 	const char *pos2 = mbsrmbs(u8hello, nullptr, mbs2);
-	printf(VBAR "search needle:\tfound \"%s\",\tposition %td, %s\n", mbs2,
-	       pos2 - u8hello, pos2);
+	printf(VBAR "search needle:\tfound \"%s\",\tposition %td, %s\n", mbs2, pos2 - u8hello,
+	       pos2);
 	const char mbs3[] = u8" \u2003\u2002—";
 	size_t pos3 = mbsspn_class(mbs3, iswspace);
-	printf(VBAR "skip space:\tfound \"%s\",\tposition %zu, %s\n", mbs3,
-	       pos3, mbs3 + pos3);
+	printf(VBAR "skip space:\tfound \"%s\",\tposition %zu, %s\n", mbs3, pos3, mbs3 + pos3);
 	draw_sep(g_table[g_u | g_d | g_r], g_table[g_l | g_u | g_d]);
 	printf(VBAR "floats (locale):\t%g (C with .)\t%g (C with ,)\t%g (with "
 	            ".)\t%g (with ,)\n",
 	       strtod("9.3", nullptr), strtod("9,3", nullptr),
-	       mbsrtod("\u20039.3", nullptr, nullptr),
-	       mbsrtod("\u20039,3", nullptr, nullptr));
+	       mbsrtod("\u20039.3", nullptr, nullptr), mbsrtod("\u20039,3", nullptr, nullptr));
 	draw_sep(g_table[g_u | g_d | g_r], g_table[g_l | g_u | g_d]);
 	printf(VBAR "vowels\t%ls\n", wcsvowel);
 	char u8vowel2[MB_LEN_MAX + sizeof u8vowel];
-	char *partial = mbsrncpy(sizeof u8vowel - 2, u8vowel2, nullptr, u8vowel,
-	                         nullptr);
+	char *partial = mbsrncpy(sizeof u8vowel - 2, u8vowel2, nullptr, u8vowel, nullptr);
 	if (partial[0])
 		partial[0] = 0;
 	printf(VBAR "partial\t%s\n", u8vowel2);

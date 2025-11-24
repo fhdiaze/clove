@@ -94,8 +94,7 @@ double circular_pop(circular *c)
 	return ret;
 }
 
-[[nodiscard("returned pointer replaces function argument")]] [[deprecated(
-	"implementation")]]
+[[nodiscard("returned pointer replaces function argument")]] [[deprecated("implementation")]]
 circular *circular_resize(circular *c, size_t nlen)
 {
 	if (c) {
@@ -120,14 +119,12 @@ circular *circular_resize(circular *c, size_t nlen)
 					if (llen <= (nlen - olen)) {
 						/* Copy the lower one up after
 						 * the old end. */ /*@\label{cpy-lowchunk}*/
-						memcpy(ntab + olen, ntab,
-						       llen * sizeof(double));
+						memcpy(ntab + olen, ntab, llen * sizeof(double));
 					} else {
 						/* Move the upper one up to the
 						 * new end. */ /*@\label{cpy-hichunk}*/
 						nstart = nlen - ulen;
-						memmove(ntab + nstart,
-						        ntab + ostart,
+						memmove(ntab + nstart, ntab + ostart,
 						        ulen * sizeof(double));
 					}
 				}
@@ -144,16 +141,14 @@ circular *circular_resize(circular *c, size_t nlen)
 					if (ostart + len > nlen) {
 						// Reallocation cuts the
 						// existing chunk in two.
-						memmove(otab, otab + ostart,
-						        len * sizeof(double));
+						memmove(otab, otab + ostart, len * sizeof(double));
 						nstart = 0;
 					}
 				}
 				if (nlen) {
 					// Now all data is saved in the
 					// conserved part of the array.
-					ntab = realloc(c->tab,
-					               sizeof(double[nlen]));
+					ntab = realloc(c->tab, sizeof(double[nlen]));
 					// If realloc fails in this case (would
 					// be weird), just overrule it.
 					if (!ntab)
@@ -185,8 +180,7 @@ void circular_fput(circular *c, FILE *s)
 		size_t len = circular_getlength(c);
 		double *tab = c->tab;
 		if (tab) {
-			fprintf(s, "%p+%zu (%zu+%zu):", (void *)tab, c->cap,
-			        c->start, len);
+			fprintf(s, "%p+%zu (%zu+%zu):", (void *)tab, c->cap, c->start, len);
 			for (size_t i = 0; i < len; ++i) {
 				double *elp = circular_element(c, i);
 				// We know that c is not null, and so elp never

@@ -5,8 +5,8 @@
 const char *trace_skip(const char expr[static 1]);
 
 void trace_values(FILE *s, const char func[static 1], const char line[static 1],
-                  const char expr[static 1], const char head[static 1],
-                  size_t len, const long double arr[len]);
+                  const char expr[static 1], const char head[static 1], size_t len,
+                  const long double arr[len]);
 
 int main(int argc, char *argv[])
 {

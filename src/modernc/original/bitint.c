@@ -10,8 +10,7 @@
 int main(int argc, char *argv[static argc + 1])
 {
 	// this doesn't fit, diagnose?
-	_BitInt(15) s15 =
-		0b1010101 '01010101wb; unsigned _BitInt(15) u15 = 0b1010101' 01010101wbu;
+	_BitInt(15) s15 = 0b1010101 '01010101wb; unsigned _BitInt(15) u15 = 0b1010101' 01010101wbu;
 	// this doesn't fit, diagnose?
 	_BitInt(15) su15 = u15;
 
@@ -46,6 +45,6 @@ int main(int argc, char *argv[static argc + 1])
 		printf("4 bits:\t%d\n", (signed)min4s);
 		printf("4 bit arithm:\t%u\n", (unsigned)(max4u + 1wbu));
 		printf("int arithm:\t%u\n", (unsigned)(max4u + 1));
-		return s15 + su15 + u15 + u65 + oa65 + o65 + s65 + sa65 + os65 +
-	               !max128s + !min128s;
+		return s15 + su15 + u15 + u65 + oa65 + o65 + s65 + sa65 + os65 + !max128s +
+	               !min128s;
 }

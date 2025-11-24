@@ -12,13 +12,12 @@
 
 [[__maybe_unused__]]
 static inline void *rodr_memcpy(size_t n, unsigned char s1[restrict static n],
-                                const unsigned char s2[restrict static n])
-	[[__unsequenced__]];
+                                const unsigned char s2[restrict static n]) [[__unsequenced__]];
 
 [[__maybe_unused__]]
 static inline void *rodr_memccpy(size_t n, unsigned char s1[restrict static n],
-                                 const unsigned char s2[restrict static n],
-                                 int c) [[__unsequenced__]];
+                                 const unsigned char s2[restrict static n], int c)
+	[[__unsequenced__]];
 
 [[__maybe_unused__]]
 static inline void *rodr_memmove(size_t n, unsigned char s1[static n],
@@ -26,25 +25,21 @@ static inline void *rodr_memmove(size_t n, unsigned char s1[static n],
 
 [[__maybe_unused__]]
 static inline int rodr_memcmp(size_t n, unsigned char s1[restrict static n],
-                              const unsigned char s2[restrict static n])
+                              const unsigned char s2[restrict static n]) [[__unsequenced__]];
+
+[[__maybe_unused__]]
+static inline void *rodr_memchr(size_t n, const unsigned char s[static n], int c)
 	[[__unsequenced__]];
 
 [[__maybe_unused__]]
-static inline void *rodr_memchr(size_t n, const unsigned char s[static n],
-                                int c) [[__unsequenced__]];
+static inline void *rodr_memset(size_t n, unsigned char s[static n], int c) [[__unsequenced__]];
 
 [[__maybe_unused__]]
-static inline void *rodr_memset(size_t n, unsigned char s[static n], int c)
-	[[__unsequenced__]];
-
-[[__maybe_unused__]]
-static inline void rodr_qsort(size_t nmemb, size_t size,
-                              unsigned char base[static nmemb * size],
+static inline void rodr_qsort(size_t nmemb, size_t size, unsigned char base[static nmemb * size],
                               int (*compar)(const void *, const void *));
 
 [[__maybe_unused__]]
-static inline void *rodr_bsearch(size_t nmemb, size_t size,
-                                 const unsigned char key[static 1],
+static inline void *rodr_bsearch(size_t nmemb, size_t size, const unsigned char key[static 1],
                                  const unsigned char base[static nmemb * size],
                                  int (*compar)(const void *, const void *));
 
@@ -71,8 +66,7 @@ static inline void *rodr_memcpy(size_t n, unsigned char s1[restrict static n],
 }
 
 static inline void *rodr_memccpy(size_t n, unsigned char s1[restrict static n],
-                                 const unsigned char s2[restrict static n],
-                                 int c)
+                                 const unsigned char s2[restrict static n], int c)
 {
 	// This captures a possible pre-existing macro for memccpy
 	return memccpy(s1, s2, c, n);
@@ -92,8 +86,7 @@ static inline int rodr_memcmp(size_t n, unsigned char s1[restrict static n],
 	return memcmp(s1, s2, n);
 }
 
-static inline void *rodr_memchr(size_t n, const unsigned char s[static n],
-                                int c)
+static inline void *rodr_memchr(size_t n, const unsigned char s[static n], int c)
 {
 	// This avoids a possible pre-existing macro for memchr
 	return (memchr)(s, c, n);
@@ -105,16 +98,14 @@ static inline void *rodr_memset(size_t n, unsigned char s[static n], int c)
 	return memset(s, c, n);
 }
 
-static inline void rodr_qsort(size_t nmemb, size_t size,
-                              unsigned char base[static nmemb * size],
+static inline void rodr_qsort(size_t nmemb, size_t size, unsigned char base[static nmemb * size],
                               int (*compar)(const void *, const void *))
 {
 	// This captures a possible pre-existing macro for qsort
 	qsort(base, nmemb, size, compar);
 }
 
-static inline void *rodr_bsearch(size_t nmemb, size_t size,
-                                 const unsigned char key[static 1],
+static inline void *rodr_bsearch(size_t nmemb, size_t size, const unsigned char key[static 1],
                                  const unsigned char base[static nmemb * size],
                                  int (*compar)(const void *, const void *))
 {
@@ -140,36 +131,31 @@ static inline void *rodr_bsearch(size_t nmemb, size_t size,
  ** implicit conversion to the corresponding `void` pointer type can
  ** be used, all others will be diagnosed.
  **/
-#define memcpy(S1, S2, N)                                                   \
-	rodr_memcpy((N), /* Make sure no qualification gets lost */         \
-	            rodr_convert(void *,                                    \
-	                         S1), /* Make sure no volatile gets lost */ \
+#define memcpy(S1, S2, N)                                                           \
+	rodr_memcpy((N), /* Make sure no qualification gets lost */                 \
+	            rodr_convert(void *, S1), /* Make sure no volatile gets lost */ \
 	            rodr_convert(void const *, S2))
 
 #undef memccpy
-#define memccpy(S1, S2, C, N)                                                \
-	rodr_memccpy((N), /* Make sure no qualification gets lost */         \
-	             rodr_convert(void *,                                    \
-	                          S1), /* Make sure no volatile gets lost */ \
+#define memccpy(S1, S2, C, N)                                                        \
+	rodr_memccpy((N), /* Make sure no qualification gets lost */                 \
+	             rodr_convert(void *, S1), /* Make sure no volatile gets lost */ \
 	             rodr_convert(void const *, S2), (C))
 
-#define memmove(S1, S2, N)                                                   \
-	rodr_memmove((N), /* Make sure no qualification gets lost */         \
-	             rodr_convert(void *,                                    \
-	                          S1), /* Make sure no volatile gets lost */ \
+#define memmove(S1, S2, N)                                                           \
+	rodr_memmove((N), /* Make sure no qualification gets lost */                 \
+	             rodr_convert(void *, S1), /* Make sure no volatile gets lost */ \
 	             rodr_convert(void const *, S2))
 
-#define memcmp(S1, S2, N)                                                   \
-	rodr_memcmp((N), /* Make sure no qualification gets lost */         \
-	            rodr_convert(void *,                                    \
-	                         S1), /* Make sure no volatile gets lost */ \
+#define memcmp(S1, S2, N)                                                           \
+	rodr_memcmp((N), /* Make sure no qualification gets lost */                 \
+	            rodr_convert(void *, S1), /* Make sure no volatile gets lost */ \
 	            rodr_convert(void const *, S2))
 
 #undef memchr
-#define memchr(S, C, N)                                    \
-	((typeof(1 ? (S) : (void *)1))rodr_memchr(         \
-		(N), /* Make sure no volatile gets lost */ \
-		rodr_convert(void const *, S), (C)))
+#define memchr(S, C, N)                                                                      \
+	((typeof(1 ? (S) : (void *)1))rodr_memchr((N), /* Make sure no volatile gets lost */ \
+	                                          rodr_convert(void const *, S), (C)))
 
 #undef memset
 #define memset(S, C, N)                                             \
@@ -182,21 +168,19 @@ static inline void *rodr_bsearch(size_t nmemb, size_t size,
 	           rodr_convert(void *, BASE), (COMPAR))
 
 #undef bsearch
-#define bsearch(KEY, BASE, NMEMB, SIZE, COMPAR)                          \
-	((typeof(1 ? (BASE) : (void *)1))rodr_bsearch(                   \
-		(NMEMB), (SIZE), /* Make sure no volatile gets lost */   \
-		rodr_convert(void const *,                               \
-	                     KEY), /* Make sure no volatile gets lost */ \
+#define bsearch(KEY, BASE, NMEMB, SIZE, COMPAR)                                        \
+	((typeof(1 ? (BASE) : (void *)1))rodr_bsearch(                                 \
+		(NMEMB), (SIZE), /* Make sure no volatile gets lost */                 \
+		rodr_convert(void const *, KEY), /* Make sure no volatile gets lost */ \
 		rodr_convert(void const *, BASE), (COMPAR)))
 
 #if __STDC_VERSION__ >= 202311L
 
 [[__maybe_unused__]]
-static inline void *rodr_memset_explicit(size_t n, unsigned char s[static n],
-                                         int c) [[__unsequenced__]];
+static inline void *rodr_memset_explicit(size_t n, unsigned char s[static n], int c)
+	[[__unsequenced__]];
 
-static inline void *rodr_memset_explicit(size_t n, unsigned char s[static n],
-                                         int c)
+static inline void *rodr_memset_explicit(size_t n, unsigned char s[static n], int c)
 {
 	// This captures a possible pre-existing macro for memset_explicit
 	return memset_explicit(s, c, n);

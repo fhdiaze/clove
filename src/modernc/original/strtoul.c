@@ -49,8 +49,7 @@ unsigned long Strtoul_inner(const char s[static 1], size_t i, unsigned base)
 	return ret;
 }
 
-static unsigned find_prefix(const char s[static 1], size_t i,
-                            const char t[static 1])
+static unsigned find_prefix(const char s[static 1], size_t i, const char t[static 1])
 {
 	size_t ret = 0;
 	while (s[i + ret] && (tolower(s[i + ret]) == tolower(t[ret]))) {

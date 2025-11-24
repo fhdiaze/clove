@@ -9,14 +9,10 @@ signed long(maxsl)(signed long a, signed long b) [[__unsequenced__]];
 unsigned long(maxul)(unsigned long a, unsigned long b) [[__unsequenced__]];
 unsigned long(maxusl)(unsigned long a, signed long b) [[__unsequenced__]];
 unsigned long(maxsul)(signed long a, unsigned long b) [[__unsequenced__]];
-signed long long(maxsll)(signed long long a, signed long long b)
-	[[__unsequenced__]];
-unsigned long long(maxull)(unsigned long long a, unsigned long long b)
-	[[__unsequenced__]];
-unsigned long long(maxusll)(unsigned long long a, signed long long b)
-	[[__unsequenced__]];
-unsigned long long(maxsull)(signed long long a, unsigned long long b)
-	[[__unsequenced__]];
+signed long long(maxsll)(signed long long a, signed long long b) [[__unsequenced__]];
+unsigned long long(maxull)(unsigned long long a, unsigned long long b) [[__unsequenced__]];
+unsigned long long(maxusll)(unsigned long long a, signed long long b) [[__unsequenced__]];
+unsigned long long(maxsull)(signed long long a, unsigned long long b) [[__unsequenced__]];
 
 int main(int argc, char *argv[argc + 1])
 {
@@ -56,21 +52,16 @@ int main(int argc, char *argv[argc + 1])
 	// Erroneous use of source buffer, using 7 where there are only 6.
 	// diagnostic?
 	puts(memcpy((char[7]){ 0 }, "he3lo", 7));
-	printf("snprintf(nullptr, 0, \"%%g\", 6.555): %d\n",
-	       snprintf(nullptr, 0, "%g", 6.555));
-	printf("snprintf(nullptr, 0, \"hoho\"): %d\n",
-	       snprintf(nullptr, 0, "hoho"));
+	printf("snprintf(nullptr, 0, \"%%g\", 6.555): %d\n", snprintf(nullptr, 0, "%g", 6.555));
+	printf("snprintf(nullptr, 0, \"hoho\"): %d\n", snprintf(nullptr, 0, "hoho"));
 	// Erroneous use of nullptr when size is not zero. diagnostic?
-	printf("snprintf(nullptr, 0, \"%%g\", 6.555): %d\n",
-	       snprintf(nullptr, 20, "%g", 6.555));
-	printf("snprintf(nullptr, 0, \"hoho\"): %d\n",
-	       snprintf(nullptr, 20, "hoho"));
+	printf("snprintf(nullptr, 0, \"%%g\", 6.555): %d\n", snprintf(nullptr, 20, "%g", 6.555));
+	printf("snprintf(nullptr, 0, \"hoho\"): %d\n", snprintf(nullptr, 20, "hoho"));
 	// Erroneous use of buffer, claiming 20 only providing 16. diagnostic?
 	printf("snprintf(something, 20, \"%%g\", 6.555): %d\n",
 	       snprintf((char[16]){ 0 }, 20, "%g", 6.555));
 	// Erroneous use of buffer, claiming 20 only providing 16. diagnostic?
-	printf("snprintf(something, 20, \"hoho\"): %d\n",
-	       snprintf((char[16]){ 0 }, 20, "hoho"));
+	printf("snprintf(something, 20, \"hoho\"): %d\n", snprintf((char[16]){ 0 }, 20, "hoho"));
 	return EXIT_SUCCESS;
 	SIZE_WIDTH;
 }

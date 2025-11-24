@@ -91,44 +91,38 @@
 /**
  ** @brief Adds the name of the current function to the trace
  **/
-#define TRACE_PRINT4(F, X)                                           \
-	do {                                                         \
-		if (TRACE_ON)                                        \
-			fprintf(stderr, "%s:%lu: " F "\n", __func__, \
-			        __LINE__ + 0UL, X);                  \
+#define TRACE_PRINT4(F, X)                                                               \
+	do {                                                                             \
+		if (TRACE_ON)                                                            \
+			fprintf(stderr, "%s:%lu: " F "\n", __func__, __LINE__ + 0UL, X); \
 	} while (false)
 
 #define STRINGIFY(X) #X
 #define STRGY(X) STRINGIFY(X)
 /** @brief Adds a textual version of the expression that is evaluated
  **/
-#define TRACE_PRINT5(F, X)                                                  \
-	do {                                                                \
-		if (TRACE_ON)                                               \
-			fprintf(stderr,                                     \
-			        "%s:" STRGY(__LINE__) ":(" #X "): " F "\n", \
-			        __func__, X);                               \
+#define TRACE_PRINT5(F, X)                                                                        \
+	do {                                                                                      \
+		if (TRACE_ON)                                                                     \
+			fprintf(stderr, "%s:" STRGY(__LINE__) ":(" #X "): " F "\n", __func__, X); \
 	} while (false)
 
 /**
  ** @brief Allows multiple arguments to be printed in the
  ** same trace
  **/
-#define TRACE_PRINT6(F, ...)                                               \
-	do {                                                               \
-		if (TRACE_ON)                                              \
-			fprintf(stderr, "%s:" STRGY(__LINE__) ": " F "\n", \
-			        __func__, __VA_ARGS__);                    \
+#define TRACE_PRINT6(F, ...)                                                                       \
+	do {                                                                                       \
+		if (TRACE_ON)                                                                      \
+			fprintf(stderr, "%s:" STRGY(__LINE__) ": " F "\n", __func__, __VA_ARGS__); \
 	} while (false)
 
 /** @brief Only traces with a text message; no values printed
  **/
-#define TRACE_PRINT7(...)                                                    \
-	do {                                                                 \
-		if (TRACE_ON)                                                \
-			fprintf(stderr,                                      \
-			        "%s:" STRGY(__LINE__) ": " __VA_ARGS__ "\n", \
-			        __func__);                                   \
+#define TRACE_PRINT7(...)                                                                       \
+	do {                                                                                    \
+		if (TRACE_ON)                                                                   \
+			fprintf(stderr, "%s:" STRGY(__LINE__) ": " __VA_ARGS__ "\n", __func__); \
 	} while (false)
 
 /**
@@ -164,8 +158,7 @@
  ** @brief Traces by first giving a textual representation of the
  ** arguments
  **/
-#define TRACE_PRINT9(F, ...) \
-	TRACE_PRINT8("(" #__VA_ARGS__ ") " F __VA_OPT__(, ) __VA_ARGS__)
+#define TRACE_PRINT9(F, ...) TRACE_PRINT8("(" #__VA_ARGS__ ") " F __VA_OPT__(, ) __VA_ARGS__)
 
 inline const char *trace_skip(const char expr[static 1])
 {
@@ -186,13 +179,11 @@ inline const char *trace_skip(const char expr[static 1])
  ** @remark Only call this through the macro ::TRACE_VALUES,
  ** which will provide the necessary contextual information.
  **/
-inline void trace_values(FILE *s, const char func[static 1],
-                         const char line[static 1], const char expr[static 1],
-                         const char head[static 1], size_t len,
+inline void trace_values(FILE *s, const char func[static 1], const char line[static 1],
+                         const char expr[static 1], const char head[static 1], size_t len,
                          const long double arr[len])
 {
-	fprintf(s, "%s:%s:(%s) %s %Lg", func, line, trace_skip(expr), head,
-	        arr[0]);
+	fprintf(s, "%s:%s:(%s) %s %Lg", func, line, trace_skip(expr), head, arr[0]);
 	for (size_t i = 1; i < len - 1; ++i)
 		fprintf(s, ", %Lg", arr[i]);
 	fputc('\n', s);
@@ -205,15 +196,13 @@ inline void trace_values(FILE *s, const char func[static 1],
  **
  ** @remark An empty argument list is taken as one (empty) argument.
  **/
-#define ALEN(...)                                                          \
-	ALEN0(__VA_ARGS__, 0x1E, 0x1F, 0x1D, 0x1C, 0x1B, 0x1A, 0x19, 0x18, \
-	      0x17, 0x16, 0x15, 0x14, 0x13, 0x12, 0x11, 0x10, 0x0E, 0x0F,  \
-	      0x0D, 0x0C, 0x0B, 0x0A, 0x09, 0x08, 0x07, 0x06, 0x05, 0x04,  \
-	      0x03, 0x02, 0x01, 0x00)
+#define ALEN(...)                                                                                  \
+	ALEN0(__VA_ARGS__, 0x1E, 0x1F, 0x1D, 0x1C, 0x1B, 0x1A, 0x19, 0x18, 0x17, 0x16, 0x15, 0x14, \
+	      0x13, 0x12, 0x11, 0x10, 0x0E, 0x0F, 0x0D, 0x0C, 0x0B, 0x0A, 0x09, 0x08, 0x07, 0x06,  \
+	      0x05, 0x04, 0x03, 0x02, 0x01, 0x00)
 
-#define ALEN0(_00, _01, _02, _03, _04, _05, _06, _07, _08, _09, _0A, _0B, _0C, \
-              _0D, _0F, _0E, _10, _11, _12, _13, _14, _15, _16, _17, _18, _19, \
-              _1A, _1B, _1C, _1D, _1F, _1E, ...)                               \
+#define ALEN0(_00, _01, _02, _03, _04, _05, _06, _07, _08, _09, _0A, _0B, _0C, _0D, _0F, _0E, _10, \
+              _11, _12, _13, _14, _15, _16, _17, _18, _19, _1A, _1B, _1C, _1D, _1F, _1E, ...)      \
 	_1E
 
 /**
@@ -224,23 +213,18 @@ inline void trace_values(FILE *s, const char func[static 1],
  ** all converted to @c long double. Thereby implicit conversion
  ** to that type is always guaranteed.
  **/
-#define TRACE_VALUES(...) \
-	TRACE_VALUES0(ALEN(__VA_ARGS__), #__VA_ARGS__, __VA_ARGS__)
+#define TRACE_VALUES(...) TRACE_VALUES0(ALEN(__VA_ARGS__), #__VA_ARGS__, __VA_ARGS__)
 
-#define TRACE_VALUES0(NARGS, EXPR, HEAD, ...)                             \
-	do {                                                              \
-		if (TRACE_ON) {                                           \
-			if (NARGS > 1)                                    \
-				trace_values(stderr, __func__,            \
-				             STRGY(__LINE__), "" EXPR "", \
-				             "" HEAD "", NARGS,           \
-				             (long double const[NARGS]){  \
-						     __VA_ARGS__ });      \
-			else                                              \
-				fprintf(stderr,                           \
-				        "%s:" STRGY(__LINE__) ": %s\n",   \
-				        __func__, HEAD);                  \
-		}                                                         \
+#define TRACE_VALUES0(NARGS, EXPR, HEAD, ...)                                                    \
+	do {                                                                                     \
+		if (TRACE_ON) {                                                                  \
+			if (NARGS > 1)                                                           \
+				trace_values(stderr, __func__, STRGY(__LINE__), "" EXPR "",      \
+				             "" HEAD "", NARGS,                                  \
+				             (long double const[NARGS]){ __VA_ARGS__ });         \
+			else                                                                     \
+				fprintf(stderr, "%s:" STRGY(__LINE__) ": %s\n", __func__, HEAD); \
+		}                                                                                \
 	} while (false)
 
 /**
@@ -297,12 +281,11 @@ inline void trace_values(FILE *s, const char func[static 1],
  ** The formats are tunable by changing the specifiers in
  ** ::TRACE_FORMAT.
  **/
-#define TRACE_VALUE1(F, X)                                                     \
-	do {                                                                   \
-		if (TRACE_ON)                                                  \
-			fprintf(stderr,                                        \
-			        TRACE_FORMAT("%s:" STRGY(__LINE__) ": " F, X), \
-			        __func__, TRACE_CONVERT(X));                   \
+#define TRACE_VALUE1(F, X)                                                                       \
+	do {                                                                                     \
+		if (TRACE_ON)                                                                    \
+			fprintf(stderr, TRACE_FORMAT("%s:" STRGY(__LINE__) ": " F, X), __func__, \
+			        TRACE_CONVERT(X));                                               \
 	} while (false)
 
 #endif

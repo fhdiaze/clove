@@ -78,8 +78,8 @@ df *Df[5] = {};
 void g(unsigned level, unsigned depth)
 {
 	Df[depth % 5] = ANONYMOUS(void)(register unsigned a)({
-		printf("from level %u, depth %u found in position %u\n", level,
-		       depth, MAX(2 * a, depth));
+		printf("from level %u, depth %u found in position %u\n", level, depth,
+		       MAX(2 * a, depth));
 		return;
 	});
 	if (level)

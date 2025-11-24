@@ -8,8 +8,7 @@ void fgoto(unsigned n)
 	unsigned *q;
 AGAIN:
 	if (p)
-		printf("%u: p and q are %s, *p is %u\n", j,
-		       (q == p) ? "equal" : "unequal", *p);
+		printf("%u: p and q are %s, *p is %u\n", j, (q == p) ? "equal" : "unequal", *p);
 	q = p;
 	p = &((unsigned){
 		j,
@@ -27,8 +26,7 @@ void fgotoblock(unsigned n)
 AGAIN: // Using a compound statement creates a new object at each iteration.
 { // A good modern compiler should complain that it is uninitialized.
 	if (p)
-		printf("%u: p and q are %s, *p is %u\n", j,
-		       (q == p) ? "equal" : "unequal", *p);
+		printf("%u: p and q are %s, *p is %u\n", j, (q == p) ? "equal" : "unequal", *p);
 	q = p;
 	p = &((unsigned){
 		j,
@@ -74,8 +72,7 @@ void fVLA(unsigned n)
 	unsigned *q;
 AGAIN: {
 	if (p)
-		printf("%u: p and q are %s\n", j,
-		       (q == p) ? "equal" : "unequal");
+		printf("%u: p and q are %s\n", j, (q == p) ? "equal" : "unequal");
 	q = p;
 	unsigned VLA[j + 1];
 	for (unsigned i = 0; i <= j; ++i)

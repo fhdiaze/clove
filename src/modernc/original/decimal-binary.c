@@ -14,8 +14,7 @@ int main(int argc, [[maybe_unused]] char *argv[argc + 1])
         double a2u = 2.097'152E-15; double p2 = a2u * f2; printf(
             "value of (double)5²¹ as binary\t\t\t\t%a\n", f2);
 		printf("value of (double)5⁻²¹ as binary\t\t\t\t%a\n", a2u);
-		printf("value of (double)5²¹⋅(double)5⁻²¹ as binary\t\t%a\n",
-	               p2);
+		printf("value of (double)5²¹⋅(double)5⁻²¹ as binary\t\t%a\n", p2);
 		printf("value of 5²¹ as decimal integer\t\t\t\t%llu\n", m10);
 		printf("value of (double)5²¹ as decimal\t\t\t\t%.26f\n", f2);
 		printf("value of (_Decimal64)5²¹ as "
@@ -25,8 +24,7 @@ int main(int argc, [[maybe_unused]] char *argv[argc + 1])
 		printf("value of (_Decimal64)5⁻²¹ as "
 	               "decimal\t\t\t2."
 	               "0971520000000000000000000000000000000000e-15\n");
-		printf("value of (double)5²¹⋅(double)5⁻²¹ as decimal\t\t%.40e\n",
-	               p2);
+		printf("value of (double)5²¹⋅(double)5⁻²¹ as decimal\t\t%.40e\n", p2);
 		printf("value of (_Decimal64)5²¹⋅(_Decimal64)5⁻²¹ as "
 	               "decimal\t%.40e\n",
 	               (double)p10);
