@@ -1,10 +1,17 @@
 param(
-    [Parameter(Mandatory=$true)]
+    [Parameter(Mandatory=$false)]
+    [Alias("s")]
     [string]$SourceFile,
 
     [Parameter(Mandatory=$false)]
-    [ValidateSet("Debug", "Release")]
-    [string]$BuildMode = "Debug"
+    [Alias("m")]
+    [ValidateSet("debug", "release")]
+    [string]$BuildMode = "debug",
+
+    [Parameter(Mandatory=$false)]
+    [Alias("a")]
+    [ValidateSet("x86", "x64")]
+    [string]$Architecture = "x64"
 )
 
 if (!(Test-Path $SourceFile)) {
@@ -26,8 +33,17 @@ $flags = Get-Content "compile_flags.txt" |
     ForEach-Object { $_.Trim().TrimEnd(',') } |
     Where-Object { $_ -ne "" }
 
+# Add architecture flag
+if ($Architecture -eq "x86") {
+    $flags += "-m32"
+    Write-Host "Building for 32-bit (x86)..."
+} else {
+    $flags += "-m64"
+    Write-Host "Building for 64-bit (x64)..."
+}
+
 # Add build mode specific flags
-if ($BuildMode -eq "Debug") {
+if ($BuildMode -eq "debug") {
     $flags += "-g"              # Debug symbols
     $flags += "-O0"             # No optimization
     $flags += "-DDEBUG"         # Define DEBUG macro
@@ -44,6 +60,7 @@ if ($BuildMode -eq "Debug") {
 Write-Host "Compiling $SourceFile -> $output"
 Write-Host "Flags: $($flags -join ' ')"
 
+clang @flags $SourceFile -o $output
 clang @flags $SourceFile -o $output
 
 if ($LASTEXITCODE -eq 0) {
