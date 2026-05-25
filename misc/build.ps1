@@ -1,31 +1,51 @@
 param(
     [Parameter(Mandatory=$false)]
-    [Alias("s")]
-    [string]$SourceFile,
-
-    [Parameter(Mandatory=$false)]
     [Alias("m")]
     [ValidateSet("debug", "release")]
     [string]$BuildMode = "debug",
 
-    [Parameter(Mandatory=$false)]
     [Alias("a")]
+    [Parameter(Mandatory=$false)]
     [ValidateSet("x86", "x64")]
-    [string]$Architecture = "x64"
+    [string]$Architecture = "x64",
+
+    [Alias("lb")]
+    [Parameter(Mandatory=$false)]
+    [switch]$LiveBuild
 )
 
-if (!(Test-Path $SourceFile)) {
-    Write-Host "Source file not found: $SourceFile"
-    exit 1
+# Setup
+$GameFileName = "game"
+$PlatformFileName = "win_handmade"
+$PlatformFilePath = ".\src\$PlatformFileName.c"
+$GameFilePath = ".\src\$GameFileName.c"
+$Outdir = ".\bin"
+$Datadir = ".\data"
+$OutPlatform = Join-Path $Outdir "$PlatformFileName.exe"
+$OutGame = Join-Path $Outdir "$GameFileName.dll"
+
+# Create folders and Clean
+if (!(Test-Path $Outdir)) {
+    Write-Host "Creating $Outdir..."
+    New-Item -ItemType Directory -Path $Outdir | Out-Null
+} else {
+    Write-Host "Cleaning $Outdir..."
+
+    if ($LiveBuild) {
+        Remove-Item $Outdir/*.txt -ErrorAction SilentlyContinue
+        Remove-Item $Outdir/*.pdb -ErrorAction SilentlyContinue
+    } else {
+        Remove-Item $Outdir/* -Recurse -Force -ErrorAction SilentlyContinue
+    }
 }
 
-# Get the base filename without extension
-$SourceFileName = [System.IO.Path]::GetFileNameWithoutExtension($SourceFile)
-$Outdir = ".\bin"
-if (!(Test-Path $Outdir)) {
-    New-Item -ItemType Directory -Path $Outdir | Out-Null
+if (!(Test-Path $Datadir)) {
+    Write-Host "Creating $Datadir..."
+    New-Item -ItemType Directory -Path $Datadir | Out-Null
+} else {
+    Write-Host "Cleaning $Datadir..."
+    Remove-Item $Datadir/log.txt -ErrorAction SilentlyContinue
 }
-$OutFile = Join-Path $Outdir "$SourceFileName.exe"
 
 # Read flags from file
 $Flags = Get-Content "compile_flags.txt" |
@@ -44,27 +64,82 @@ if ($Architecture -eq "x86") {
 
 # Add build mode specific flags
 if ($BuildMode -eq "debug") {
-    $Flags += "-g"              # Debug symbols
-    $Flags += "-O0"             # No optimization
-    $Flags += "-DDEBUG"         # Define DEBUG macro
+    $Flags += @(
+        "-g",              # Debug symbols
+        "-gcodeview",
+        "-O0",             # No optimization
+        "-DDEBUG",         # Define DEBUG macro
+        "-Wl,/DEBUG:FULL",
+        "-fms-runtime-lib=static_dbg"             # Build statically with C runtime lib
+    )
     #$Flags += "-fsanitize=address"
     #$Flags += "-fno-omit-frame-pointer"
     Write-Host "Building in DEBUG mode..."
 } else {
-    $Flags += "-O3"             # Maximum optimization
-    $Flags += "-DNDEBUG"        # Define NDEBUG macro
-    $Flags += "-flto"           # Link-time optimization
+    $Flags += @(
+        "-O3",             # Maximum optimization
+        "-DNDEBUG",        # Define NDEBUG macro
+        "-flto",           # Link-time optimization
+        "-Wl,/opt:ref",
+        "-Wl,/opt:icf",
+        "-fms-runtime-lib=static"
+    )
     Write-Host "Building in RELEASE mode..."
 }
 
-Write-Host "Compiling $SourceFile -> $OutFile"
-Write-Host "Flags: $($Flags -join ' ')"
+$random = Get-Random -Minimum 0 -Maximum 99999
+$GameFlags = $Flags + @(
+    "-Wl,/MAP:$Outdir/$GameFileName.map,/MAPINFO:EXPORTS",
+    "-Wl,/EXPORT:sound_create_samples",
+    "-Wl,/EXPORT:game_update_and_render",
+    "-Wl,/PDB:$Outdir/game_$random.pdb",
+    "-shared"
+)
 
-clang @Flags $SourceFile -o $OutFile
+Write-Host "Building game dll..." -ForegroundColor Green
+Write-Host ""
+Write-Host "clang $($GameFlags -join ' ') $GameFilePath -o $OutGame"
+Write-Host ""
+"Waiting for pdb file" | Out-File -FilePath "$Outdir/lock.tmp" -Encoding UTF8
+Write-Host ""
 
-if ($LASTEXITCODE -eq 0) {
-    Write-Host "Build succeeded!" -ForegroundColor Green
-} else {
-    Write-Host "Build failed!" -ForegroundColor Red
+clang @GameFlags $GameFilePath -o $OutGame
+
+Remove-Item $Outdir/lock.tmp
+
+if ($LASTEXITCODE -ne 0) {
+    Write-Host "Game dll build failed!" -ForegroundColor Red
     exit $LASTEXITCODE
 }
+
+Write-Host ""
+Write-Host "Game dll build succeeded!" -ForegroundColor Green
+Write-Host ""
+
+if ($LiveBuild) {
+    Write-Host "Live build completed. Skipping platform build." -ForegroundColor Cyan
+    return
+}
+
+$PlatformFlags = $Flags + @(
+    "-luser32",
+    "-lgdi32",
+    "-lwinmm",
+    "-Wl,/subsystem:windows",
+    "-Wl,/MAP:$Outdir/$PlatformFileName.map,/MAPINFO:EXPORTS"
+)
+
+Write-Host "Building platform exe..." -ForegroundColor Green
+Write-Host ""
+Write-Host "clang $($PlatformFlags -join ' ') $PlatformFilePath -o $OutPlatform"
+Write-Host ""
+
+clang @PlatformFlags $PlatformFilePath -o $OutPlatform
+
+if ($LASTEXITCODE -ne 0) {
+    Write-Host "Platform exe build failed!" -ForegroundColor Red
+    exit $LASTEXITCODE
+}
+
+Write-Host ""
+Write-Host "Platform exe build succeeded!" -ForegroundColor Green
