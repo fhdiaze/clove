@@ -1,4 +1,7 @@
 @echo off
+
+cd /d "%~dp0"
+
 setlocal enabledelayedexpansion
 
 set "BuildMode=debug"
@@ -35,9 +38,9 @@ if /i not "%Architecture%"=="x86" if /i not "%Architecture%"=="x64" (
 
 set "MainFileName=http"
 set "MainFilePath=.\src\%MainFileName%.c"
-set "Outdir=.\bin"
-set "Datadir=.\data"
-set "OutMain=%Outdir%\%PlatformFileName%.exe"
+set "Outdir=.\"
+set "Datadir=.\"
+set "OutMain=%Outdir%\%MainFileName%.exe"
 
 if not exist "%Outdir%" (
     echo Creating %Outdir%...
@@ -61,7 +64,6 @@ if not exist "%Datadir%" (
 )
 
 REM Read flags from file
-setlocal enabledelayedexpansion
 set "Flags="
 for /f "tokens=*" %%A in (compile_flags.txt) do (
     set "line=%%A"
@@ -83,7 +85,7 @@ if "%BuildMode%"=="debug" (
     set "Flags=!Flags! -g -gcodeview -O0 -DDEBUG -Wl,/DEBUG:FULL -fms-runtime-lib=static_dbg"
     echo Building in DEBUG mode...
 ) else (
-    set "Flags=!Flags! -O3 -DNDEBUG -flto -Wl,/opt:ref -Wl,/opt:icf -fms-runtime-lib=static"
+    set "Flags=!Flags! -O3 -DNDEBUG -flto  -fms-runtime-lib=static"
     echo Building in RELEASE mode...
 )
 
@@ -124,9 +126,9 @@ echo.
 clang !PlatformFlags! %PlatformFilePath% -o %OutPlatform%
 
 if errorlevel 1 (
-    echo Building platform exe failed!
+    echo Building failed!
     exit /b %errorlevel%
 )
 
 echo.
-echo Building platform exe succeeded!
+echo Building succeeded!
