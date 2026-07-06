@@ -31,12 +31,13 @@
 -Wassign-enum
 -Wenum-compare
 -Wenum-float-conversion
--Wanon-enum-enum-conversionae
+-Wanon-enum-enum-conversion
 
 -Wl,/opt:ref
 -Wl,/opt:icf
 -Wl,/INCREMENTAL:NO
 
 -I./include
+
 -IC:/Users/Fredy.Diaz/Documents/Main/Personal/Code/vcpkg/installed/x64-windows/include
 -LC:/Users/Fredy.Diaz/Documents/Main/Personal/Code/vcpkg/packages/curl_x64-windows/lib

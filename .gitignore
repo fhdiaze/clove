@@ -1,6 +1,11 @@
 # IDEs
 # .vscode
 
+# folders
+bin/
+data/
+data/aoc//*
+
 # Prerequisites
 *.d
 
@@ -53,6 +58,3 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
-
-# AoC data
-data/aoc//*
