@@ -2,6 +2,10 @@
 
 setlocal enabledelayedexpansion
 
+REM Captured now because "shift" (used below during argument parsing) can end up
+REM shifting %0 too once all positional args are consumed, which would corrupt %~dp0.
+set "ScriptDir=%~dp0"
+
 set "BuildMode=debug"
 set "Architecture=x64"
 set "ModuleName=http"
@@ -10,9 +14,10 @@ set "MainFilePath=./%MainFileName%.c"
 set "Outdir=./bin/%ModuleName%"
 set "Datadir=./data/%ModuleName%"
 set "OutMainFilePath=%Outdir%/%MainFileName%.exe"
+set "FlagsFile=%ScriptDir%..\..\compile_flags.txt"
 set "DebugFlags=-g -gcodeview -O0 -DDEBUG -Wl,/DEBUG:FULL -fms-runtime-lib=static_dbg"
 set "ReleaseFlags=-O3 -DNDEBUG -flto -fms-runtime-lib=static"
-set "BuildFlags=-shared -Wl,/MAP:%Outdir%/%MainFileName%.map,/MAPINFO:EXPORTS -Wl,/PDB:%Outdir%/%MainFileName%_%random%.pdb"
+set "Flags=-Wl,/MAP:%Outdir%/%MainFileName%.map,/MAPINFO:EXPORTS -Wl,/PDB:%Outdir%/%MainFileName%.pdb"
 
 :parse_args
 
@@ -62,42 +67,42 @@ if not exist "%Datadir%" (
 )
 
 REM Read flags from file (path is relative to this script's location, not the caller's cwd)
-for /f "tokens=*" %%A in ("%~dp0..\..\compile_flags.txt") do (
+for /f "usebackq tokens=*" %%A in ("%FlagsFile%") do (
     set "line=%%A"
     set "line=!line: =!"
     if not "!line!"=="" if not "!line:~0,2!"=="//" (
-        set "BuildFlags=!BuildFlags! %%A"
+        set "Flags=!Flags! %%A"
     )
 )
 
 if "%Architecture%"=="x86" (
-    set "BuildFlags=!BuildFlags! -m32"
+    set "Flags=!Flags! -m32"
     echo Building for 32-bit ^(x86^)...
 ) else (
-    set "BuildFlags=!BuildFlags! -m64"
+    set "Flags=!Flags! -m64"
     echo Building for 64-bit ^(x64^)...
 )
 
 if "%BuildMode%"=="debug" (
-    set "BuildFlags=!BuildFlags! %DebugFlags%"
+    set "Flags=!Flags! %DebugFlags%"
     echo Building in DEBUG mode...
 ) else (
-    set "BuildFlags=!BuildFlags! %ReleaseFlags%"
+    set "Flags=!Flags! %ReleaseFlags%"
     echo Building in RELEASE mode...
 )
 
-echo Building %MainFilePath%...
+echo Building %OutMainFilePath% ...
 echo.
-echo clang !BuildFlags! %MainFilePath% -o %OutMainFilePath%
+echo clang !Flags! %MainFilePath% -o %OutMainFilePath%
 echo.
 
-clang !BuildFlags! %MainFilePath% -o %OutMainFilePath%
+clang !Flags! %MainFilePath% -o %OutMainFilePath%
 
 if errorlevel 1 (
-    echo Building %MainFilePath% failed!
+    echo Building %MainFileName% failed!
     exit /b %errorlevel%
 )
 
 echo.
-echo Building %MainFilePath% succeeded!
+echo Building %MainFileName% succeeded!
 echo.
