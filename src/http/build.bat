@@ -1,11 +1,18 @@
 @echo off
 
-cd /d "%~dp0"
-
 setlocal enabledelayedexpansion
 
 set "BuildMode=debug"
 set "Architecture=x64"
+set "ModuleName=http"
+set "MainFileName=http"
+set "MainFilePath=./%MainFileName%.c"
+set "Outdir=./bin/%ModuleName%"
+set "Datadir=./data/%ModuleName%"
+set "OutMainFilePath=%Outdir%/%MainFileName%.exe"
+set "DebugFlags=-g -gcodeview -O0 -DDEBUG -Wl,/DEBUG:FULL -fms-runtime-lib=static_dbg"
+set "ReleaseFlags=-O3 -DNDEBUG -flto -fms-runtime-lib=static"
+set "BuildFlags=-shared -Wl,/MAP:%Outdir%/%MainFileName%.map,/MAPINFO:EXPORTS -Wl,/PDB:%Outdir%/%MainFileName%_%random%.pdb"
 
 :parse_args
 
@@ -22,7 +29,8 @@ if /i "%~1"=="/a" (
     )
     set "Architecture=%~2" & shift & shift & goto :parse_args
 )
-goto :parse_args
+echo Error: Unknown argument "%~1".
+exit /b 1
 
 :done_args
 
@@ -36,23 +44,13 @@ if /i not "%Architecture%"=="x86" if /i not "%Architecture%"=="x64" (
     exit /b 1
 )
 
-set "MainFileName=http"
-set "MainFilePath=.\src\%MainFileName%.c"
-set "Outdir=.\"
-set "Datadir=.\"
-set "OutMain=%Outdir%\%MainFileName%.exe"
 
 if not exist "%Outdir%" (
     echo Creating %Outdir%...
     mkdir "%Outdir%"
 ) else (
     echo Cleaning %Outdir%...
-    if %LiveBuild% equ 1 (
-        del /q "%Outdir%\*.txt" 2>nul
-        del /q "%Outdir%\*.pdb" 2>nul
-    ) else (
-        del /s /q "%Outdir%\*" 2>nul
-    )
+    del /s /q "%Outdir%\*" 2>nul
 )
 
 if not exist "%Datadir%" (
@@ -63,72 +61,43 @@ if not exist "%Datadir%" (
     del /q "%Datadir%\log.txt" 2>nul
 )
 
-REM Read flags from file
-set "Flags="
-for /f "tokens=*" %%A in (compile_flags.txt) do (
+REM Read flags from file (path is relative to this script's location, not the caller's cwd)
+for /f "tokens=*" %%A in ("%~dp0..\..\compile_flags.txt") do (
     set "line=%%A"
     set "line=!line: =!"
     if not "!line!"=="" if not "!line:~0,2!"=="//" (
-        set "Flags=!Flags! %%A"
+        set "BuildFlags=!BuildFlags! %%A"
     )
 )
 
 if "%Architecture%"=="x86" (
-    set "Flags=!Flags! -m32"
+    set "BuildFlags=!BuildFlags! -m32"
     echo Building for 32-bit ^(x86^)...
 ) else (
-    set "Flags=!Flags! -m64"
+    set "BuildFlags=!BuildFlags! -m64"
     echo Building for 64-bit ^(x64^)...
 )
 
 if "%BuildMode%"=="debug" (
-    set "Flags=!Flags! -g -gcodeview -O0 -DDEBUG -Wl,/DEBUG:FULL -fms-runtime-lib=static_dbg"
+    set "BuildFlags=!BuildFlags! %DebugFlags%"
     echo Building in DEBUG mode...
 ) else (
-    set "Flags=!Flags! -O3 -DNDEBUG -flto  -fms-runtime-lib=static"
+    set "BuildFlags=!BuildFlags! %ReleaseFlags%"
     echo Building in RELEASE mode...
 )
 
-set "GameFlags=!Flags! -Wl,/MAP:%Outdir%/%MainFileName%.map,/MAPINFO:EXPORTS -Wl,/EXPORT:sound_create_samples -Wl,/EXPORT:game_update_and_render -Wl,/PDB:%Outdir%/game_%random%.pdb -shared"
-
-echo Building game dll...
+echo Building %MainFilePath%...
 echo.
-echo clang !GameFlags! %MainFilePath% -o %OutGame%
-echo.
-echo Waiting for pdb file>"%Outdir%\lock.tmp"
+echo clang !BuildFlags! %MainFilePath% -o %OutMainFilePath%
 echo.
 
-clang !GameFlags! %MainFilePath% -o %OutGame%
-
-del /q "%Outdir%\lock.tmp" 2>nul
+clang !BuildFlags! %MainFilePath% -o %OutMainFilePath%
 
 if errorlevel 1 (
-    echo Building game dll failed!
+    echo Building %MainFilePath% failed!
     exit /b %errorlevel%
 )
 
 echo.
-echo Building game dll succeeded!
+echo Building %MainFilePath% succeeded!
 echo.
-
-if %LiveBuild% equ 1 (
-    echo Live build completed. Skipping platform build.
-    exit /b 0
-)
-
-set "PlatformFlags=!Flags! -luser32 -lgdi32 -lwinmm -Wl,/subsystem:windows -Wl,/MAP:%Outdir%/%PlatformFileName%.map,/MAPINFO:EXPORTS"
-
-echo Building platform exe...
-echo.
-echo clang !PlatformFlags! %PlatformFilePath% -o %OutPlatform%
-echo.
-
-clang !PlatformFlags! %PlatformFilePath% -o %OutPlatform%
-
-if errorlevel 1 (
-    echo Building failed!
-    exit /b %errorlevel%
-)
-
-echo.
-echo Building succeeded!
